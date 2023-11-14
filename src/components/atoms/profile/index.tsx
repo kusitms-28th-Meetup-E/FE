@@ -15,7 +15,7 @@ export const Profile = ({ nickname, profileImg, date }: ProfileProps) => {
       <div>
         <p className="user-nickname">{nickname}</p>
         <p className="content-date">{date}</p>
-      </div>{" "}
+      </div>
     </UserInfo>
   );
 };
