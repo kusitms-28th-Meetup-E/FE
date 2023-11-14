@@ -20,7 +20,8 @@ export const CommunityDetailWrapper = styled.div`
   display: flex;
   gap: 16px;
   flex-direction: column;
-  width: 710px;
+  /* width: 710px; */
+  width: 50%;
   height: 750px;
   flex-shrink: 0;
   border-radius: 5px;
