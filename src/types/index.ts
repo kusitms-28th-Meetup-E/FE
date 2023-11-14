@@ -115,3 +115,15 @@ export interface ArticleItemProps {
   likeCount?: number;
   quotCount?: number;
 }
+
+export interface CommunityPostProps {
+  id: number;
+  profileImg: string;
+  nickname: string;
+  category: string;
+  date: string;
+  likeCount: number;
+  commentCount: number;
+  communityText: string;
+  quotText: string;
+}
