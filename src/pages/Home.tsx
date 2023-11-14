@@ -4,6 +4,8 @@ import { MainCommunity } from "@/components/organisms/Home/MainCommunity";
 import { MainContent } from "@/components/organisms/Home/MainContent";
 import { MainTopic } from "@/components/organisms/Home/MainTopic";
 
+import { SubjectDetailPage } from "./SubjectDetailPage";
+
 const Home = () => {
   return (
     <>
@@ -13,6 +15,7 @@ const Home = () => {
       <MainContent />
       <MainCommunity />
       <DiscussedTopics />
+      <SubjectDetailPage />
     </>
   );
 };
