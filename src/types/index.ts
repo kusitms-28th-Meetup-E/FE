@@ -77,3 +77,15 @@ export interface ProfileProps {
   profileImg: string;
   date: string;
 }
+
+export interface CommunityPostProps {
+  id: number;
+  profileImg: string;
+  nickname: string;
+  category: string;
+  date: string;
+  likeCount: number;
+  commentCount: number;
+  communityText: string;
+  quotText: string;
+}
