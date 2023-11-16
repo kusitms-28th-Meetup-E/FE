@@ -1,4 +1,3 @@
-import { CommunityMainList } from "@/components/organisms/SubjectDetail/CommunityMainList";
 import { CommunityPreview } from "@/components/organisms/SubjectDetail/CommunityPreview";
 
 export const SubjectDetailPage = () => {
@@ -6,7 +5,6 @@ export const SubjectDetailPage = () => {
     <>
       <CommunityPreview />
       <br />
-      <CommunityMainList />
     </>
   );
 };
