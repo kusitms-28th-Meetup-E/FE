@@ -5,8 +5,8 @@ import { MainCommunity } from "@/components/organisms/Home/MainCommunity";
 import { MainContent } from "@/components/organisms/Home/MainContent";
 import { MainTopic } from "@/components/organisms/Home/MainTopic";
 import { KeywordArticle } from "@/components/organisms/detail/KeywordArticle";
-
 import { KeywordVideo } from "@/components/organisms/detail/keywordVideo";
+
 import { SubjectDetailPage } from "./SubjectDetailPage";
 
 const Home = () => {
