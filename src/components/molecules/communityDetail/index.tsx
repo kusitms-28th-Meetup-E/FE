@@ -19,7 +19,7 @@ export const CommunityDetail = ({ data }: { data: CommunityPostProps }) => {
           </div>
           <div className="top-second-wrapper">
             <div>
-              <KeywordTag category={data.category} />
+              <KeywordTag category={data.area} />
             </div>
             <div>좋아요랑댓글이거는develop머지하면넣을거</div>
           </div>
