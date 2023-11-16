@@ -73,17 +73,19 @@ export interface SubjectProps {
 }
 
 export interface ProfileProps {
-  nickname: string;
-  profileImg: string;
-  date: string;
+  nickname?: string;
+  profileImg?: string;
+  date?: string;
 }
 
 export interface CommunityPostProps {
   id: number;
-  profileImg: string;
-  nickname: string;
-  category: string;
-  date: string;
+  profileImg?: string;
+  nickname?: string;
+  area: string;
+  topic: string;
+  keyword: string;
+  date?: string;
   likeCount: number;
   commentCount: number;
   communityText: string;
