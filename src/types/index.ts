@@ -121,11 +121,34 @@ export interface CommunityPostProps {
   profileImg?: string;
   nickname?: string;
   area: string;
-  topic: string;
+  // topic: string;
   keyword: string;
   date?: string;
   likeCount: number;
+  quotCount?: number;
   commentCount: number;
   communityText: string;
+  quotText: string;
+}
+
+export interface CategoryBarProps {
+  onSelectTab: (idx: number) => void;
+}
+
+export interface CommunityTalkProps {
+  id: number;
+  communityText: string;
+  date: string;
+  writerId: string;
+  nickname: string;
+  profileImg: string;
+  area: string;
+  subject: string;
+  keyword: string;
+  likeCount: number;
+  commentCount: number;
+  contentsId: number;
+  contents: null;
+  likeStatus: string;
   quotText: string;
 }
