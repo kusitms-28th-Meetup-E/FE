@@ -76,3 +76,13 @@ export const putKakaoRegister = async ({
   );
   return res;
 };
+
+export const getCommunityAllData = async () => {
+  const res = await GwangjangAxios.get("/community");
+  return res;
+};
+
+export const getCommunityAreaData = async (topicId: number) => {
+  const res = await GwangjangAxios.get(`/community/topic/${topicId}`);
+  return res;
+};
