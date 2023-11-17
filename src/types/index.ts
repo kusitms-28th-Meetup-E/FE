@@ -71,40 +71,10 @@ export interface ContentDataProps {
   link: string;
 }
 
-export interface SubjectProps {
-  title: string;
-  imgUrl: string;
-  subscribeCount: number;
-  category: string;
-}
-
 export interface ProfileProps {
   nickname?: string;
   profileImg?: string;
-  date?: string;
-}
-
-export interface SlideItemProps {
-  title: string;
-  type: string;
   date: string;
-}
-
-export interface semiDataProps {
-  title: string;
-  type: string;
-  date: string;
-}
-
-export interface ArticleDataProps {
-  data: {
-    title: string;
-    type: string;
-    image: string;
-    date: string;
-    likeCount: number;
-    quotCount: number;
-  }[];
 }
 
 export interface ArticleItemProps {
@@ -116,26 +86,11 @@ export interface ArticleItemProps {
   quotCount?: number;
 }
 
-export interface CommunityPostProps {
-  id: number;
-  profileImg?: string;
-  nickname?: string;
-  area: string;
-  // topic: string;
-  keyword: string;
-  date?: string;
-  likeCount: number;
-  quotCount?: number;
-  commentCount: number;
-  communityText: string;
-  quotText: string;
-}
-
 export interface CategoryBarProps {
   onSelectTab: (idx: number) => void;
 }
 
-export interface CommunityTalkProps {
+export interface CommunityItemProps {
   id: number;
   communityText: string;
   date: string;
