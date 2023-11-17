@@ -43,7 +43,7 @@ const Header = () => {
           />
           <div
             className="community"
-            onClick={() => SpaceTo("/")}
+            onClick={() => SpaceTo("/community")}
           >
             커뮤니티
           </div>
