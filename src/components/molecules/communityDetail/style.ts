@@ -39,6 +39,11 @@ export const CommunityDetailContainer = styled.div`
     .top-second-wrapper {
       display: flex;
       justify-content: space-between;
+
+      .button-wrapper {
+        display: flex;
+        gap: 8px;
+      }
     }
   }
 

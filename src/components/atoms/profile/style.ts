@@ -14,8 +14,8 @@ export const UserInfo = styled.div`
 
   div {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 2px;
 
     .user-nickname {
       color: var(--Gray7_600, #757575);

@@ -1,10 +1,11 @@
+import { CommentBorderButton, LikeBorderButton } from "@/components/atoms/button";
 import { Profile } from "@/components/atoms/profile";
 import { KeywordTag } from "@/components/atoms/tag";
-import { CommunityPostProps } from "@/types";
+import { CommunityItemProps } from "@/types";
 
 import { CommunityDetailContainer } from "./style";
 
-export const CommunityDetail = ({ data }: { data: CommunityPostProps }) => {
+export const CommunityDetail = ({ data }: { data: CommunityItemProps }) => {
   return (
     <>
       <CommunityDetailContainer>
@@ -21,7 +22,10 @@ export const CommunityDetail = ({ data }: { data: CommunityPostProps }) => {
             <div>
               <KeywordTag category={data.area} />
             </div>
-            <div>좋아요랑댓글이거는develop머지하면넣을거</div>
+            <div className="button-wrapper">
+              <LikeBorderButton likeCount={data.likeCount} />
+              <CommentBorderButton commentCount={data.commentCount} />
+            </div>
           </div>
         </div>
         <div className="bottom-content">

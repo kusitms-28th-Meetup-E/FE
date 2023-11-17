@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 import { CommunityDetail } from "@/components/molecules/communityDetail";
-import { mainCommunityData } from "@/dummy/mainCommunityData";
+import { envirData } from "@/dummy/AreaData";
 
 export const CommunityPreview = () => {
   return (
     <CommunityDetailWrapper>
-      {mainCommunityData.map((item, idx) => (
+      {envirData.map((item, idx) => (
         <CommunityDetail
           key={idx}
           data={item}

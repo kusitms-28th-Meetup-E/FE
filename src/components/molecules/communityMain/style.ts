@@ -4,8 +4,9 @@ export const CommunityMainContainer = styled.div`
   display: flex;
   flex-direction: column;
   /* width: 690px; */
-  width: 47.91%;
+  /* width: 47.91%; */
   max-width: 690px;
+  /* width: 100%; */
   height: 345px;
   border-radius: 5px;
   background: var(--White, #fff);
@@ -35,6 +36,7 @@ export const CommunityMainContainer = styled.div`
       -webkit-box-orient: vertical;
       overflow: hidden;
       word-wrap: break-word;
+      height: 96px;
     }
   }
 
@@ -79,5 +81,6 @@ export const CommunityMainContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     margin-top: 12px;
+    gap: 8px;
   }
 `;

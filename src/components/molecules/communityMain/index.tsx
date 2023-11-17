@@ -1,15 +1,16 @@
+import { LikeBorderButton, QuotBorderButton } from "@/components/atoms/button";
 import { KeywordTag, TopicTag } from "@/components/atoms/tag";
-import { CommunityPostProps } from "@/types";
+import { CommunityItemProps } from "@/types";
 
 import { CommunityMainContainer } from "./style";
 
-export const CommunityMain = ({ data }: { data: CommunityPostProps }) => {
+export const CommunityMain = ({ data }: { data: CommunityItemProps }) => {
   return (
     <CommunityMainContainer>
       <div className="top-wrapper">
         <div className="content-category">
           <TopicTag category={data.area} />
-          <KeywordTag category={data.topic} />
+          {/* <KeywordTag category={data.} /> */}
           <KeywordTag category={data.keyword} />
         </div>
         <div className="content-text">{data.communityText}</div>
@@ -25,9 +26,8 @@ export const CommunityMain = ({ data }: { data: CommunityPostProps }) => {
         />
       </div>
       <div className="content-button">
-        여기도 develop머지후 수정할 예정
-        <br />
-        sssss
+        <LikeBorderButton likeCount={data.likeCount} />
+        <QuotBorderButton quotCount={data.commentCount} />
       </div>
     </CommunityMainContainer>
   );
