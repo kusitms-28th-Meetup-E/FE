@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { CategoryBar } from "@/components/molecules/categoryBar";
-import { CommunityPost } from "@/components/molecules/communityPost";
+import { DetailCommunityBox } from "@/components/molecules/detailCommunityBox";
 import { CommunityMainList } from "@/components/organisms/SubjectDetail/CommunityMainList";
 import { envirData } from "@/dummy/AreaData";
 
@@ -18,7 +18,7 @@ export const CommunityPage = () => {
       <CommunityMainList selectedTab={selectedTab} />
       <br />
       {envirData.map((item, idx) => (
-        <CommunityPost
+        <DetailCommunityBox
           key={idx}
           data={item}
         />

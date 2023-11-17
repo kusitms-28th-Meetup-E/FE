@@ -65,11 +65,11 @@ export const CategoryBarContainer = styled.div`
     }
 
     .focus-bottom {
-      margin-top: 21px;
+      margin-top: 13px;
       border-bottom: 2px solid var(--Gray10_900);
     }
     .not-focused {
-      margin-top: 21px;
+      margin-top: 13px;
       border-bottom: 2px solid var(--Gray1_50);
     }
   }
