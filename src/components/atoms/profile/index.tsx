@@ -3,8 +3,20 @@ import { ProfileProps } from "@/types";
 
 import { BigUserInfo, UserInfo } from "./style";
 
+const formatDate = (inputDate: string) => {
+  if (!inputDate) {
+    return "";
+  }
+  console.log("실행");
+  const date = new Date(inputDate);
+  const formattedDate = date.toLocaleDateString();
+  return formattedDate;
+};
+
 export const Profile = ({ nickname, profileImg, date }: ProfileProps) => {
   profileImg = temp;
+
+  const formattedDate = formatDate(date);
 
   return (
     <UserInfo>
@@ -14,7 +26,7 @@ export const Profile = ({ nickname, profileImg, date }: ProfileProps) => {
       />
       <div>
         <p className="user-nickname">{nickname}</p>
-        <p className="content-date">{date}</p>
+        <p className="content-date">{formattedDate}</p>
       </div>
     </UserInfo>
   );
@@ -22,6 +34,7 @@ export const Profile = ({ nickname, profileImg, date }: ProfileProps) => {
 
 export const BigProfile = ({ nickname, profileImg, date }: ProfileProps) => {
   profileImg = temp;
+  const formattedDate = formatDate(date);
 
   return (
     <BigUserInfo>
@@ -31,7 +44,7 @@ export const BigProfile = ({ nickname, profileImg, date }: ProfileProps) => {
       />
       <div>
         <p className="user-nickname">{nickname}</p>
-        <p className="content-date">{date}</p>
+        <p className="content-date">{formattedDate}</p>
       </div>
     </BigUserInfo>
   );
