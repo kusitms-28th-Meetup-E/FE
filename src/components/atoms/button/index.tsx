@@ -83,11 +83,23 @@ export const LikeBorderButton = ({ likeCount }: { likeCount: number }) => {
   );
 };
 
-export const QuotBorderButton = ({ likeCount }: { likeCount: number }) => {
+export const QuotBorderButton = ({ quotCount }: { quotCount: number }) => {
   return (
     <BorderStyleButton>
       <div>인용</div>
-      <p>{likeCount}</p>
+      <p>{quotCount}</p>
+    </BorderStyleButton>
+  );
+};
+
+export const CommentBorderButton = ({ commentCount }: { commentCount: number }) => {
+  return (
+    <BorderStyleButton>
+      <img
+        src={commentImg}
+        alt="comment"
+      />
+      <p>{commentCount}</p>
     </BorderStyleButton>
   );
 };
