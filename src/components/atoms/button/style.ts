@@ -97,6 +97,11 @@ export const BorderStyleButton = styled.div`
   line-height: 18px;
   letter-spacing: -0.18px;
   cursor: pointer;
+  align-items: center;
+
+  svg {
+    fill: var(--Gray6_500);
+  }
 
   div {
     color: var(--Gray7_600, #757575);
@@ -106,5 +111,57 @@ export const BorderStyleButton = styled.div`
   p {
     color: var(--Gray10_900);
     font-size: var(--text_cap1);
+  }
+
+  &:hover {
+    background-color: var(--Main_Blue);
+
+    svg {
+      fill: white;
+    }
+
+    div {
+      color: white;
+    }
+
+    p {
+      color: white;
+    }
+  }
+`;
+
+export const BorderStyleButtonTemp = styled.div<{ likeStatus: boolean }>`
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  padding: 7px;
+  border-radius: 4px;
+  border: ${(props) =>
+    props.likeStatus ? "1px solid var(--Main_Blue)" : "1px solid var(--Gray3_200)"};
+  line-height: 18px;
+  letter-spacing: -0.18px;
+  cursor: pointer;
+  align-items: center;
+
+  svg {
+    /* font-weight: 800; */
+    fill: ${(props) => (props.likeStatus ? "var(--Main_Blue)" : "var(--Gray6_500)")};
+  }
+
+  p {
+    color: ${(props) => (props.likeStatus ? "var(--Main_Blue)" : "var(--Gray10_900)")};
+    font-size: var(--text_cap1);
+  }
+
+  &:hover {
+    background-color: var(--Main_Blue);
+
+    svg {
+      fill: white;
+    }
+
+    p {
+      color: white;
+    }
   }
 `;
