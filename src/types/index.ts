@@ -71,10 +71,28 @@ export interface ContentDataProps {
   link: string;
 }
 
+export interface SubjectProps {
+  title: string;
+  imgUrl: string;
+  subscribeCount: number;
+  category: string;
+}
+
 export interface ProfileProps {
   nickname?: string;
   profileImg?: string;
   date: string;
+}
+
+export interface ArticleDataProps {
+  data: {
+    title: string;
+    type: string;
+    image: string;
+    date: string;
+    likeCount: number;
+    quotCount: number;
+  }[];
 }
 
 export interface ArticleItemProps {
