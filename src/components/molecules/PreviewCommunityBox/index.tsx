@@ -5,7 +5,7 @@ import { CommunityItemProps } from "@/types";
 
 import { CommunityDetailContainer } from "./style";
 
-export const CommunityDetail = ({ data }: { data: CommunityItemProps }) => {
+export const PreviewCommunityBox = ({ data }: { data: CommunityItemProps }) => {
   return (
     <>
       <CommunityDetailContainer>
@@ -23,7 +23,10 @@ export const CommunityDetail = ({ data }: { data: CommunityItemProps }) => {
               <KeywordTag category={data.area} />
             </div>
             <div className="button-wrapper">
-              <LikeBorderButton likeCount={data.likeCount} />
+              <LikeBorderButton
+                likeCount={data.likeCount}
+                initialLikeStatus={data.likeStatus}
+              />
               <CommentBorderButton commentCount={data.commentCount} />
             </div>
           </div>

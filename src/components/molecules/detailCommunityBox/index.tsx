@@ -5,7 +5,7 @@ import { CommunityItemProps } from "@/types";
 
 import { CommunityPostContainer } from "./style";
 
-export const CommunityPost = ({ data }: { data: CommunityItemProps }) => {
+export const DetailCommunityBox = ({ data }: { data: CommunityItemProps }) => {
   return (
     <CommunityPostContainer>
       <div className="top-post-wrapper">
@@ -13,7 +13,10 @@ export const CommunityPost = ({ data }: { data: CommunityItemProps }) => {
           nickname={data.nickname}
           date={data.date}
         />
-        <LikeBorderButton likeCount={data.likeCount} />
+        <LikeBorderButton
+          likeCount={data.likeCount}
+          initialLikeStatus={data.likeStatus}
+        />
       </div>
       <div className="top-wrapper">
         <div className="content-category">
