@@ -9,6 +9,7 @@ export const Container = styled.div`
   margin-top: 50px;
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
   img {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
