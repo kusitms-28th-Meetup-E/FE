@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
+import { getSearch, getSearchCommunity } from "@/apis";
 import SearchCategory from "@/components/molecules/searchCategory";
 import SearchTitle from "@/components/molecules/searchTitle";
 import { CommunityMainList } from "@/components/organisms/Community/CommunityMainList";
@@ -12,8 +13,8 @@ import CommunityTopTopic from "@/components/organisms/Community/CommunityTopTopi
 import SearchNotFound from "@/components/organisms/Search/SearchNotFound";
 import SearchTopicList from "@/components/organisms/Search/SearchTopicList";
 import { PopularCommunityData } from "@/dummy/PopularCommunityData";
-import { SearchData } from "@/dummy/SearchData";
-import { SearchTopicData } from "@/dummy/SearchTopicData";
+//import { SearchData } from "@/dummy/SearchData";
+// import { SearchTopicData } from "@/dummy/SearchTopicData";
 import { ToptopicData } from "@/dummy/ToptopicData";
 import { searchResultState } from "@/recoil/atoms";
 
@@ -21,18 +22,37 @@ const SearchPage = () => {
   const [query] = useSearchParams();
   const [searchCategoryBtn, setSearchCategoryBtn] = useState<string>("사회 이슈 주제");
   const [notfound, setNotfound] = useState<boolean>(false);
+  const [searchTopicData, setSearchTopicData] = useState([]);
+  const [count, setCount] = useState(0);
+  const [searchCommunityData, setSearchCommunityData] = useState([]);
+  const [countCommunity, setCountCommunity] = useState(0);
 
   const search = useRecoilValue(searchResultState);
 
   useEffect(() => {
     const searchquery = query.get("q") || "";
     console.log(searchquery);
-    if (searchquery === "하이") {
-      // 검색결과 없을 경우
-      setNotfound(true);
-    } else {
-      setNotfound(false);
-    }
+    getSearch(searchquery)
+      .then((res) => {
+        setCount(res.data.data.searchCount);
+        setSearchTopicData(res.data.data.issueResList);
+        setNotfound(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotfound(true);
+      });
+    getSearchCommunity(searchquery)
+      .then((res) => {
+        setCountCommunity(res.data.data.searchCount);
+        setSearchCommunityData(res.data.data.communityResList);
+        console.log(res.data.data);
+        setNotfound(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setNotfound(true);
+      });
   }, [query]);
   return (
     <Container>
@@ -43,7 +63,7 @@ const SearchPage = () => {
       <SearchTitle
         search={search}
         searchCategoryBtn={searchCategoryBtn}
-        searchCount={notfound ? 0 : 99}
+        searchCount={notfound ? 0 : searchCategoryBtn === "커뮤니티" ? countCommunity : count}
       />
       <BottomContainer>
         {notfound ? (
@@ -52,12 +72,12 @@ const SearchPage = () => {
           </Bottom>
         ) : searchCategoryBtn === "커뮤니티" ? (
           <Bottom>
-            <CommunityMainList data={SearchData} />
+            <CommunityMainList data={searchCommunityData} />
             <CommunityPopular data={PopularCommunityData} />
           </Bottom>
         ) : (
           <Bottom>
-            <SearchTopicList data={SearchTopicData} />
+            <SearchTopicList data={searchTopicData} />
             <CommunityTopTopic data={ToptopicData} />
           </Bottom>
         )}
