@@ -86,3 +86,15 @@ export const getCommunityAreaData = async (topicId: number) => {
   const res = await GwangjangAxios.get(`/community/topic/${topicId}`);
   return res;
 };
+
+//검색 페이지
+
+export const getSearch = async (keyword: string) => {
+  const res = await GwangjangAxios.get(`/keyword/search/${keyword}`);
+  return res;
+};
+
+export const getSearchCommunity = async (keyword: string) => {
+  const res = await GwangjangAxios.get(`/community/search/ALL/${keyword}`);
+  return res;
+};
