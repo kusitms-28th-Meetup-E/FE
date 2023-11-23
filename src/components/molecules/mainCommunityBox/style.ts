@@ -13,6 +13,7 @@ export const CommunityMainContainer = styled.div`
   box-shadow: 0px 15px 35px 0px rgba(66, 66, 66, 0.05);
   padding: 20px 24px;
   box-sizing: border-box;
+  cursor: pointer;
 
   .top-wrapper {
     display: flex;
@@ -46,7 +47,7 @@ export const CommunityMainContainer = styled.div`
     border-radius: 5px;
     background: var(--Gray2_100, #f5f5f5);
     border-radius: 5px;
-
+    cursor: pointer;
     display: flex;
 
     .quot-text {

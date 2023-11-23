@@ -215,6 +215,14 @@ export default Header;
 
 export const Wrapper = styled.div<{ $openlist: boolean }>`
   position: relative;
+  position: -webkit-sticky; /* 사파리 브라우저 지원 */
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none; // drag 방지
   .list {
     display: ${(props) => (props.$openlist ? "block" : "none")};
     width: 40%;
@@ -348,14 +356,6 @@ export const Container = styled.div<{ $link: string; $openlist: boolean }>`
       display: none;
     }
   }
-  position: -webkit-sticky; /* 사파리 브라우저 지원 */
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-use-select: none;
-  user-select: none; // drag 방지
 `;
 export const LeftHeader = styled.div`
   display: flex;

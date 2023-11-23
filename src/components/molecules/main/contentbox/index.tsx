@@ -45,7 +45,7 @@ export const ContentBox = ({ data, category }: { data: ContentDataProps; categor
             <TopicTag category={category} />
           </div>
           <div>
-            <KeywordTag category={category} />
+            <KeywordTag category={category}>{data.keyword}</KeywordTag>
           </div>
         </div>
         <div className="text-box">

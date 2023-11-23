@@ -1,16 +1,24 @@
+import { useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import { SeeMore } from "@/components/atoms/more";
 import { PreviewCommunityBox } from "@/components/molecules/PreviewCommunityBox";
 import { envirData } from "@/dummy/AreaData";
+import { areaState } from "@/recoil/atoms";
 
 export const CommunityPreview = () => {
+  const { id } = useParams();
+  const area = useRecoilValue(areaState);
+
+  const name = decodeURI(decodeURIComponent(id || ""));
+
   return (
-    <Container>
+    <Container $area={area}>
       <div className="PreviewTop">
         <div className="keyword-text">
           <div className="title-top">
-            <p>후쿠시마 오염수</p> 에 대해
+            <p>{name}</p> 에 대해
           </div>
           <div>이렇게 말하고 있어요</div>
         </div>
@@ -36,7 +44,7 @@ export const CommunityPreview = () => {
   );
 };
 
-export const Container = styled.div`
+export const Container = styled.div<{ $area: string }>`
   width: 710px;
   position: relative;
   .PreviewTop {
@@ -68,7 +76,16 @@ export const Container = styled.div`
       color: inherit;
       line-height: inherit;
       letter-spacing: inherit;
-      box-shadow: inset 0 -9px 0 #1ae276;
+      box-shadow: ${(props) =>
+        props.$area === "환경"
+          ? "inset 0 -9px 0 #1ae276;"
+          : props.$area === "일자리·노동"
+          ? "inset 0 -9px 0 #0084FF;"
+          : props.$area === "교육"
+          ? "inset 0 -9px 0 #FF9900;"
+          : props.$area === "주거·사회 안전망"
+          ? "inset 0 -9px 0 #7755FF;"
+          : ""};
       margin-right: 5px;
     }
   }

@@ -1,9 +1,11 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import bg from "@/assets/DetailTitle/detail-background.png";
 import DetailTitle from "@/components/molecules/DetailTitle";
-import { detailTitleData } from "@/dummy/detailTitleData";
+import { detailTitleState } from "@/recoil/atoms";
 export const DetailArticleTitle = () => {
+  const detailTitleData = useRecoilValue(detailTitleState);
   return (
     <Container>
       <img

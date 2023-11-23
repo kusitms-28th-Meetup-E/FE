@@ -6,6 +6,8 @@ import { CommunityItemProps } from "@/types";
 import { CommunityPostContainer } from "./style";
 
 export const DetailCommunityBox = ({ data }: { data: CommunityItemProps }) => {
+  const contLen = String(data.contents).length;
+
   return (
     <CommunityPostContainer>
       <div className="top-post-wrapper">
@@ -22,18 +24,28 @@ export const DetailCommunityBox = ({ data }: { data: CommunityItemProps }) => {
       <div className="top-wrapper">
         <div className="content-category">
           <TopicTag category={data.area} />
-          {/* <KeywordTag category={data.subject} /> */}
-          <KeywordTag category={data.keyword} />
+          <KeywordTag category={data.area}>{data.subject}</KeywordTag>
+          <KeywordTag category={data.area}>{data.keyword}</KeywordTag>
         </div>
         <div className="content-text">{data.communityText} </div>
       </div>
-      <div className="content-quot">
+      <div
+        className="content-quot"
+        onClick={() => {
+          if (contLen > 20) {
+            console.log(contLen);
+            window.open(`${data.contents}`);
+          } else {
+            window.open(`https://www.youtube.com/watch?v=${data.contents}`);
+          }
+        }}
+      >
         <div className="quot-text">
           <p>인용한 콘텐츠</p>
-          <div>{data.quotText}</div>
+          <div>{data.contentsTitle}</div>
         </div>
         <img
-          src="https://images.chosun.com/resizer/XKL6ePOdAuAn81yF-ZBOY8VyQWs=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/JMI3RCEB2Y7QSIUWJKT2MT7CC4.jpg"
+          src={data.contentsUrl}
           alt=""
         />
       </div>

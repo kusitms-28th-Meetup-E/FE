@@ -1,3 +1,5 @@
+import { useEffect, useMemo, useState } from "react";
+
 import * as Highcharts from "highcharts";
 import HighchartsMore from "highcharts/highcharts-more";
 import HighchartsAccessibility from "highcharts/modules/accessibility";
@@ -7,59 +9,88 @@ HighchartsExporting(Highcharts);
 HighchartsAccessibility(Highcharts);
 HighchartsMore(Highcharts);
 import "./theme3.css";
-import { useRecoilValue } from "recoil";
+import { useParams } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 
-import { lineDummydata } from "@/dummy/lineData";
-import { areaState } from "@/recoil/atoms";
+import { getDetailLineGraph } from "@/apis";
+import { areaState, topDateState } from "@/recoil/atoms";
+import { lineGraphProps } from "@/types";
 
 const Line = ({ showGraph }: { showGraph: boolean }) => {
   const area = useRecoilValue(areaState);
-  const options = {
-    chart: {
-      type: "line",
-      plotBorderWidth: 0,
-      height: 246,
-      width: 887,
-      marginLeft: 0,
-      marginRight: 0,
-    },
+  const setTopDate = useSetRecoilState(topDateState);
+  const [data, setData] = useState<lineGraphProps[]>([]);
+  const { id } = useParams();
 
-    legend: {
-      enabled: false,
-    },
-    tooltip: {
-      pointFormat:
-        "<span class='tooltip-point-custom'><span class='tooltip-dot-custom'>\u25CF</span> 검색횟수: <b>{point.y}</b></span><br/>",
-      useHTML: true,
-      style: {
-        fontSize: "1em",
-        color: "#fff",
-      },
-    },
-    exporting: {
-      enabled: false,
-    },
+  useEffect(() => {
+    const name = decodeURI(decodeURIComponent(id || ""));
 
-    series: [
-      {
-        name: "검색횟수",
-        data: lineDummydata,
+    getDetailLineGraph(name)
+      .then((res) => {
+        const obj = Object.freeze(res.data.data.data);
+        console.log(res);
+        setTopDate(res.data.data.date);
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const RealObj = obj.map((item: any) => {
+          return Object.freeze(item);
+        });
+        setData(RealObj);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+  const options = useMemo(() => {
+    return {
+      chart: {
+        type: "line",
+        plotBorderWidth: 0,
+        height: 246,
+        width: 887,
+        marginLeft: 0,
+        marginRight: 0,
       },
-    ],
-    credits: {
-      enabled: false,
-    },
-  };
+
+      legend: {
+        enabled: false,
+      },
+      tooltip: {
+        pointFormat:
+          "<span class='tooltip-point-custom'><span class='tooltip-dot-custom'>\u25CF</span> 검색횟수: <b>{point.y}</b></span><br/>",
+        useHTML: true,
+        style: {
+          fontSize: "1em",
+          color: "#fff",
+        },
+      },
+      exporting: {
+        enabled: false,
+      },
+
+      series: [
+        {
+          name: "검색횟수",
+          data: data,
+        },
+      ],
+      credits: {
+        enabled: false,
+      },
+    };
+  }, [data]);
   return (
     <Container
       $showGraph={showGraph}
       $area={area}
     >
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={options}
-      />
+      {data.length && (
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+        />
+      )}
     </Container>
   );
 };
@@ -84,9 +115,9 @@ const Container = styled.div<{ $showGraph: boolean; $area: string }>`
       props.$area === "환경"
         ? " rgba(26, 226, 118, 1) !important;"
         : props.$area === "교육"
-        ? "rgba(0, 132, 255, 1) !important;"
+        ? "rgba(255, 153, 0, 1) !important;"
         : props.$area === "일자리·노동"
-        ? " rgba(255, 153, 0, 1) !important;"
+        ? " rgba(0, 132, 255, 1) !important;"
         : props.$area === "주거·사회 안전망"
         ? " rgba(119, 85, 255, 1) !important;"
         : ""};
@@ -96,9 +127,9 @@ const Container = styled.div<{ $showGraph: boolean; $area: string }>`
       props.$area === "환경"
         ? " rgba(26, 226, 118, 1) !important;"
         : props.$area === "교육"
-        ? "rgba(0, 132, 255, 1) !important;"
+        ? "rgba(255, 153, 0, 1) !important;"
         : props.$area === "일자리·노동"
-        ? " rgba(255, 153, 0, 1) !important;"
+        ? " rgba(0, 132, 255, 1) !important;"
         : props.$area === "주거·사회 안전망"
         ? " rgba(119, 85, 255, 1) !important;"
         : ""};
@@ -108,9 +139,9 @@ const Container = styled.div<{ $showGraph: boolean; $area: string }>`
       props.$area === "환경"
         ? " rgba(26, 226, 118, 1) !important;"
         : props.$area === "교육"
-        ? "rgba(0, 132, 255, 1) !important;"
+        ? "rgba(255, 153, 0, 1) !important;"
         : props.$area === "일자리·노동"
-        ? " rgba(255, 153, 0, 1) !important;"
+        ? " rgba(0, 132, 255, 1) !important;"
         : props.$area === "주거·사회 안전망"
         ? " rgba(119, 85, 255, 1) !important;"
         : ""};
@@ -120,9 +151,9 @@ const Container = styled.div<{ $showGraph: boolean; $area: string }>`
       props.$area === "환경"
         ? " rgba(26, 226, 118, 1) !important;"
         : props.$area === "교육"
-        ? "rgba(0, 132, 255, 1) !important;"
+        ? "rgba(255, 153, 0, 1) !important;"
         : props.$area === "일자리·노동"
-        ? " rgba(255, 153, 0, 1) !important;"
+        ? " rgba(0, 132, 255, 1) !important;"
         : props.$area === "주거·사회 안전망"
         ? " rgba(119, 85, 255, 1) !important;"
         : ""};
@@ -130,9 +161,9 @@ const Container = styled.div<{ $showGraph: boolean; $area: string }>`
       props.$area === "환경"
         ? " rgba(26, 226, 118, 1) !important;"
         : props.$area === "교육"
-        ? "rgba(0, 132, 255, 1) !important;"
+        ? "rgba(255, 153, 0, 1) !important;"
         : props.$area === "일자리·노동"
-        ? " rgba(255, 153, 0, 1) !important;"
+        ? " rgba(0, 132, 255, 1) !important;"
         : props.$area === "주거·사회 안전망"
         ? " rgba(119, 85, 255, 1) !important;"
         : ""};

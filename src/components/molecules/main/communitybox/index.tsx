@@ -133,7 +133,8 @@ export const CommunityBox = () => {
               <div className="community-content">
                 <div className="community-tag-wrapper">
                   <TopicTag category={item.area} />
-                  <KeywordTag category={item.keyword} />
+                  <KeywordTag category={item.area}>{item.topic}</KeywordTag>
+                  <KeywordTag category={item.area}>{item.keyword}</KeywordTag>
                 </div>
                 <div className="content-wrapper">
                   <div className="content-text">{item.communityText}</div>

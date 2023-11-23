@@ -1,26 +1,66 @@
+import { useEffect, useState } from "react";
+
+import { useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
+import { getKeywordArticle, getTopicArticle } from "@/apis";
 import { SubTitle } from "@/components/atoms/title";
 import { ArticleCarousel } from "@/components/molecules/carousel/ArticleCarousel";
-import { articleData } from "@/dummy/articleData";
+//import { articleData } from "@/dummy/articleData";
+import { detailPageKeyword } from "@/recoil/atoms";
+import { areaState } from "@/recoil/atoms";
+import { ArticleDataProps } from "@/types";
+//import { ArticleDataProps } from "@/types";
 
 export const KeywordArticle = () => {
+  const { id } = useParams();
+  const area = useRecoilValue(areaState);
+
+  const name = decodeURI(decodeURIComponent(id || ""));
+
+  const DetailPageKeyword = useRecoilValue(detailPageKeyword);
+  const [articleData, setArticleData] = useState<ArticleDataProps[]>([]);
+  const [keywordArticleData, setKeywordArticleData] = useState<ArticleDataProps[]>([]);
+  useEffect(() => {
+    getTopicArticle(name)
+      .then((res) => {
+        setArticleData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    getKeywordArticle(DetailPageKeyword)
+      .then((res) => {
+        setKeywordArticleData(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [DetailPageKeyword, name]);
+
   return (
-    <Background>
-      <div className="inner">
-        <div className="keyword-text">
-          <p>키워드</p>가 더 궁금하다면?
-        </div>
-        <SubTitle title="관련 기사로 더 알아보기" />
-      </div>
-      <div>
-        <ArticleCarousel data={articleData} />
-      </div>
+    <Background $area={area}>
+      {(keywordArticleData.length || articleData.length) && (
+        <>
+          <div className="inner">
+            <div className="keyword-text">
+              <p>{!DetailPageKeyword ? name : DetailPageKeyword}</p>가 더 궁금하다면?
+            </div>
+            <SubTitle title="관련 기사로 더 알아보기" />
+          </div>
+          <div>
+            <ArticleCarousel data={DetailPageKeyword === "" ? articleData : keywordArticleData} />
+          </div>
+        </>
+      )}
     </Background>
   );
 };
 
-const Background = styled.div`
+const Background = styled.div<{ $area: string }>`
   background-color: var(--Gray3_200);
   display: flex;
   flex-direction: column;
@@ -48,7 +88,16 @@ const Background = styled.div`
         font-weight: inherit;
         line-height: inherit;
         letter-spacing: inherit;
-        box-shadow: inset 0 -12px 0 #1ae276;
+        box-shadow: ${(props) =>
+          props.$area === "환경"
+            ? "inset 0 -9px 0 #1ae276;"
+            : props.$area === "일자리·노동"
+            ? "inset 0 -9px 0 #0084FF;"
+            : props.$area === "교육"
+            ? "inset 0 -9px 0 #FF9900;"
+            : props.$area === "주거·사회 안전망"
+            ? "inset 0 -9px 0 #7755FF;"
+            : ""};
       }
     }
 

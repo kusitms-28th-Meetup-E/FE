@@ -1,7 +1,13 @@
 import { atom, selector } from "recoil";
 
 import { mySubjectData } from "@/dummy/mySubjectData";
-import { ArticleItemProps } from "@/types";
+import {
+  ArticleDataProps,
+  BubbleGraphProps,
+  DetailTitleProps,
+  lineGraphProps,
+  packBubbleProps,
+} from "@/types";
 
 import persistAtom from "./persistAtom";
 
@@ -35,7 +41,7 @@ export const selectedTabState = atom({
   default: 0,
 });
 
-export const modalState = atom<ArticleItemProps | null>({
+export const modalState = atom<ArticleDataProps | null>({
   key: "src/atoms/auth.tsx-modalState",
   default: null,
 });
@@ -63,4 +69,49 @@ export const searchResultState = atom({
   key: "src/atoms/auth.tsx-searchResultState",
   default: "",
   effects: [persistAtom],
+});
+
+export const BubbleChartState = atom<packBubbleProps[]>({
+  // 주제뱔 상세페이지 접속시, 쿼리스트링의 영역값을 저장
+  key: "src/atoms/auth.tsx-BubbleChartState",
+  default: [],
+});
+
+export const detailTitleState = atom<DetailTitleProps>({
+  // 주제뱔 상세페이지 접속시, 쿼리스트링의 영역값을 저장
+  key: "src/atoms/auth.tsx-detailTitleState",
+  default: {
+    category: "",
+    title: "",
+    count: 0,
+    oneline: "",
+    id: 0,
+  },
+});
+export const LineGraphState = atom<lineGraphProps[]>({
+  // 주제뱔 상세페이지 접속시, 쿼리스트링의 영역값을 저장
+  key: "src/atoms/auth.tsx-LineGraphState",
+  default: [],
+});
+export const bubbleGraphState = atom<BubbleGraphProps[]>({
+  // 주제뱔 상세페이지 접속시, 쿼리스트링의 영역값을 저장
+  key: "src/atoms/auth.tsx-bubbleGraphState",
+  default: [],
+});
+export const detailPageKeyword = atom({
+  // 주제뱔 상세페이지 접속시, 쿼리스트링의 영역값을 저장
+  key: "src/atoms/auth.tsx-detailPageKeyword ",
+  default: "",
+});
+
+export const loadingState = atom({
+  // 주제뱔 상세페이지 접속시, 쿼리스트링의 영역값을 저장
+  key: "src/atoms/auth.tsx-loadingState ",
+  default: true,
+});
+
+export const topDateState = atom({
+  // 주제뱔 상세페이지 접속시, 쿼리스트링의 영역값을 저장
+  key: "src/atoms/auth.tsx-topDateState ",
+  default: "",
 });

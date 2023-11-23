@@ -11,9 +11,9 @@ import { ArticleDataProps } from "@/types";
 
 import { SlideItem } from "../slideItem";
 
-export const ArticleCarousel = ({ data }: ArticleDataProps) => {
+export const ArticleCarousel = ({ data }: { data: ArticleDataProps[] }) => {
   const maxSlidesToShow = Math.min(data.length, 4);
-
+  console.log(data);
   const SliderSetting = {
     dots: false,
     infinite: true,
@@ -61,7 +61,7 @@ export const ArticleCarousel = ({ data }: ArticleDataProps) => {
         {...SliderSetting}
         ref={slickRef}
       >
-        {data.map((item, idx) => (
+        {data?.map((item, idx) => (
           <SlideItemWrapper key={idx}>
             <SlideItem data={item} />
           </SlideItemWrapper>

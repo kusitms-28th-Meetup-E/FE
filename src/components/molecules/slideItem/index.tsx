@@ -1,14 +1,19 @@
+import moment from "moment";
 import { useSetRecoilState } from "recoil";
 
 import { LikeBorderButton, QuotBorderButton } from "@/components/atoms/button";
 import { ShowModalState, modalState } from "@/recoil/atoms";
-import { ArticleItemProps } from "@/types";
+import { ArticleDataProps } from "@/types";
 
 import { SlideWrapper } from "./style";
 
-export const SlideItem = ({ data }: { data: ArticleItemProps }) => {
+export const SlideItem = ({ data }: { data: ArticleDataProps }) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const setModal = useSetRecoilState(modalState);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const ShowModal = useSetRecoilState(ShowModalState);
+  console.log(data, 124);
+
   const Modal = () => {
     setModal(data);
     ShowModal(true);
@@ -16,35 +21,39 @@ export const SlideItem = ({ data }: { data: ArticleItemProps }) => {
   };
 
   return (
-    <SlideWrapper>
+    <SlideWrapper
+      onClick={() =>
+        data?.type === "YOUTUBE"
+          ? window.open(`https://www.youtube.com/watch?v=${data?.url}`)
+          : window.open(data?.url)
+      }
+    >
       <div className="slide-container">
         <div className="slide-image">
           <img
-            src={data.image}
+            src={data?.imgUrl}
             alt="썸네일"
           />
         </div>
         <div className="slide-text">
           <div className="top-text">
-            <div className="text-type">{data.type}</div>
-            <div className="text-title">{data.title}</div>
+            <div className="text-type">{data?.type}</div>
+            <div
+              className="text-title"
+              dangerouslySetInnerHTML={{ __html: data?.title }}
+            ></div>
           </div>
           <div className="last-text">
-            <div className="text-date">{data.date}</div>
-            {data.likeCount !== undefined || data.quotCount !== undefined ? (
+            <div className="text-date">{moment(data?.pubDate).format("YYYY.MM.DD")}</div>
+            {data.title ? (
               <div className="button-wrapper">
-                {data.likeCount !== undefined && (
+                {data.title !== undefined && (
                   <LikeBorderButton
-                    likeCount={data.likeCount}
+                    likeCount={30}
                     initialLikeStatus="true"
                   />
                 )}
-                {data.quotCount !== undefined && (
-                  <QuotBorderButton
-                    onClick={Modal}
-                    quotCount={data.quotCount}
-                  />
-                )}
+                <QuotBorderButton onClick={Modal} />
               </div>
             ) : null}
           </div>

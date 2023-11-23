@@ -6,16 +6,17 @@ import HighchartsAccessibility from "highcharts/modules/accessibility";
 import HighchartsExporting from "highcharts/modules/exporting";
 import HighchartsReact from "highcharts-react-official";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-
-import { packbubbleDummydata } from "@/dummy/packBubbleData";
 
 HighchartsExporting(Highcharts);
 HighchartsAccessibility(Highcharts);
 HighchartsMore(Highcharts);
 import "./theme.css";
+import { BubbleChartState } from "@/recoil/atoms";
 
 const PackBubble = () => {
+  const BubbleChartData = useRecoilValue(BubbleChartState);
   const [width, setWidth] = useState<number>(window.innerWidth); // 기본 1440-> 반응형 400으로 , 반응형 작업할 때 사용, 아마 강제로 view값 가져와서 거기에 맞게 useEffect로 줄여야할듯
   const navigate = useNavigate();
   const handleResize = () => {
@@ -61,7 +62,7 @@ const PackBubble = () => {
 
     plotOptions: {
       packedbubble: {
-        minSize: "10%",
+        minSize: "20%",
         maxSize: "230%",
         zMin: 0,
         zMax: 1250,
@@ -76,7 +77,8 @@ const PackBubble = () => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           click: function (e: any) {
             console.log(e.point.name);
-            navigate(`/detail/${e.point.id}`);
+            const name = encodeURI(encodeURIComponent(e.point.name));
+            navigate(`/detail/${name}`);
             //1부터 9까지 숫자가 들어오면 거기에 맞춰서 라우팅 하는게 맞을듯
             //setWidth(width - 100); // 반응형 할 때, 사용 임시
           },
@@ -118,7 +120,7 @@ const PackBubble = () => {
     credits: {
       enabled: false,
     },
-    series: packbubbleDummydata, // 데이터 값
+    series: BubbleChartData, // 데이터 값
   };
   return (
     <Container>

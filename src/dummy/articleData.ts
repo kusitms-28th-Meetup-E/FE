@@ -6,6 +6,7 @@ export const articleData = [
     date: "2023.10.24",
     likeCount: 24,
     quotCount: 39,
+    contents_id: 901,
   },
   {
     title: "지금 막 3분으로 넘어감dddd미ㅑ더리먀너딜먼얄머ㅣ댜ㅓㄹ미ㅑ어림댜ㅓ리먀너일머댤",
@@ -13,6 +14,7 @@ export const articleData = [
     image: "https://gwanghwamun.seoul.go.kr/resources/client2022/images/bg_info_mo.jpg",
     date: "2023.10.24",
     likeCount: 24,
+    contents_id: 901,
     quotCount: 39,
   },
   {
@@ -21,6 +23,7 @@ export const articleData = [
     image: "https://gwanghwamun.seoul.go.kr/resources/client2022/images/bg_info_mo.jpg",
     date: "2023.10.24",
     likeCount: 24,
+    contents_id: 901,
     quotCount: 39,
   },
   {
@@ -29,6 +32,7 @@ export const articleData = [
     image: "https://gwanghwamun.seoul.go.kr/resources/client2022/images/bg_info_mo.jpg",
     date: "2023.10.24",
     likeCount: 24,
+    contents_id: 901,
     quotCount: 39,
   },
   {
@@ -37,6 +41,7 @@ export const articleData = [
     image: "https://gwanghwamun.seoul.go.kr/resources/client2022/images/bg_info_mo.jpg",
     date: "2023.10.24",
     likeCount: 24,
+    contents_id: 901,
     quotCount: 39,
   },
 ];

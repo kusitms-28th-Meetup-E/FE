@@ -67,7 +67,7 @@ export interface SeeMoreProps {
 
 export interface ContentDataProps {
   category: string;
-  keyword: string[];
+  keyword: string;
   type: string;
   title: string;
   imgUrl: string;
@@ -111,15 +111,17 @@ export interface semiDataProps {
 }
 
 export interface ArticleDataProps {
-  data: {
-    title: string;
-    type: string;
-    image: string;
-    date: string;
-    likeCount: number;
-    quotCount: number;
-  }[];
-}
+  contents_id?: string;
+  description?: string;
+  imgUrl: string;
+  issueTitle?: string;
+  keyword?: string;
+  pubDate: string;
+  title: string;
+  topic?: string;
+  type: string;
+  url: string;
+} // 좋아요 수 넣기
 
 export interface ArticleItemProps {
   title: string;
@@ -128,6 +130,17 @@ export interface ArticleItemProps {
   date: string;
   likeCount?: number;
   quotCount?: number;
+  contents_id?: number;
+}
+
+export interface ContentsItemProps {
+  contents_id: number;
+  url: string;
+  title: string;
+  description: string;
+  type: string;
+  issueTitle: string;
+  pubDate: string;
 }
 
 export interface CategoryBarProps {
@@ -148,6 +161,8 @@ export interface CommunityItemProps {
   commentCount: number;
   contentsId: number;
   contents: null;
+  contentsTitle: string;
+  contentsUrl: string;
   likeStatus: string;
   quotText: string;
 }
@@ -168,7 +183,7 @@ export interface SimilarTopicesProps {
 }
 
 export interface SimilarTopicProps {
-  subscibeCount: number;
+  subscribeCount: number;
   topic: string;
   area: string;
 }
@@ -176,6 +191,11 @@ export interface ToptopicProps {
   id: number;
   area: string;
   subject: string;
+
+  //
+  category: string;
+  imgUrl: string;
+  title: string;
 }
 
 export interface PopularCommunityProps {
@@ -223,4 +243,25 @@ export interface SearchTopicProps {
   count: number;
   oneline: string;
   img: string;
+}
+
+export interface packBubbleProps {
+  name: string;
+  data: {
+    name: string;
+    value: number;
+    id?: number;
+  }[];
+}
+
+export interface lineGraphProps {
+  name: string;
+  y: number;
+}
+
+export interface BubbleGraphProps {
+  x: number;
+  y: number | null;
+  z: number;
+  name: string;
 }

@@ -2,10 +2,13 @@ import { ChangeEvent, useState } from "react";
 
 import { useRecoilValue } from "recoil";
 
+import { postCommunityItem } from "@/apis";
 import { BigProfile } from "@/components/atoms/profile";
 import { KeywordTag, TopicTag } from "@/components/atoms/tag";
 import { modalState } from "@/recoil/atoms";
 import { ArticleItemProps } from "@/types";
+
+import { NoticeModal } from "../noticeModal";
 
 import { PostingModalContainer } from "./style";
 
@@ -13,12 +16,16 @@ export const PostingModal = () => {
   const [writeText, setWriteText] = useState("");
   const [textLen, setTextLen] = useState(0);
 
+  // const [contentsId, setContentsId] = useState<number | undefined>(undefined);
+
   const [uploadBtn, setUploadBtn] = useState(true);
 
+  const [isComplete, setIsComplete] = useState(false);
   //데이터 받아오기
   const modalData = useRecoilValue<ArticleItemProps | null>(modalState);
-  console.log(modalData);
+  console.log("data:", modalData);
 
+  console.log(modalData?.contents_id);
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setWriteText(e.currentTarget.value);
     setTextLen(e.currentTarget.value.length);
@@ -30,8 +37,28 @@ export const PostingModal = () => {
     }
   };
 
-  const onClickButton = () => {
-    console.log("글 올리기 ");
+  const accessToken = window.localStorage.getItem("accessToken");
+  console.log("token:", accessToken);
+
+  const onClickButton = async () => {
+    console.log("hihi");
+    if (modalData != null) {
+      console.log("글 올리기 ");
+      // setContentsId(modalData.contents_id);
+      // console.log(contentsId);
+    }
+    if (modalData?.contents_id != null && accessToken != null) {
+      console.log("text");
+      await postCommunityItem(modalData?.contents_id, writeText, accessToken)
+        .then((res) => {
+          console.log(res.data);
+          setIsComplete(true);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsComplete(false);
+        });
+    }
   };
 
   return (
@@ -57,7 +84,7 @@ export const PostingModal = () => {
       </div>
       <div className="input-box">
         <textarea
-          placeholder="인용 글 내용을 입력해주세요."
+          placeholder="내용을 입력해주세요."
           maxLength={500}
           value={writeText}
           onChange={onChange}
@@ -74,6 +101,7 @@ export const PostingModal = () => {
           alt=""
         />
       </div>
+      {isComplete && <NoticeModal />}
     </PostingModalContainer>
   );
 };

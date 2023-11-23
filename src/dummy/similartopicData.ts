@@ -4,17 +4,17 @@ export const similartopicData = {
   item: [
     {
       topic: "어쩌라고",
-      subscibeCount: 80,
+      subscribeCount: 80,
       area: "환경",
     },
     {
       topic: "어쩌라고",
-      subscibeCount: 80,
+      subscribeCount: 80,
       area: "환경",
     },
     {
       topic: "어쩌라고",
-      subscibeCount: 80,
+      subscribeCount: 80,
       area: "환경",
     },
   ],

@@ -8,12 +8,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { NextArrowButton, PrevArrowButton } from "@/components/atoms/button";
-// import { SlideItem } from "@/components/molecules/slideItem";
+import { SlideItem } from "@/components/molecules/slideItem";
 import { filteredDataSelector } from "@/recoil/atoms";
+import { ArticleDataProps } from "@/types";
 
-import { SlideItem } from "../slideItem";
-
-export const TopicCarousel = () => {
+export const TopicCarousel = ({ data }: { data: ArticleDataProps[] }) => {
   const filteredData = useRecoilValue(filteredDataSelector);
 
   const maxSlidesToShow = Math.min(filteredData.length, 4);
@@ -65,7 +64,7 @@ export const TopicCarousel = () => {
         {...SliderSetting}
         ref={slickRef}
       >
-        {filteredData.map((data, idx) => (
+        {data?.map((data, idx) => (
           <SlideItemWrapper key={idx}>
             <SlideItem data={data} />
           </SlideItemWrapper>

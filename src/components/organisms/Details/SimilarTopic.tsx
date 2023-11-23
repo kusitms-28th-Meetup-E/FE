@@ -1,15 +1,23 @@
+import { useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import next from "@/assets/bottom_arrow.svg";
 import { SimilarTopicBox } from "@/components/molecules/longTopicBox";
+import { areaState } from "@/recoil/atoms";
 import { SimilarTopicesProps } from "@/types";
 
 const SimilarTopic = ({ data }: { data: SimilarTopicesProps }) => {
+  const { id } = useParams();
+  const area = useRecoilValue(areaState);
+
+  const name = decodeURI(decodeURIComponent(id || ""));
+
   return (
-    <Container>
+    <Container $area={area}>
       <div className="keyword-text">
         <div className="title-top">
-          <p>{data.topic}</p> 와
+          <p>{name}</p> 와
         </div>
         <div>비슷한 주제예요</div>
       </div>
@@ -34,7 +42,7 @@ const SimilarTopic = ({ data }: { data: SimilarTopicesProps }) => {
 
 export default SimilarTopic;
 
-const Container = styled.div`
+const Container = styled.div<{ $area: string }>`
   .keyword-text {
     padding: 0 24px;
     margin-bottom: 20px;
@@ -59,7 +67,16 @@ const Container = styled.div`
       color: inherit;
       line-height: inherit;
       letter-spacing: inherit;
-      box-shadow: inset 0 -9px 0 #1ae276;
+      box-shadow: ${(props) =>
+        props.$area === "환경"
+          ? "inset 0 -9px 0 #1ae276;"
+          : props.$area === "일자리·노동"
+          ? "inset 0 -9px 0 #0084FF;"
+          : props.$area === "교육"
+          ? "inset 0 -9px 0 #FF9900;"
+          : props.$area === "주거·사회 안전망"
+          ? "inset 0 -9px 0 #7755FF;"
+          : ""};
       margin-right: 5px;
     }
 

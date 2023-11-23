@@ -20,7 +20,7 @@ export const PreviewCommunityBox = ({ data }: { data: CommunityItemProps }) => {
           </div>
           <div className="top-second-wrapper">
             <div>
-              <KeywordTag category={data.area} />
+              <KeywordTag category={data.area}>{data.keyword}</KeywordTag>
             </div>
             <div className="button-wrapper">
               <LikeBorderButton
@@ -33,7 +33,7 @@ export const PreviewCommunityBox = ({ data }: { data: CommunityItemProps }) => {
         </div>
         <div className="bottom-content">
           <div>인용한 콘텐츠</div>
-          <p>{data.quotText}</p>
+          <p>{data.contentsTitle}</p>
         </div>
       </CommunityDetailContainer>
     </>

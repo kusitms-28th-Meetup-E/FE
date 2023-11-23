@@ -32,7 +32,7 @@ image[width="1420"] {
   stroke-width: 0;
 }
 
-.highcharts-series-0.highcharts-packedbubble-series:hover .highcharts-point {
+.highcharts-series-3.highcharts-packedbubble-series:hover .highcharts-point {
   fill-opacity: 1;
   fill: #ff9900;
 }
@@ -44,14 +44,14 @@ image[width="1420"] {
   fill-opacity: 1;
   fill: #1ae276 !important;
 }
-.highcharts-series-3.highcharts-packedbubble-series:hover .highcharts-point {
+.highcharts-series-0.highcharts-packedbubble-series:hover .highcharts-point {
   fill-opacity: 1;
   fill: #0084ff !important;
 }
 .highcharts-legend-item text {
   font-size: 1rem !important;
 }
-.highcharts-legend-item.highcharts-series-0 .highcharts-point {
+.highcharts-legend-item.highcharts-series-3 .highcharts-point {
   fill: #ff9900;
   width: 9px !important;
 }
@@ -61,14 +61,14 @@ image[width="1420"] {
 .highcharts-legend-item.highcharts-series-2 .highcharts-point {
   fill: #1ae276;
 }
-.highcharts-legend-item.highcharts-series-3 .highcharts-point {
+.highcharts-legend-item.highcharts-series-0 .highcharts-point {
   fill: #0084ff;
 }
 .highcharts-legend-item .highcharts-graph {
   stroke: transparent;
 }
 
-.highcharts-series-0.highcharts-packedbubble-series .highcharts-label.highcharts-data-label text {
+.highcharts-series-3.highcharts-packedbubble-series .highcharts-label.highcharts-data-label text {
   fill: #ff9900 !important;
   color: #ff9900 !important;
 }
@@ -80,7 +80,7 @@ image[width="1420"] {
   fill: #1ae276 !important;
   color: #1ae276 !important;
 }
-.highcharts-series-3.highcharts-packedbubble-series .highcharts-label.highcharts-data-label text {
+.highcharts-series-0.highcharts-packedbubble-series .highcharts-label.highcharts-data-label text {
   fill: #0084ff !important;
   color: #0084ff !important;
 }

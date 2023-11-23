@@ -2,21 +2,29 @@ import { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
+import {
+  getCommunityAllData,
+  getCommunityAreaData,
+  getCommunityTop5,
+  getSubscribeTop5,
+} from "@/apis";
 import { CategoryBar } from "@/components/molecules/categoryBar";
 import { CommunityMainList } from "@/components/organisms/Community/CommunityMainList";
 import CommunityPopular from "@/components/organisms/Community/CommunityPopular";
 import CommunityTitle from "@/components/organisms/Community/CommunityTitle";
 import CommunityTopTopic from "@/components/organisms/Community/CommunityTopTopic";
 import { EduData, envirData } from "@/dummy/AreaData";
-import { PopularCommunityData } from "@/dummy/PopularCommunityData";
-import { ToptopicData } from "@/dummy/ToptopicData";
-import { CommunityItemProps } from "@/types";
+// import { ToptopicData } from "@/dummy/ToptopicData";
+import { CommunityItemProps, PopularCommunityProps, ToptopicProps } from "@/types";
 
 export const CommunityPage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [communityData, setCommunityData] = useState<CommunityItemProps[]>([]);
+  const [topData, setTopData] = useState<ToptopicProps[]>([]);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const [popularData, setPopularData] = useState<PopularCommunityProps[]>([]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,28 +39,80 @@ export const CommunityPage = () => {
   }, []);
 
   useEffect(() => {
+    getSubscribeTop5()
+      .then((res) => {
+        console.log("top5:", res.data);
+        setTopData(res.data.data);
+        console.log(topData);
+      })
+      .catch((err) => {
+        // setTopData(ToptopicData);
+        console.log(err);
+      });
+
+    getCommunityTop5()
+      .then((res) => {
+        console.log("top55:", res.data);
+        setPopularData(res.data.data);
+      })
+      .catch((err) => console.log(err));
+
     switch (selectedTab) {
       case 0: // 전체 api 갖고와서 데이터 넣어주기
-        // getCommunityAllData()
-        //   .then((res) => {
-        //     console.log(res.data);
-        //     dataFetch = res.data;
-        //   })
-        //   .catch((err) => console.log(err));
-        setCommunityData(envirData);
+        getCommunityAllData()
+          .then((res) => {
+            console.log("전체:", res.data.data);
+            setCommunityData(res.data.data);
+          })
+          .catch((err) => {
+            setCommunityData(envirData);
+            console.log(err);
+          });
 
         break;
       case 1: // 일자리 · 노동
-        setCommunityData(envirData);
+        getCommunityAreaData("일자리-노동")
+          .then((res) => {
+            console.log("일자리노동:", res.data);
+            setCommunityData(res.data.data);
+          })
+          .catch((err) => {
+            setCommunityData(envirData);
+            console.log(err);
+          });
         break;
       case 2: // 주거 · 사회 안전망
-        setCommunityData(envirData);
+        getCommunityAreaData("주거-사회안전망")
+          .then((res) => {
+            // console.log("res:", res.data);
+            setCommunityData(res.data.data);
+          })
+          .catch((err) => {
+            setCommunityData(envirData);
+            console.log(err);
+          });
         break;
       case 3: // 환경
-        setCommunityData(envirData);
+        getCommunityAreaData("환경")
+          .then((res) => {
+            console.log("res:", res.data);
+            setCommunityData(res.data.data);
+          })
+          .catch((err) => {
+            setCommunityData(envirData);
+            console.log(err);
+          });
         break;
       case 4: // 교육
-        setCommunityData(EduData);
+        getCommunityAreaData("교육")
+          .then((res) => {
+            console.log("res:", res.data);
+            setCommunityData(res.data.data);
+          })
+          .catch((err) => {
+            setCommunityData(EduData);
+            console.log(err);
+          });
         break;
       default:
         break;
@@ -69,16 +129,16 @@ export const CommunityPage = () => {
             <>
               <CommunityMainList data={communityData} />
               <div className="sideCommunity">
-                <CommunityPopular data={PopularCommunityData} />
-                <CommunityTopTopic data={ToptopicData} />
+                <CommunityPopular data={popularData.slice(0, 5)} />
+                <CommunityTopTopic data={topData} />
               </div>
             </>
           ) : (
             <div className="responsive-box">
               <div className="sideCommunity">
-                <CommunityPopular data={PopularCommunityData.slice(0, 2)} />
+                <CommunityPopular data={popularData.slice(0, 2)} />
                 <div className="topic-data-box">
-                  <CommunityTopTopic data={ToptopicData.slice(0, 2)} />
+                  <CommunityTopTopic data={topData.slice(0, 2)} />
                 </div>
               </div>
               <CommunityMainList data={communityData} />

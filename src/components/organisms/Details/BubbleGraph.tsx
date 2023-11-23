@@ -4,14 +4,14 @@ import styled from "styled-components";
 
 import Bubble from "@/components/molecules/bubble";
 export const BubbleGraph = () => {
-  const Month = [1, 2, 3, 4, 5, 6, 7];
+  const Month = [7, 8, 9, 10, 11, 12];
 
   return (
     <Container>
       <BubbleTop>
         <div className="title">
-          약 <p className="first">70개의 기사 데이터</p>를 형태소 분석한 결과,{" "}
-          <p className="second"> 6개의 주요 키워드</p>를 추출했어요
+          약 <p className="first">1024개의 기사 데이터</p>를 형태소 분석한 결과,{" "}
+          <p className="second"> 5개의 주요 키워드</p>를 추출했어요
         </div>
       </BubbleTop>
       <Bubble />
@@ -33,7 +33,7 @@ const Container = styled.div`
   justify-content: center;
   position: relative;
   margin: 0 auto;
-  padding-top: 60px;
+  padding-top: 80px;
   background-color: var(--Gray3_200);
 
   //위에 한줄소개 height 늘어나게 했을 때 대비해서 일단 작성해놓은 반응형
@@ -57,7 +57,7 @@ const BubbleTop = styled.div`
   background-color: transparent;
   .title {
     display: flex;
-    margin: 30px auto 0;
+    margin: 48px auto 0;
     color: var(--Gray7_600, #757575);
     font-size: var(--text_b3);
     width: fit-content;

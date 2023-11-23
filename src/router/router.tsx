@@ -53,7 +53,7 @@ const router = () => {
             element={<CommunityPage />}
           />
           <Route
-            path="/detailcommunity/:topicid/:comunnityid"
+            path="/detailcommunity/:topicId/:communityId"
             element={<DetailCommunityPage />}
           />
           <Route

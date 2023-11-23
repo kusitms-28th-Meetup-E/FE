@@ -19,7 +19,7 @@ export const SimilarTopicBox = ({ data }: { data: SimilarTopicProps }) => {
         <TopicTag category={data.area} />
       </Top>
       <Bottom>
-        <p>{data.subscibeCount}명</p>이 구독하고 있어요
+        <p>{data.subscribeCount}명</p>이 구독하고 있어요
       </Bottom>
     </Container>
   );
@@ -36,8 +36,8 @@ export const TopTopicBox = ({ data }: { data: ToptopicProps }) => {
       $string="top"
     >
       <Middle>
-        <div className="title">{data.subject}</div>
-        <TopicTag category={data.area} />
+        <div className="title">{data.title}</div>
+        <TopicTag category={data.category} />
       </Middle>
     </Container>
   );

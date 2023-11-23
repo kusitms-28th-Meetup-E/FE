@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 import bg from "@/assets/DetailTitle/detail-background.png";
 import { DetailCommunityBox } from "@/components/molecules/detailCommunityBox";
-import { envirData } from "@/dummy/AreaData";
+import { CommunityItemProps } from "@/types";
 
-const DetailCommunityTitle = () => {
+const DetailCommunityTitle = ({ data }: { data: CommunityItemProps }) => {
   return (
     <Container>
       <img
@@ -13,7 +13,7 @@ const DetailCommunityTitle = () => {
         width="100%"
         height={220}
       />
-      <DetailCommunityBox data={envirData[0]} />
+      <DetailCommunityBox data={data} />
     </Container>
   );
 };

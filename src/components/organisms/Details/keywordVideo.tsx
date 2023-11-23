@@ -1,18 +1,55 @@
+import { useEffect, useState } from "react";
+
+import { useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
+import { getKeywordYoutube, getTopicYoutube } from "@/apis";
 import { SubTitle } from "@/components/atoms/title";
 import { ArticleCarousel } from "@/components/molecules/carousel/ArticleCarousel";
-import { tempVideoData } from "@/dummy/tempVideoData";
+//import { tempVideoData } from "@/dummy/tempVideoData";
+import { detailPageKeyword } from "@/recoil/atoms";
+import { ArticleDataProps } from "@/types";
 
 export const KeywordVideo = () => {
+  const { id } = useParams();
+
+  const name = decodeURI(decodeURIComponent(id || ""));
+  const DetailPageKeyword = useRecoilValue(detailPageKeyword);
+  const [YoutubeData, setYoutubeData] = useState<ArticleDataProps[]>([]);
+  const [keywordYoutubeData, setKeywordYoutubeData] = useState<ArticleDataProps[]>([]);
+
+  useEffect(() => {
+    getTopicYoutube(name)
+      .then((res) => {
+        setYoutubeData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    getKeywordYoutube(DetailPageKeyword)
+      .then((res) => {
+        setKeywordYoutubeData(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [DetailPageKeyword, name]);
+
   return (
     <Background>
-      <div className="inner">
-        <SubTitle title="관련 영상으로 더 알아보기" />
-      </div>
-      <div>
-        <ArticleCarousel data={tempVideoData} />
-      </div>
+      {(keywordYoutubeData.length || YoutubeData.length) && (
+        <>
+          <div className="inner">
+            <SubTitle title="관련 영상으로 더 알아보기" />
+          </div>
+          <div>
+            <ArticleCarousel data={DetailPageKeyword === "" ? YoutubeData : keywordYoutubeData} />
+          </div>
+        </>
+      )}
     </Background>
   );
 };

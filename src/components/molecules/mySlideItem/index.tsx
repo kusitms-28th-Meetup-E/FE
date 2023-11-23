@@ -32,7 +32,7 @@ export const MySlideItem = ({ data }: { data: ArticleItemProps }) => {
                     initialLikeStatus="true"
                   />
                 )}
-                {data.quotCount !== undefined && <QuotBorderButton quotCount={data.quotCount} />}
+                {data.quotCount !== undefined && <QuotBorderButton />}
               </div>
             ) : null}
           </div>
