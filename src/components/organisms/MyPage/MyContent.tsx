@@ -1,12 +1,15 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import { MySlideItem } from "@/components/molecules/mySlideItem";
-import { articleData } from "@/dummy/articleData";
+import { myLikeContentsData } from "@/recoil/atoms";
 
 export const MyContent = () => {
+  const contentsData = useRecoilValue(myLikeContentsData);
+
   return (
     <MyContentWrapper>
-      {articleData.map((item, idx) => (
+      {contentsData.map((item, idx) => (
         <MySlideItem
           key={idx}
           data={item}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import temp from "@/assets/main_logo.svg";
@@ -7,10 +8,13 @@ import editNicknameImg from "@/assets/myPage/edit-pencil-nickname.svg";
 import editImg from "@/assets/myPage/edit-pencil.svg";
 import { TopTopicBox } from "@/components/molecules/longTopicBox";
 import { SideBox } from "@/components/molecules/sideBox";
-import { MySubscribeData } from "@/dummy/MySubscribeData";
+import { mySubscribeTopicData } from "@/recoil/atoms";
 
 export const MySideBox = () => {
   const [isEditing, setIsEditing] = useState(false);
+
+  const mySubData = useRecoilValue(mySubscribeTopicData);
+  console.log("ss", mySubData);
   const [newNickname, setNewNickname] = useState("기본값");
 
   //닉네임 수정 시
@@ -98,7 +102,7 @@ export const MySideBox = () => {
           <div className="subscribe-title">구독한 사회이슈</div>
           <p> 사회이슈 키워드는 최대 3개까지 구독할 수 있어요.</p>
           <div className="subscribe-topic">
-            {MySubscribeData.map((item, idx) => {
+            {mySubData.map((item, idx) => {
               return (
                 <div className="topic-wrapper">
                   <TopTopicBox

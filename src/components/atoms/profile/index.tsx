@@ -48,7 +48,6 @@ export const LongProfile = ({ nickname, profileImg, date }: ProfileProps) => {
 };
 
 export const BigProfile = ({ nickname, profileImg, date }: ProfileProps) => {
-  profileImg = temp;
   const formattedDate = formatDate(date);
 
   return (

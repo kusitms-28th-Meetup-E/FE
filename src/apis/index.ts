@@ -292,3 +292,48 @@ export const getPopularContents = async () => {
   const res = await GwangjangAxios.get("/contents/contents/like");
   return res;
 };
+
+//내가 구독한 주제
+export const getMySubscribeData = async (accessToken: string) => {
+  const res = await GwangjangAxios.get("/member/subscribe", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return res;
+};
+
+//좋아요한 커뮤니티 글
+export const getMyLikeCommunityData = async (accessToken: string) => {
+  const res = await GwangjangAxios.get("/community/mypage", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return res;
+};
+
+//내가 쓴 커뮤니티 글
+export const getMyWriteCommunityData = async (accessToken: string) => {
+  const res = await GwangjangAxios.get("/community/mywrite", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return res;
+};
+
+export const postMyLikeContentsData = async (accessToken: string) => {
+  const res = await GwangjangAxios.post(
+    "/contents/my-page/like",
+    {
+      data: [],
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  return res;
+};

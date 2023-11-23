@@ -1,10 +1,17 @@
+import { useRecoilValue } from "recoil";
+
 import { LikeBorderButton, QuotBorderButton } from "@/components/atoms/button";
 import { TopicTag } from "@/components/atoms/tag";
-import { ArticleItemProps } from "@/types";
+import { myLikeContentsData } from "@/recoil/atoms";
+import { ContentsItemProps } from "@/types";
 
 import { SlideWrapper } from "./style";
 
-export const MySlideItem = ({ data }: { data: ArticleItemProps }) => {
+export const MySlideItem = ({ data }: { data: ContentsItemProps }) => {
+  const contentData = useRecoilValue(myLikeContentsData);
+
+  console.log("contentData:", contentData);
+
   return (
     <SlideWrapper>
       <div className="slide-container">

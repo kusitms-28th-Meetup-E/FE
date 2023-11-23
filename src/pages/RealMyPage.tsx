@@ -1,19 +1,37 @@
 import { useState, useEffect } from "react";
 
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 
+import {
+  getMyLikeCommunityData,
+  getMySubscribeData,
+  getMyWriteCommunityData,
+  postMyLikeContentsData,
+} from "@/apis";
 import { ResponsiveSideBox } from "@/components/molecules/responsiveSideBox";
 import { MyContent } from "@/components/organisms/MyPage/MyContent";
 import { MyPageTitle } from "@/components/organisms/MyPage/MyPageTitle";
 import { MyPost } from "@/components/organisms/MyPage/MyPost";
 import { MySideBox } from "@/components/organisms/MyPage/MySideBox";
 import { MyStatus } from "@/components/organisms/MyPage/MyStatus";
-import { selectedTabState } from "@/recoil/atoms";
+import {
+  myLikeContentsData,
+  myLikeData,
+  mySubscribeTopicData,
+  myWriteData,
+  selectedTabState,
+} from "@/recoil/atoms";
 
 export const RealMyPage = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const selectedTab = useRecoilValue(selectedTabState);
+
+  //
+  const setSubscribeData = useSetRecoilState(mySubscribeTopicData);
+  const setLikeData = useSetRecoilState(myLikeData);
+  const setLikeContents = useSetRecoilState(myLikeContentsData);
+  const setWriteData = useSetRecoilState(myWriteData);
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,6 +44,48 @@ export const RealMyPage = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const accessToken = window.localStorage.getItem("accessToken");
+
+  useEffect(() => {
+    if (accessToken !== null) {
+      getMySubscribeData(accessToken)
+        .then((res) => {
+          // console.log(res.data.data.subscribeResList);
+          setSubscribeData(res.data.data.subscribeResList);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      //
+      getMyLikeCommunityData(accessToken)
+        .then((res) => {
+          // console.log(res.data);
+          setLikeData(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      postMyLikeContentsData(accessToken)
+        .then((res) => {
+          console.log(res.data);
+          setLikeContents(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      getMyWriteCommunityData(accessToken)
+        .then((res) => {
+          // console.log("11", res.data);
+          setWriteData(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
 
   return (
     <OutWrapper>

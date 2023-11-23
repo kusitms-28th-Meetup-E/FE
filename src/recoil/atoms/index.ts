@@ -131,6 +131,23 @@ export const topDateState = atom({
   default: "",
 });
 
+export const mySubscribeTopicData = atom({
+  key: "src/atoms/auth.tsx-mySubscribeTopicData",
+  default: [],
+});
+
+export const myLikeData = atom({
+  key: "src/atoms/auth.tsx-myLikeData",
+  default: [],
+});
+
+export const myLikeContentsData = atom({
+  key: "src/atoms/auth.tsx-myLikeContentsData",
+  default: [],
+});
+
+export const myWriteData = atom({
+  key: "src/atoms/auth.tsx-myWriteData",
 export const ToastState = atom({
   // 주제뱔 상세페이지 접속시, 쿼리스트링의 영역값을 저장
   key: "src/atoms/auth.tsx-ToastState ",

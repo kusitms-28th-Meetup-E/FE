@@ -281,6 +281,27 @@ export interface BubbleGraphProps {
   name: string;
 }
 
+export interface SubscribeDataProps {
+  //
+  imgUrl: string;
+  issue: string;
+  issueId: number;
+  topic: string;
+}
+
+export interface ContentsItemProps {
+  contents_id: number;
+  imgUrl: string;
+  title: string;
+  description: string;
+  type: string;
+  issueTitle: string;
+  keyword: string;
+  pubDate: string;
+  topic: string;
+  likeCount?: number;
+  quotCount?: number;
+
 export interface CommentProps {
   topicId: number;
   communityId: number;

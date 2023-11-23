@@ -1,6 +1,6 @@
 import bg from "@/assets/discussedTopic/topic1.png";
 import { TopicTag } from "@/components/atoms/tag";
-import { ToptopicProps, SimilarTopicProps } from "@/types";
+import { SimilarTopicProps, ToptopicProps } from "@/types";
 
 import { Container, Top, Bottom, Middle } from "./style";
 
