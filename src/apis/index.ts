@@ -133,7 +133,6 @@ export const getCommunityAreaData = async (topicId: string) => {
   return res;
 };
 
-
 //검색 페이지
 
 export const getSearch = async (keyword: string) => {
@@ -143,6 +142,7 @@ export const getSearch = async (keyword: string) => {
 
 export const getSearchCommunity = async (keyword: string) => {
   const res = await GwangjangAxios.get(`/community/search/ALL/${keyword}`);
+  return res;
 };
 export const postCommunityItem = async (
   contentsId: number,
