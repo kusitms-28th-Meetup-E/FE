@@ -32,11 +32,9 @@ const DetailTitle = ({ data }: { data: DetailTitleProps }) => {
 
     if (!onOff && localStorage.getItem("accessToken")) {
       mySubscribe().then((res) => {
-        console.log(res.data.data);
         if (res.data.data.length !== 3) {
           getSubcribe({ topicId: num, IssueId: detailtitle.id })
             .then((res) => {
-              console.log(res.data.data.subscribers);
               setDetailtitle({ ...detailtitle, count: res?.data?.data?.subscribers });
               setOnOff(true);
             })
@@ -53,7 +51,6 @@ const DetailTitle = ({ data }: { data: DetailTitleProps }) => {
     if (onOff && localStorage.getItem("accessToken")) {
       getDeleteSubcribe({ topicId: num, IssueId: detailtitle.id })
         .then((res) => {
-          console.log(res.data.data.subscribers);
           setDetailtitle({ ...detailtitle, count: res?.data?.data?.subscribers });
           setOnOff(false);
         })

@@ -21,15 +21,11 @@ export const LoginTopic = () => {
   const [selectedCate, setSelectedCate] = useState<any[]>([]);
 
   useEffect(() => {
-    console.log(selectedCategory);
     mySubscribe().then((res) => {
-      console.log(res.data.data);
       const uniqueIssues = [...new Set(res.data.data.map((item: { issue: string }) => item.issue))];
-      console.log(uniqueIssues);
       setSelectedCategory(res.data.data[0].issue);
       setSelectedCate(uniqueIssues);
       getIssueMainfirst(selectedCategory).then((res) => {
-        console.log(res.data.data);
         setSubscirbeData(res.data.data);
       });
     });
@@ -39,7 +35,6 @@ export const LoginTopic = () => {
   useEffect(() => {
     if (selectedCategory !== "") {
       getIssueMainfirst(selectedCategory).then((res) => {
-        console.log(res.data.data);
         setSubscirbeData(res.data.data);
       });
     }

@@ -23,11 +23,9 @@ export const SlideItem = ({ data }: { data: ArticleDataProps }) => {
     } else {
       setModal(data);
       ShowModal(true);
-      console.log("modal-data", data);
       document.body.style.overflowY = "hidden";
     }
   };
-  console.log(data);
 
   return (
     <SlideWrapper

@@ -46,7 +46,6 @@ const Home = () => {
   useEffect(() => {
     getMainBubbleChart()
       .then((res) => {
-        console.log(res.data);
         const obj = [...res.data.data];
         const RealObj = obj.map((item) => {
           return Object.freeze(item);
@@ -61,7 +60,6 @@ const Home = () => {
     //메인 하단
     getMainBottom()
       .then((res) => {
-        console.log("res.data.data:", res.data.data);
         setMainBottomData(res.data.data);
         setHoverData(res.data.data.issueList);
       })
@@ -99,7 +97,6 @@ const Home = () => {
       });
 
     mySubscribe().then((res) => {
-      console.log(res.data.data);
       setSelectedCate(res.data.data.length);
     });
   }, [

@@ -19,7 +19,6 @@ export const PostingModal = () => {
   const [textLen, setTextLen] = useState(0);
 
   const date = moment(new Date()).format("YYYY.MM.DD");
-  console.log(date);
 
   // const [contentsId, setContentsId] = useState<number | undefined>(undefined);
 
@@ -27,14 +26,9 @@ export const PostingModal = () => {
 
   const [isComplete, setIsComplete] = useState(false);
 
-  const nick = localStorage.getItem("nickname");
-  console.log(nick);
-
   //데이터 받아오기
   const modalData = useRecoilValue<ArticleDataProps>(modalState);
-  console.log("data:", modalData);
 
-  console.log(modalData?.contents_id);
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setWriteText(e.currentTarget.value);
     setTextLen(e.currentTarget.value.length);
@@ -53,12 +47,10 @@ export const PostingModal = () => {
 
   const onClickButton = async () => {
     if (modalData != null) {
-      console.log("글 올리기 ");
       // setContentsId(modalData.contents_id);
       // console.log(contentsId);
     }
     if (modalData?.contents_id != null && accessToken != null) {
-      console.log("text");
       await postCommunityItem(modalData?.contents_id, writeText, accessToken)
         .then((res) => {
           console.log(res.data);

@@ -57,7 +57,6 @@ export const RealMyPage = () => {
         .then((res) => {
           setNewNickname(res.data.data.nickname);
           setPf(res.data.data.profileImg);
-          console.log("구독", res.data.data.subscribeResList.slice(0, 3));
           setSubscribeData(res.data.data.subscribeResList.slice(0, 3));
         })
         .catch((err) => {
@@ -85,7 +84,6 @@ export const RealMyPage = () => {
 
       getMyWriteCommunityData(accessToken)
         .then((res) => {
-          console.log("11", res.data);
           setWriteData(res.data.data);
         })
         .catch((err) => {

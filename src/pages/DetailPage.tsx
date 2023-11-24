@@ -42,14 +42,11 @@ const DetailPage = () => {
     const name = decodeURI(decodeURIComponent(id || ""));
     getDetailOneLineIntro() // detailTitle
       .then((res) => {
-        console.log(name);
-        console.log(res.data);
         const obj = [...res.data.data];
         const arr = obj.map((item) => {
           return Object.freeze(item);
         });
         const brr = arr.filter((item: { issueTitle: string }) => item.issueTitle === name);
-        console.log(brr);
         const objectTitle = brr[0];
 
         //구독자수
@@ -74,7 +71,6 @@ const DetailPage = () => {
       });
     getSubscribeTop5()
       .then((res) => {
-        console.log(res.data.data);
         setSimilar(res.data.data.slice(0, 3));
       })
       .catch((err) => {

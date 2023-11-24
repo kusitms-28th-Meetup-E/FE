@@ -52,7 +52,6 @@ export const MainCommunityBox = ({ data }: { data: CommunityItemProps }) => {
         onClick={(e) => {
           e.stopPropagation();
           if (contLen > 20) {
-            console.log(contLen);
             window.open(`${data.contents}`);
           } else {
             window.open(`https://www.youtube.com/watch?v=${data.contents}`);

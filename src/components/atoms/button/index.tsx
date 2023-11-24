@@ -3,12 +3,14 @@ import { useState } from "react";
 import { BiCommentDetail } from "react-icons/bi";
 import { IoCloseOutline } from "react-icons/io5";
 import { PiThumbsUpBold } from "react-icons/pi";
+import { useSetRecoilState } from "recoil";
 
 import nextImg from "@/assets/NextArrowImg.svg";
 import commentImg from "@/assets/comment.svg";
 import likeImg from "@/assets/like.svg";
 import plus from "@/assets/plus_blue.svg";
 import prevImg from "@/assets/prevArrowImg.svg";
+import { ToastState } from "@/recoil/atoms/index.ts";
 import { ButtonProps, CategoryButtonProps, SubscribeButtonProps } from "@/types/index.ts";
 
 import {
@@ -122,13 +124,22 @@ export const LikeBorderButton = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [likeStatus, setLikeStatus] = useState(initialLikeStatus);
   const [count, setCount] = useState(likeCount);
+  const setOnToast = useSetRecoilState<boolean>(ToastState);
+
   const handleButtonClick = () => {
-    if (likeStatus == "false") {
-      setCount(count + 1);
-      setLikeStatus("true");
-    } else if (likeStatus == "true") {
-      setCount(count - 1);
-      setLikeStatus("false");
+    if (!localStorage.getItem("accessToken")) {
+      setOnToast(true);
+      setTimeout(() => {
+        setOnToast(false);
+      }, 1500);
+    } else {
+      if (likeStatus == "false") {
+        setCount(count + 1);
+        setLikeStatus("true");
+      } else if (likeStatus == "true") {
+        setCount(count - 1);
+        setLikeStatus("false");
+      }
     }
   };
 
@@ -154,13 +165,22 @@ export const LikeContentBorderButton = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [likeStatus, setLikeStatus] = useState(initialLikeStatus);
   const [count, setCount] = useState(likeCount);
+  const setOnToast = useSetRecoilState<boolean>(ToastState);
+
   const handleButtonClick = () => {
-    if (likeStatus == false) {
-      setCount(count + 1);
-      setLikeStatus(true);
-    } else if (likeStatus == true) {
-      setCount(count - 1);
-      setLikeStatus(false);
+    if (!localStorage.getItem("accessToken")) {
+      setOnToast(true);
+      setTimeout(() => {
+        setOnToast(false);
+      }, 1500);
+    } else {
+      if (likeStatus == false) {
+        setCount(count + 1);
+        setLikeStatus(true);
+      } else if (likeStatus == true) {
+        setCount(count - 1);
+        setLikeStatus(false);
+      }
     }
   };
 

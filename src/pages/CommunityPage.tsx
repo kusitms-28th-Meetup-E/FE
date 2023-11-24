@@ -58,7 +58,6 @@ export const CommunityPage = () => {
       case 0: // 전체 api 갖고와서 데이터 넣어주기
         getCommunityAllData()
           .then((res) => {
-            console.log("전체:", res.data.data);
             setCommunityData(res.data.data);
           })
           .catch((err) => {
@@ -70,7 +69,6 @@ export const CommunityPage = () => {
       case 1: // 일자리 · 노동
         getCommunityAreaData("일자리-노동")
           .then((res) => {
-            console.log("일자리노동:", res.data);
             setCommunityData(res.data.data);
           })
           .catch((err) => {
@@ -92,7 +90,6 @@ export const CommunityPage = () => {
       case 3: // 환경
         getCommunityAreaData("환경")
           .then((res) => {
-            console.log("res:", res.data);
             setCommunityData(res.data.data);
           })
           .catch((err) => {
@@ -103,7 +100,6 @@ export const CommunityPage = () => {
       case 4: // 교육
         getCommunityAreaData("교육")
           .then((res) => {
-            console.log("res:", res.data);
             setCommunityData(res.data.data);
           })
           .catch((err) => {
