@@ -117,7 +117,7 @@ export const CommunityPage = () => {
       default:
         break;
     }
-  }, [selectedTab]);
+  }, [selectedTab, topData]);
 
   return (
     <>

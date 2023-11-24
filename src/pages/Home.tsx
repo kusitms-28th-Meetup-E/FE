@@ -90,7 +90,14 @@ const Home = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [setBubbleChartData]);
+  }, [
+    setBubbleChartData,
+    setCommunityData,
+    setHoverData,
+    setMainBottomData,
+    setMainTopData,
+    setPopularContents,
+  ]);
 
   return (
     <DragContainer>
