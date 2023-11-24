@@ -20,7 +20,7 @@ export const KeywordVideo = () => {
   const [keywordYoutubeData, setKeywordYoutubeData] = useState<ArticleDataProps[]>([]);
 
   useEffect(() => {
-    getTopicYoutube(name)
+    getTopicYoutube(name, "YOUTUBE")
       .then((res) => {
         setYoutubeData(res.data.data);
       })
@@ -29,7 +29,7 @@ export const KeywordVideo = () => {
       });
 
     if (name !== "") {
-      getKeywordYoutube(DetailPageKeyword)
+      getKeywordYoutube(DetailPageKeyword, "YOUTUBE")
         .then((res) => {
           setKeywordYoutubeData(res.data.data);
         })

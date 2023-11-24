@@ -23,7 +23,7 @@ export const KeywordArticle = () => {
   const [articleData, setArticleData] = useState<ArticleDataProps[]>([]);
   const [keywordArticleData, setKeywordArticleData] = useState<ArticleDataProps[]>([]);
   useEffect(() => {
-    getTopicArticle(name)
+    getTopicArticle(name, "NAVER")
       .then((res) => {
         setArticleData(res.data.data);
       })
@@ -31,7 +31,7 @@ export const KeywordArticle = () => {
         console.log(err);
       });
     if (name !== "") {
-      getKeywordArticle(DetailPageKeyword)
+      getKeywordArticle(DetailPageKeyword, "NAVER")
         .then((res) => {
           setKeywordArticleData(res.data.data);
         })

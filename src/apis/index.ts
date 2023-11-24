@@ -111,20 +111,20 @@ export const getDetailBubbleGraph = async (name: string) => {
   return res;
 };
 
-export const getKeywordArticle = async (keyword: string) => {
-  const res = await GwangjangAxios.get(`/contents/keyword/${keyword}/NAVER`);
+export const getKeywordArticle = async (keyword: string, type: string) => {
+  const res = await GwangjangAxios.get(`/contents/contents/keyword/${keyword}/${type}`);
   return res;
 };
-export const getKeywordYoutube = async (keyword: string) => {
-  const res = await GwangjangAxios.get(`/contents/keyword/${keyword}/YOUTUBE`);
+export const getKeywordYoutube = async (keyword: string, type: string) => {
+  const res = await GwangjangAxios.get(`/contents/contents/keyword/${keyword}/${type}`);
   return res;
 };
-export const getTopicArticle = async (issue: string) => {
-  const res = await GwangjangAxios.get(`/contents/issueTitle/${issue}/NAVER`);
+export const getTopicArticle = async (issue: string, type: string) => {
+  const res = await GwangjangAxios.get(`/contents/contents/issue/${issue}/${type}`);
   return res;
 };
-export const getTopicYoutube = async (issue: string) => {
-  const res = await GwangjangAxios.get(`/contents/issueTitle/${issue}/YOUTUBE`);
+export const getTopicYoutube = async (issue: string, type: string) => {
+  const res = await GwangjangAxios.get(`/contents/contents/issue/${issue}/${type}`);
   return res;
 };
 

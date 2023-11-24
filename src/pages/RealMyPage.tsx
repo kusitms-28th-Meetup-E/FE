@@ -33,6 +33,9 @@ export const RealMyPage = () => {
   const [LikeData, setLikeData] = useRecoilState(myLikeData);
   const [LikeContents, setLikeContents] = useRecoilState(myLikeContentsData);
   const [WriteData, setWriteData] = useRecoilState(myWriteData);
+
+  const [pf, setPf] = useState("");
+
   const setSubscribeData = useSetRecoilState<SubscribeDataProps[]>(mySubscribeTopicData);
   useEffect(() => {
     const handleResize = () => {
@@ -53,6 +56,7 @@ export const RealMyPage = () => {
       getMySubscribeData(accessToken)
         .then((res) => {
           setNewNickname(res.data.data.nickname);
+          setPf(res.data.data.profileImg);
           console.log("구독", res.data.data.subscribeResList.slice(0, 3));
           setSubscribeData(res.data.data.subscribeResList.slice(0, 3));
         })
@@ -98,7 +102,10 @@ export const RealMyPage = () => {
           <RealMyPageContainer>
             {windowWidth > 1150 ? (
               <>
-                <MySideBox newNickname={newNickname} />
+                <MySideBox
+                  newNickname={newNickname}
+                  profileImg={pf}
+                />
                 <MyStatus />
               </>
             ) : (

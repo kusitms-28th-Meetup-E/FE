@@ -3,14 +3,19 @@ import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
-import temp from "@/assets/main_logo.svg";
 import editNicknameImg from "@/assets/myPage/edit-pencil-nickname.svg";
 import editImg from "@/assets/myPage/edit-pencil.svg";
 import { TopTopicBox } from "@/components/molecules/longTopicBox";
 import { SideBox } from "@/components/molecules/sideBox";
 import { mySubscribeTopicData } from "@/recoil/atoms";
 
-export const MySideBox = ({ newNickname }: { newNickname: string }) => {
+export const MySideBox = ({
+  newNickname,
+  profileImg,
+}: {
+  newNickname: string;
+  profileImg: string;
+}) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const mySubData = useRecoilValue(mySubscribeTopicData);
@@ -43,7 +48,7 @@ export const MySideBox = ({ newNickname }: { newNickname: string }) => {
           <div className="my-profile">
             <div className="img-box">
               <img
-                src={temp}
+                src={profileImg}
                 alt="profile"
                 className="profile-img"
               ></img>
