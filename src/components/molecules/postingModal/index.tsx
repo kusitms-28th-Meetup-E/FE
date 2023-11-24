@@ -52,7 +52,6 @@ export const PostingModal = () => {
   // const myImg = window.localStorage.getItem("profileImg");
 
   const onClickButton = async () => {
-    console.log("hihi");
     if (modalData != null) {
       console.log("글 올리기 ");
       // setContentsId(modalData.contents_id);

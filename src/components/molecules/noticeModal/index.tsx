@@ -10,10 +10,15 @@ export const NoticeModal = () => {
   const ShowModal = useSetRecoilState(ShowModalState);
 
   const SpaceTo = (page: string) => {
-    navigate(page);
+    document.body.style.overflowY = "auto";
     ShowModal(false);
+    navigate(page);
   };
-  document.body.style.overflowY = "auto";
+
+  const SpaceToSuccess = () => {
+    ShowModal(false);
+    document.body.style.overflowY = "auto";
+  };
 
   return (
     <ModalBackground>
@@ -28,7 +33,7 @@ export const NoticeModal = () => {
           </button>
           <button
             className="gray-button"
-            // onClick
+            onClick={SpaceToSuccess}
           >
             계속 탐색하기
           </button>

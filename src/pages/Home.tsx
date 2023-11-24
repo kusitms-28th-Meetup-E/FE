@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import {
   getCommunityTop5,
@@ -17,12 +17,14 @@ import { LoginTopic } from "@/components/organisms/Home/LoginTopic";
 import { MainCommunity } from "@/components/organisms/Home/MainCommunity";
 import { MainContent } from "@/components/organisms/Home/MainContent";
 import { MainTopic } from "@/components/organisms/Home/MainTopic";
+import { QuotModal } from "@/components/organisms/Modal/QuotModal";
 import { packbubbleDummydata } from "@/dummy/packBubbleData";
 import {
   BubbleChartState,
   ContentsPopularState,
   MainTopState,
   PopularCommunityState,
+  ShowModalState,
   TalkingHoverState,
   TalkingTopicState,
 } from "@/recoil/atoms";
@@ -33,6 +35,7 @@ const Home = () => {
   const setMainBottomData = useSetRecoilState<mainTopicBottom[]>(TalkingTopicState);
   const setHoverData = useSetRecoilState(TalkingHoverState);
   const setMainTopData = useSetRecoilState<TopicMainProps[]>(MainTopState);
+  const Show = useRecoilValue(ShowModalState);
 
   const setPopularContents = useSetRecoilState<ContentsMainProps[]>(ContentsPopularState);
 
@@ -122,6 +125,7 @@ const Home = () => {
       <MainContent />
       <MainCommunity />
       <DiscussedTopics />
+      {Show ? <QuotModal /> : ""}
     </DragContainer>
   );
 };
