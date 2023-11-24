@@ -27,6 +27,7 @@ import { SubscribeDataProps } from "@/types";
 export const RealMyPage = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const selectedTab = useRecoilValue(selectedTabState);
+  const [newNickname, setNewNickname] = useState("");
 
   // const [SubscribeData, setSubscribeData] = useRecoilState(mySubscribeTopicData);
   const [LikeData, setLikeData] = useRecoilState(myLikeData);
@@ -51,6 +52,7 @@ export const RealMyPage = () => {
     if (accessToken !== null) {
       getMySubscribeData(accessToken)
         .then((res) => {
+          setNewNickname(res.data.data.nickname);
           console.log("구독", res.data.data.subscribeResList.slice(0, 3));
           setSubscribeData(res.data.data.subscribeResList.slice(0, 3));
         })
@@ -96,7 +98,7 @@ export const RealMyPage = () => {
           <RealMyPageContainer>
             {windowWidth > 1150 ? (
               <>
-                <MySideBox />
+                <MySideBox newNickname={newNickname} />
                 <MyStatus />
               </>
             ) : (

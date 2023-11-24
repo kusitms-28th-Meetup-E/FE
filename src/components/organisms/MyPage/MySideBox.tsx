@@ -10,17 +10,14 @@ import { TopTopicBox } from "@/components/molecules/longTopicBox";
 import { SideBox } from "@/components/molecules/sideBox";
 import { mySubscribeTopicData } from "@/recoil/atoms";
 
-export const MySideBox = () => {
+export const MySideBox = ({ newNickname }: { newNickname: string }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const mySubData = useRecoilValue(mySubscribeTopicData);
 
-  const [newNickname, setNewNickname] = useState("광장피플");
-
   //닉네임 수정 시
   const startEditing = () => {
     setIsEditing(true);
-    setNewNickname("");
   };
 
   const cancelEditing = () => {
@@ -63,7 +60,6 @@ export const MySideBox = () => {
                   <input
                     type="text"
                     value={newNickname}
-                    onChange={(e) => setNewNickname(e.target.value)}
                     placeholder="변경할 닉네임을 입력해주세요."
                   />
                   <div className="btn-wrapper">

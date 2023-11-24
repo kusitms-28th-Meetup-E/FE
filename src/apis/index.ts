@@ -337,3 +337,18 @@ export const postMyLikeContentsData = async (accessToken: string) => {
   );
   return res;
 };
+
+export const putLikeApi = async (topicId: number, communityId: number, accessToken: string) => {
+  const res = await GwangjangAxios.put(
+    `community/topic/${topicId}/community/${communityId}/heart`,
+    {
+      data: [],
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  return res;
+};
