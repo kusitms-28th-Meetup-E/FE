@@ -30,15 +30,15 @@ export const KeywordArticle = () => {
       .catch((err) => {
         console.log(err);
       });
-
-    getKeywordArticle(DetailPageKeyword)
-      .then((res) => {
-        setKeywordArticleData(res.data.data);
-        console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (name !== "") {
+      getKeywordArticle(DetailPageKeyword)
+        .then((res) => {
+          setKeywordArticleData(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [DetailPageKeyword, name]);
 
   return (
@@ -47,9 +47,9 @@ export const KeywordArticle = () => {
         <>
           <div className="inner">
             <div className="keyword-text">
-              <p>{!DetailPageKeyword ? name : DetailPageKeyword}</p>가 더 궁금하다면?
+              <p>{!DetailPageKeyword ? name : DetailPageKeyword}</p>(이)가 더 궁금하다면?
             </div>
-            <SubTitle title="관련 기사로 더 알아보기" />
+            <SubTitle title="관련 기사로 더 알아보세요" />
           </div>
           <div>
             <ArticleCarousel data={DetailPageKeyword === "" ? articleData : keywordArticleData} />

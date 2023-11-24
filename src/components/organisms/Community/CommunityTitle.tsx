@@ -17,7 +17,7 @@ const CommunityTitle = () => {
           <p className="secondLine">우리는?</p>
         </Title>
         <div className="text">
-          사회 이슈에 대한 의견을<p> 함께 나눠요</p>
+          사회 이슈에 대한 생각을<p> 함께 나눠요</p>
         </div>
       </Cover>
     </Container>

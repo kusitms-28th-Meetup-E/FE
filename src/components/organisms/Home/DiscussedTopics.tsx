@@ -1,11 +1,17 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import { Title } from "@/components/atoms/title";
 import Topic from "@/components/molecules/discussedTopic";
 import { topicData } from "@/dummy/topicData";
+import { TalkingTopicState } from "@/recoil/atoms";
+// import { TalkingTopicState } from "@/recoil/atoms";
 
-const title = "광장이 지금\n얘기하고 있는 주제";
+const title = "광장이 이야기하는\n사회 이슈";
 const DiscussedTopics = () => {
+  const bottomData = useRecoilValue(TalkingTopicState);
+  console.log("bbb", bottomData);
+
   return (
     <Container>
       <div className="inner">
@@ -22,7 +28,16 @@ const DiscussedTopics = () => {
         ))}
       </DiscussedTopicContainer>
       <div className="inner">
-        <div className="addingTopic">주제를 추가하고 싶어요.</div>
+        <div
+          className="addingTopic"
+          onClick={() =>
+            window.open(
+              "https://docs.google.com/forms/d/e/1FAIpQLSfaG6BKFpiQfP8VOkjeAKfhgcobB4_A3uYp1gvG8J9R7vvD5w/viewform"
+            )
+          }
+        >
+          주제를 추가하고 싶어요.
+        </div>
       </div>
     </Container>
   );

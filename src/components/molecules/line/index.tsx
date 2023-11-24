@@ -41,7 +41,7 @@ const Line = ({ showGraph }: { showGraph: boolean }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, [id]);
+  }, [id, setTopDate]);
   const options = useMemo(() => {
     return {
       chart: {

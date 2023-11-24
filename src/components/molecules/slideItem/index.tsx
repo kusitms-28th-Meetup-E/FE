@@ -12,7 +12,6 @@ export const SlideItem = ({ data }: { data: ArticleDataProps }) => {
   const setModal = useSetRecoilState(modalState);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const ShowModal = useSetRecoilState(ShowModalState);
-  console.log(data, 124);
 
   const Modal = () => {
     setModal(data);

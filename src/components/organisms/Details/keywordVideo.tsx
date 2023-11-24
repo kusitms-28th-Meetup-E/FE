@@ -28,14 +28,15 @@ export const KeywordVideo = () => {
         console.log(err);
       });
 
-    getKeywordYoutube(DetailPageKeyword)
-      .then((res) => {
-        setKeywordYoutubeData(res.data.data);
-        console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (name !== "") {
+      getKeywordYoutube(DetailPageKeyword)
+        .then((res) => {
+          setKeywordYoutubeData(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [DetailPageKeyword, name]);
 
   return (
@@ -43,7 +44,7 @@ export const KeywordVideo = () => {
       {(keywordYoutubeData.length || YoutubeData.length) && (
         <>
           <div className="inner">
-            <SubTitle title="관련 영상으로 더 알아보기" />
+            <SubTitle title="관련 영상으로 더 알아보세요" />
           </div>
           <div>
             <ArticleCarousel data={DetailPageKeyword === "" ? YoutubeData : keywordYoutubeData} />

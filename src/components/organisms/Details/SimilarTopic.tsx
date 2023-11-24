@@ -5,9 +5,9 @@ import styled from "styled-components";
 import next from "@/assets/bottom_arrow.svg";
 import { SimilarTopicBox } from "@/components/molecules/longTopicBox";
 import { areaState } from "@/recoil/atoms";
-import { SimilarTopicesProps } from "@/types";
+import { SimilarTopicProps } from "@/types";
 
-const SimilarTopic = ({ data }: { data: SimilarTopicesProps }) => {
+const SimilarTopic = ({ data }: { data: SimilarTopicProps[] }) => {
   const { id } = useParams();
   const area = useRecoilValue(areaState);
 
@@ -19,17 +19,17 @@ const SimilarTopic = ({ data }: { data: SimilarTopicesProps }) => {
         <div className="title-top">
           <p>{name}</p> 와
         </div>
-        <div>비슷한 주제예요</div>
+        <div>이런 주제도 있어요</div>
       </div>
 
       <TopicWraaper>
         <div className="TopicBoxes">
-          {data.item.map((el) => {
+          {data?.map((el) => {
             return <SimilarTopicBox data={el} />;
           })}
         </div>
         <DifferentTopicBtn>
-          <p>다른 주제도 둘러보세요</p>
+          <p>다른 사회 이슈도 둘러보세요.</p>
           <img
             src={next}
             alt=">"

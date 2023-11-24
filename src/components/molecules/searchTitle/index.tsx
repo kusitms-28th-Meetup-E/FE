@@ -13,7 +13,7 @@ const SearchTitle = ({
   return (
     <Container>
       <div className="inner">
-        <p>‘{searchResult}’</p>에 대한 {searchCategoryBtn} 글 <p>{searchCount}</p>건
+        <p>‘{searchResult}’</p>에 대한 {searchCategoryBtn} 사회 이슈 <p>{searchCount}</p>건
       </div>
     </Container>
   );

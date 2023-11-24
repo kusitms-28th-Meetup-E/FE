@@ -1,6 +1,12 @@
 import axios from "axios";
 
-import { addRegisterType, emailCodeType, localRegisterType, loginType } from "@/types";
+import {
+  CommentProps,
+  addRegisterType,
+  emailCodeType,
+  localRegisterType,
+  loginType,
+} from "@/types";
 
 const GwangjangAxios = axios.create({
   baseURL: "https://api.gwang-jang.co.kr",
@@ -175,6 +181,114 @@ export const getSearch = async (keyword: string) => {
 };
 
 export const getSearchCommunity = async (keyword: string) => {
-  const res = await GwangjangAxios.get(`/community/search/ALL/${keyword}`);
+  const res = await GwangjangAxios.get(`/community/search/${keyword}`);
+  return res;
+};
+
+export const getDetailCommunity = async (issue: string) => {
+  const res = await GwangjangAxios.get(`/community/sortBy/ISSUE/word/${issue}`);
+  return res;
+};
+
+export const getRandomIssue = async () => {
+  const res = await GwangjangAxios.get(`/keyword/random/issue`);
+  return res;
+};
+
+export const postComment = async ({ topicId, communityId, talk }: CommentProps) => {
+  const res = await GwangjangAxios.post(
+    `/community/topic/${topicId}/community/${communityId}/comments`,
+    {
+      talk: talk,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.accessToken}`,
+      },
+    }
+  );
+  return res;
+};
+
+export const getComment = async ({ topicId, communityId }: CommentProps) => {
+  const res = await GwangjangAxios.get(
+    `/community/topic/${topicId}/community/${communityId}/comments`
+  );
+  return res;
+};
+
+export const getSubcribe = async ({ topicId, IssueId }: { topicId: number; IssueId: number }) => {
+  const res = await GwangjangAxios.post(
+    `member/topic/${topicId}/issue/${IssueId}/subscribe`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.accessToken}`,
+      },
+    }
+  );
+  return res;
+};
+
+export const getDeleteSubcribe = async ({
+  topicId,
+  IssueId,
+}: {
+  topicId: number;
+  IssueId: number;
+}) => {
+  const res = await GwangjangAxios.delete(`member/topic/${topicId}/issue/${IssueId}/subscribe`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.accessToken}`,
+    },
+  });
+  return res;
+};
+
+export const getactiveSubcribe = async ({
+  topicId,
+  IssueId,
+}: {
+  topicId: number;
+  IssueId: number;
+}) => {
+  const res = await GwangjangAxios.get(`member/topic/${topicId}/issue/${IssueId}/subscribe`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.accessToken}`,
+    },
+  });
+  return res;
+};
+
+export const getget = async () => {
+  const res = await GwangjangAxios.get(`/member/subscribe`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.accessToken}`,
+    },
+  });
+  return res;
+};
+
+export const getgetget = async (topic: string) => {
+  const res = await GwangjangAxios.get(`/contnets/subscribe/${topic}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.accessToken}`,
+    },
+  });
+  return res;
+};
+
+export const getMainBottom = async () => {
+  const res = await GwangjangAxios.get("/keyword/topic/all");
+  return res;
+};
+
+export const getMainTop = async () => {
+  const res = await GwangjangAxios.get("/member/subscribe/issue");
+  return res;
+};
+
+export const getPopularContents = async () => {
+  const res = await GwangjangAxios.get("/contents/contents/like");
   return res;
 };

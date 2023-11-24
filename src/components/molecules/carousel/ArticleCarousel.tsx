@@ -13,7 +13,6 @@ import { SlideItem } from "../slideItem";
 
 export const ArticleCarousel = ({ data }: { data: ArticleDataProps[] }) => {
   const maxSlidesToShow = Math.min(data.length, 4);
-  console.log(data);
   const SliderSetting = {
     dots: false,
     infinite: true,

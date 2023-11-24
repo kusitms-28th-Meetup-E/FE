@@ -1,14 +1,20 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import { SeeMore } from "@/components/atoms/more";
 import { Title } from "@/components/atoms/title";
 import { ContentBox } from "@/components/molecules/main/contentbox";
-import { contentData } from "@/dummy/ContentData";
+// import { contentData } from "@/dummy/ContentData";
+import { ContentsPopularState } from "@/recoil/atoms";
 import { Inner } from "@/style/global";
 
 export const MainContent = () => {
-  const firstData = contentData[0];
+  // const firstData = contentData[0];
   const title = "지금 사람들이\n가장 많이 본 콘텐츠";
+
+  const contentsData = useRecoilValue(ContentsPopularState);
+  console.log("dfdf", contentsData);
+  const firstData = contentsData[0];
 
   return (
     <Background>
@@ -22,15 +28,15 @@ export const MainContent = () => {
               <ContentBox
                 key={0}
                 data={firstData}
-                category={firstData.category}
+                category={""} // category={contentsData[0].topic}
               />
             </div>
             <div className="content-grid">
-              {contentData.slice(1).map((data, idx) => (
+              {contentsData.slice(1).map((data, idx) => (
                 <ContentBox
                   key={idx}
                   data={data}
-                  category={data.category}
+                  category={""} // category={data.topic}
                 />
               ))}
             </div>

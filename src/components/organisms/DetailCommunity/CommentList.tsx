@@ -1,15 +1,19 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+import { getComment, postComment } from "@/apis";
 import temp from "@/assets/main_logo.svg";
 import { Comment } from "@/components/molecules/comment";
-import { CommentData } from "@/dummy/commentData";
 
 export const CommentList = () => {
+  const { topicId } = useParams();
+  const { communityId } = useParams();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [text, setText] = useState("");
   const [registerBtn, setRegisterBtn] = useState(true);
+  const [commentdata, setCommentData] = useState([]);
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.currentTarget.value);
     if (e.currentTarget.value === "") {
@@ -24,10 +28,59 @@ export const CommentList = () => {
       textareaRef.current.style.height = scrollHeight + "px";
     }
   };
+  const commentRegister = () => {
+    postComment({
+      topicId: parseInt(topicId || "0"),
+      communityId: parseInt(communityId || "0"),
+      talk: text,
+    })
+      .then((res) => {
+        console.log(res.data.data);
+        setCommentData(res.data.data);
+        setText("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // const handleOnKeyPress = (e: KeyboardEvent) => {
+  //   if (e.key === "Enter") {
+  //     if (textareaRef.current !== null && e.nativeEvent === false) {
+  //       //한글 중복 입력 해결
+  //       textareaRef.current.disabled = false; //input 비활성화 해제
+  //       textareaRef.current.blur(); //input에 focus 해제
+  //     }
+  //     postComment({
+  //       topicId: parseInt(topicId || "0"),
+  //       communityId: parseInt(communityId || "0"),
+  //       talk: text,
+  //     })
+  //       .then((res) => {
+  //         console.log(res.data.data);
+  //         setCommentData(res.data.data);
+  //         setText("");
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  // };
+
+  useEffect(() => {
+    getComment({
+      topicId: parseInt(topicId || "0"),
+      communityId: parseInt(communityId || "0"),
+    }).then((res) => {
+      console.log(res.data.data);
+      setCommentData(res.data.data);
+      setText("");
+    });
+  }, [communityId, topicId]);
+
   return (
     <CommunityListWrapper>
       <div className="comment-count">
-        <b>24</b>개의 댓글이 있어요
+        <b>{commentdata.length}</b>개의 댓글이 있어요
       </div>
       <div className="comment-post">
         <img
@@ -39,8 +92,10 @@ export const CommentList = () => {
           value={text}
           onChange={onChange}
           placeholder="댓글을 입력해주세요."
+          //onKeyDown={handleOnKeyPress}
         />
         <button
+          onClick={commentRegister}
           disabled={registerBtn}
           className={registerBtn ? "" : "abled"}
         >
@@ -49,7 +104,7 @@ export const CommentList = () => {
       </div>
       <div className="line"></div>
       <div className="comment-box">
-        <Comment data={CommentData} />
+        <Comment data={commentdata} />
       </div>
     </CommunityListWrapper>
   );

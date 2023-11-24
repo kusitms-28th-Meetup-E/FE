@@ -16,7 +16,7 @@ export const LineGraph = () => {
     <Container>
       <ToggleBox>
         <div className="title">
-          <div className="first">{detailTitleData.title}</div>는{" "}
+          <div className="first">{detailTitleData.title}</div>(은)는{" "}
           <div className="second">2023년 {topDate}</div> 가장 많이 검색됐어요.
         </div>
         <button

@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 import styled from "styled-components";
 
-import { getDetailOneLineIntro, getDetailSubscribeCount } from "@/apis";
+import { getDetailOneLineIntro, getDetailSubscribeCount, getRandomIssue } from "@/apis";
+import Loading from "@/components/atoms/Loading";
+import ChallengeToast from "@/components/atoms/toast";
 import { BubbleGraph } from "@/components/organisms/Details/BubbleGraph";
 import { CommunityPreview } from "@/components/organisms/Details/CommunityPreview";
 import { DetailArticleTitle } from "@/components/organisms/Details/DetailArticleTitle";
@@ -17,16 +19,24 @@ import { QuotModal } from "@/components/organisms/Modal/QuotModal";
 //import { bubbleDummydata } from "@/dummy/bubbleData";
 import { detailTitleData } from "@/dummy/detailTitleData";
 //import { lineDummydata } from "@/dummy/lineData";
-import { similartopicData } from "@/dummy/similartopicData";
-import { ShowModalState, bubbleGraphState, detailTitleState } from "@/recoil/atoms";
+import {
+  ShowModalState,
+  ToastState,
+  bubbleGraphState,
+  detailTitleState,
+  loadingState,
+} from "@/recoil/atoms";
 //import { BubbleGraphProps } from "@/types";
 
 const DetailPage = () => {
   //모달 show 여부
   const Show = useRecoilValue(ShowModalState);
+  const Toast = useRecoilValue(ToastState);
   const setDetailTitle = useSetRecoilState(detailTitleState);
   const setBubbleGraphData = useSetRecoilState(bubbleGraphState);
   const { id } = useParams();
+  const [loading, setLoading] = useRecoilState(loadingState);
+  const [similar, setSimilar] = useState([]);
 
   useEffect(() => {
     const name = decodeURI(decodeURIComponent(id || ""));
@@ -52,6 +62,7 @@ const DetailPage = () => {
               oneline: objectTitle.issueDetail,
               id: objectTitle.issueId,
             });
+            setLoading(false);
           })
           .catch((err) => {
             console.log(err);
@@ -61,42 +72,44 @@ const DetailPage = () => {
         console.log(err);
         setDetailTitle(detailTitleData);
       });
-    // getDetailBubbleGraph(name)
-    //   .then((res) => {
-    //     console.log(res.data.data);
-    //     const obj = [...res.data.data];
-    //     const RealObj = obj.map((item: any) => {
-    //       return Object.freeze(item);
-    //     });
-    //     setBubbleGraphData(RealObj);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setBubbleGraphData(bubbleDummydata);
-    //   });
-  }, [id, setBubbleGraphData, setDetailTitle]);
+    getRandomIssue()
+      .then((res) => {
+        console.log(res.data.data);
+        setSimilar(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id, setBubbleGraphData, setDetailTitle, setLoading]);
 
   return (
     <>
-      <DetailArticleTitle />
-      <BubbleGraph />
-      <LineGraph />
-      <KeywordArticle />
-      <KeywordVideo />
-      <Bottom>
-        {window.innerWidth > 800 ? (
-          <>
-            <CommunityPreview />
-            <SimilarTopic data={similartopicData} />
-          </>
-        ) : (
-          <>
-            <SimilarTopic data={similartopicData} />
-            <CommunityPreview />
-          </>
-        )}
-      </Bottom>
-      {Show ? <QuotModal /> : ""}
+      {Toast ? <ChallengeToast message="로그인을 진행해 주세요" /> : ""}
+      {!loading ? (
+        <>
+          <DetailArticleTitle />
+          <BubbleGraph />
+          <LineGraph />
+          <KeywordArticle />
+          <KeywordVideo />
+          <Bottom>
+            {window.innerWidth > 800 ? (
+              <>
+                <CommunityPreview />
+                <SimilarTopic data={similar} />
+              </>
+            ) : (
+              <>
+                <SimilarTopic data={similar} />
+                <CommunityPreview />
+              </>
+            )}
+          </Bottom>
+          {Show ? <QuotModal /> : ""}
+        </>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };

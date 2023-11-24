@@ -26,7 +26,7 @@ export const Tag = styled.div<{ $category: string | undefined }>`
   letter-spacing: -0.18px;
 `;
 
-export const Keyword = styled.div<{ $category: string }>`
+export const Keyword = styled.div<{ $category: string | undefined }>`
   display: inline-flex;
   padding: 3px 10px;
   justify-content: center;

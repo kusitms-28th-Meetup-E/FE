@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 
 import { getCommunityDetailData } from "@/apis";
 import { CommentList } from "@/components/organisms/DetailCommunity/CommentList";
@@ -19,7 +19,7 @@ const DetailCommunityPage = () => {
         setDetailData(res.data.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [communityId, topicId]);
 
   return (
     <>

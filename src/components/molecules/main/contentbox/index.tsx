@@ -2,13 +2,14 @@ import { useState } from "react";
 
 import nextIcon from "@/assets/nextIcon.svg";
 import { KeywordTag, TopicTag } from "@/components/atoms/tag";
-import { ContentDataProps } from "@/types";
+import { ContentsMainProps } from "@/types";
 
 import { ContentContainer, EdgeContainer, HoverContent } from "./style";
 
-export const ContentBox = ({ data, category }: { data: ContentDataProps; category: string }) => {
+export const ContentBox = ({ data, category }: { data?: ContentsMainProps; category: string }) => {
+  console.log(category);
   const containerStyle = {
-    backgroundImage: `linear-gradient(180deg, rgba(34, 34, 34, 0.2) 57.24%, rgba(34,34,34,0.95) 87.86%),url(${data.imgUrl})`,
+    backgroundImage: `linear-gradient(180deg, rgba(34, 34, 34, 0.2) 57.24%, rgba(34,34,34,0.95) 87.86%),url(${data?.imgUrl})`,
     backgroundSize: "cover",
     // boxShadow: "0px 15px 34px 0px rgba(207, 207, 207, 0.1)",
   };
@@ -16,7 +17,7 @@ export const ContentBox = ({ data, category }: { data: ContentDataProps; categor
   const [hover, setHover] = useState<boolean>(false);
 
   const onClick = () => {
-    window.open(`${data.link}`, "_blank");
+    window.open(`${data?.link}`, "_blank");
   };
 
   return (
@@ -27,7 +28,7 @@ export const ContentBox = ({ data, category }: { data: ContentDataProps; categor
       onMouseOut={() => setHover(false)}
     >
       <HoverContent $hover={hover}>
-        <div className="article-text">{data.content}</div>
+        <div className="article-text">{data?.title}</div>
         <div className="article-img">
           <img
             src={nextIcon}
@@ -42,15 +43,15 @@ export const ContentBox = ({ data, category }: { data: ContentDataProps; categor
       >
         <div className="tag-box">
           <div>
-            <TopicTag category={category} />
+            <TopicTag category={data?.topic} />
           </div>
           <div>
-            <KeywordTag category={category}>{data.keyword[1]}</KeywordTag>
+            <KeywordTag category={data?.topic}>{data?.keyword}</KeywordTag>
           </div>
         </div>
         <div className="text-box">
-          <p>{data.type}</p>
-          <div className="content-title">{data.title}</div>
+          <p>{data?.type}</p>
+          <div className="content-title">{data?.title}</div>
         </div>
       </ContentContainer>
     </EdgeContainer>

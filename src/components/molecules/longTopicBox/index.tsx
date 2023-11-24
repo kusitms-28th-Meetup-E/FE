@@ -15,11 +15,11 @@ export const SimilarTopicBox = ({ data }: { data: SimilarTopicProps }) => {
       $string="similar"
     >
       <Top>
-        <div className="title">{data.topic}</div>
-        <TopicTag category={data.area} />
+        <div className="title">{data.issueTitle}</div>
+        <TopicTag category={data.topicTitle} />
       </Top>
       <Bottom>
-        <p>{data.subscribeCount}명</p>이 구독하고 있어요
+        <p>80명</p>이 구독하고 있어요
       </Bottom>
     </Container>
   );

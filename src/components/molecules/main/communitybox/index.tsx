@@ -1,12 +1,12 @@
 // import { useState, useEffect } from "react";
-
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { CommentButton, LikeButton } from "@/components/atoms/button";
 import { Profile } from "@/components/atoms/profile";
 import { KeywordTag, TopicTag } from "@/components/atoms/tag";
-import { mainCommunityData } from "@/dummy/mainCommunityData";
+import { PopularCommunityState } from "@/recoil/atoms";
 
 import { CommunityContainer } from "./style";
 
@@ -28,6 +28,10 @@ export const CommunityBox = () => {
   //     window.removeEventListener("resize", handleResize);
   //   };
   // }, []);
+
+  const communityData = useRecoilValue(PopularCommunityState);
+
+  console.log(communityData, 22);
 
   return (
     <TempContainer>
@@ -127,13 +131,13 @@ export const CommunityBox = () => {
           },
         }}
       >
-        {mainCommunityData.map((item, idx) => (
+        {communityData.map((item, idx) => (
           <SwiperSlide key={idx}>
             <CommunityContainer>
               <div className="community-content">
                 <div className="community-tag-wrapper">
                   <TopicTag category={item.area} />
-                  <KeywordTag category={item.area}>{item.topic}</KeywordTag>
+                  <KeywordTag category={item.area}>{item.subject}</KeywordTag>
                   <KeywordTag category={item.area}>{item.keyword}</KeywordTag>
                 </div>
                 <div className="content-wrapper">
@@ -153,7 +157,7 @@ export const CommunityBox = () => {
               </div>
               <div className="quotation">
                 <div className="quot-title">인용한 콘텐츠</div>
-                <div className="quot-text">{item.quotText}</div>
+                <div className="quot-text">{item.contentsTitle}</div>
               </div>
             </CommunityContainer>
           </SwiperSlide>

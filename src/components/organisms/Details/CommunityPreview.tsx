@@ -1,10 +1,12 @@
+import { useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
+import { getDetailCommunity } from "@/apis";
 import { SeeMore } from "@/components/atoms/more";
 import { PreviewCommunityBox } from "@/components/molecules/PreviewCommunityBox";
-import { envirData } from "@/dummy/AreaData";
 import { areaState } from "@/recoil/atoms";
 
 export const CommunityPreview = () => {
@@ -12,7 +14,17 @@ export const CommunityPreview = () => {
   const area = useRecoilValue(areaState);
 
   const name = decodeURI(decodeURIComponent(id || ""));
+  const [similiarData, setSimilarData] = useState([]);
 
+  useEffect(() => {
+    getDetailCommunity(name)
+      .then((res) => {
+        setSimilarData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [name]);
   return (
     <Container $area={area}>
       <div className="PreviewTop">
@@ -31,7 +43,7 @@ export const CommunityPreview = () => {
       </div>
       <CommunityDetailWrapper>
         <div className="scrollInner">
-          {envirData.map((item, idx) => (
+          {similiarData?.map((item, idx) => (
             <PreviewCommunityBox
               key={idx}
               data={item}
@@ -117,7 +129,6 @@ export const CommunityDetailWrapper = styled.div`
   padding: 24px;
   box-sizing: border-box;
   .scrollInner {
-    width: fit-content;
     display: flex;
     flex-direction: column;
     gap: 16px;

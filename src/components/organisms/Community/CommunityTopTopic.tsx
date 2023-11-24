@@ -15,8 +15,8 @@ const CommunityTopTopic = ({ data }: { data: ToptopicProps[] }) => {
   return (
     <TopicWraaper $link={link}>
       <div className="title">
-        <p className="first">주간 인기 주제 top5</p>
-        <p className="second">이번 주 커뮤니티에서 활발하게 논의된 주제예요</p>
+        <p className="first">인기 있는 사회 이슈 top5</p>
+        <p className="second">광장에서 가장 인기 있는 사회 이슈에요.</p>
       </div>
       <div className="TopicBoxes">
         {data.map((item, idx) => {

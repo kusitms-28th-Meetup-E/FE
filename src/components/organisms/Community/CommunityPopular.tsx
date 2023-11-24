@@ -7,8 +7,8 @@ const CommunityPopular = ({ data }: { data: PopularCommunityProps[] }) => {
   return (
     <PopularWraaper>
       <div className="title">
-        <p className="first">지금 가장 인기있는 게시글</p>
-        <p className="second">이번 주 광장에서 인기있던 글이에요</p>
+        <p className="first">인기 있는 커뮤니티 글 top 5</p>
+        <p className="second">이번 주 광장에서 가장 인기 있는 글이에요</p>
       </div>
       <div className="TopicBoxes">
         {data.map((item, idx) => {

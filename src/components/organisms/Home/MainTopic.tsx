@@ -1,13 +1,18 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import { SeeMore } from "@/components/atoms/more";
 import { Title } from "@/components/atoms/title";
 import { TopicBox } from "@/components/molecules/main/topicbox";
-import { subjectData } from "@/dummy/subjectData";
+// import { subjectData } from "@/dummy/subjectData";
+import { MainTopState } from "@/recoil/atoms";
 import { Inner } from "@/style/global";
 
 export const MainTopic = () => {
-  const title = "가장 인기있는\n주제";
+  const title = " 광장에서 가장\n인기 있는 사회 이슈";
+
+  const mainTopicData = useRecoilValue(MainTopState);
+  console.log(mainTopicData);
 
   return (
     <Background>
@@ -17,13 +22,13 @@ export const MainTopic = () => {
             <Title title={title} />
           </div>
           <TopicWrapper>
-            {subjectData.map((data, idx) => (
+            {mainTopicData.map((data, idx) => (
               <TopicBox
                 key={idx}
-                title={data.title}
-                subscribeCount={data.subscribeCount}
-                imgUrl={data.imgUrl}
-                category={data.category}
+                title={data?.title}
+                subscribeCount={data?.subscribeCount}
+                imgUrl={data?.imgUrl}
+                category={data?.category}
               />
             ))}
           </TopicWrapper>{" "}
