@@ -1,8 +1,10 @@
 import { ChangeEvent, useState } from "react";
 
+import moment from "moment";
 import { useRecoilValue } from "recoil";
 
 import { postCommunityItem } from "@/apis";
+import logoImg from "@/assets/main_logo.svg";
 import { BigProfile } from "@/components/atoms/profile";
 import { KeywordTag, TopicTag } from "@/components/atoms/tag";
 import { modalState } from "@/recoil/atoms";
@@ -16,11 +18,18 @@ export const PostingModal = () => {
   const [writeText, setWriteText] = useState("");
   const [textLen, setTextLen] = useState(0);
 
+  const date = moment(new Date()).format("YYYY.MM.DD");
+  console.log(date);
+
   // const [contentsId, setContentsId] = useState<number | undefined>(undefined);
 
   const [uploadBtn, setUploadBtn] = useState(true);
 
   const [isComplete, setIsComplete] = useState(false);
+
+  const nick = localStorage.getItem("nickname");
+  console.log(nick);
+
   //데이터 받아오기
   const modalData = useRecoilValue<ArticleDataProps>(modalState);
   console.log("data:", modalData);
@@ -38,7 +47,9 @@ export const PostingModal = () => {
   };
 
   const accessToken = window.localStorage.getItem("accessToken");
-  console.log("token:", accessToken);
+
+  // const myNickname = window.localStorage.getItem("nickname");
+  // const myImg = window.localStorage.getItem("profileImg");
 
   const onClickButton = async () => {
     console.log("hihi");
@@ -65,9 +76,12 @@ export const PostingModal = () => {
     <PostingModalContainer onClick={(e) => e.stopPropagation()}>
       <div className="first-box">
         <BigProfile
-          nickname="chaemin"
-          date="2001.04.05"
-          profileImg=""
+          // nickname={myNickname ? myNickname : "광장피플"}
+          nickname="광장피플"
+          // date="2023.11.25"
+          date={date}
+          // profileImg={myImg ? myImg : logoImg}
+          profileImg={logoImg}
         />
         <button
           onClick={onClickButton}
@@ -78,9 +92,9 @@ export const PostingModal = () => {
         </button>
       </div>
       <div className="second-box">
-        <TopicTag category="환경" />
-        <KeywordTag category="환경">아아</KeywordTag>
-        <KeywordTag category="환경">아아</KeywordTag>
+        <TopicTag category={modalData.topic} />
+        <KeywordTag category={modalData.topic}>{modalData.issueTitle}</KeywordTag>
+        <KeywordTag category={modalData.topic}>{modalData.keyword}</KeywordTag>
       </div>
       <div className="input-box">
         <textarea
@@ -91,10 +105,15 @@ export const PostingModal = () => {
         />
         <p>({textLen}/500)</p>
       </div>
-      <div className="content-quot">
+      <div
+        className="content-quot"
+        onClick={() => {
+          window.open(modalData.url);
+        }}
+      >
         <div className="quot-text">
           <p>인용한 콘텐츠</p>
-          <div>{modalData?.title}</div>
+          <div dangerouslySetInnerHTML={{ __html: modalData?.title }}></div>
         </div>
         <img
           src={modalData?.imgUrl}

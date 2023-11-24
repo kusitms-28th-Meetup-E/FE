@@ -12,4 +12,18 @@ export const LoadingBox = styled.div`
   right: 0;
   margin: 0 auto;
   z-index: 9;
+
+  background: rgba(21, 21, 21, 0.7);
+  .box {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: space-evenly;
+    padding: 30px;
+    width: 300px;
+    border-radius: 30px;
+    height: 100px;
+    align-items: center;
+    background-color: white;
+  }
 `;

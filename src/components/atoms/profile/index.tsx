@@ -1,4 +1,3 @@
-import temp from "@/assets/react.svg";
 import { ProfileProps } from "@/types";
 
 import { BigUserInfo, UserInfo, LongUserInfo } from "./style";
@@ -14,8 +13,6 @@ const formatDate = (inputDate: string) => {
 };
 
 export const Profile = ({ nickname, profileImg, date }: ProfileProps) => {
-  profileImg = temp;
-
   const formattedDate = formatDate(date);
 
   return (
@@ -33,7 +30,7 @@ export const Profile = ({ nickname, profileImg, date }: ProfileProps) => {
 };
 
 export const LongProfile = ({ nickname, profileImg, date }: ProfileProps) => {
-  profileImg = temp;
+  const formattedDate = formatDate(date);
 
   return (
     <LongUserInfo>
@@ -42,13 +39,12 @@ export const LongProfile = ({ nickname, profileImg, date }: ProfileProps) => {
         alt="O"
       />
       <p className="user-nickname">{nickname}</p>
-      <p className="content-date">{date}</p>
+      <p className="content-date">{formattedDate}</p>
     </LongUserInfo>
   );
 };
 
 export const BigProfile = ({ nickname, profileImg, date }: ProfileProps) => {
-  profileImg = temp;
   const formattedDate = formatDate(date);
 
   return (

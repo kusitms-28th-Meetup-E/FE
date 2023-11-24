@@ -35,18 +35,22 @@ image[width="1420"] {
 .highcharts-series-3.highcharts-packedbubble-series:hover .highcharts-point {
   fill-opacity: 1;
   fill: #ff9900;
+  cursor: pointer;
 }
 .highcharts-series-1.highcharts-packedbubble-series:hover .highcharts-point {
   fill-opacity: 1;
   fill: #957bff !important;
+  cursor: pointer;
 }
 .highcharts-series-2.highcharts-packedbubble-series:hover .highcharts-point {
   fill-opacity: 1;
   fill: #1ae276 !important;
+  cursor: pointer;
 }
 .highcharts-series-0.highcharts-packedbubble-series:hover .highcharts-point {
   fill-opacity: 1;
   fill: #0084ff !important;
+  cursor: pointer;
 }
 .highcharts-legend-item text {
   font-size: 1rem !important;

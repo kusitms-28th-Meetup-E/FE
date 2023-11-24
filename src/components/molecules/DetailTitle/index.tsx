@@ -29,29 +29,30 @@ const DetailTitle = ({ data }: { data: DetailTitleProps }) => {
     } else if (area === "교육") {
       setNum(4);
     }
-    if (localStorage.getItem("accessToken")) {
-      setOnOff(true);
+    if (!onOff && localStorage.getItem("accessToken")) {
       getSubcribe({ topicId: num, IssueId: detailtitle.id })
         .then((res) => {
           console.log(res.data.data.subscribers);
           setDetailtitle({ ...detailtitle, count: res?.data?.data?.subscribers });
+          setOnOff(true);
         })
         .catch((err) => {
           console.log(err);
         });
       // 구독 Api 발송!
-      if (onOff === true) {
-        getDeleteSubcribe({ topicId: num, IssueId: detailtitle.id })
-          .then((res) => {
-            console.log(res.data.data.subscribers);
-            setDetailtitle({ ...detailtitle, count: res?.data?.data?.subscribers });
-            setOnOff(false);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    } else {
+    }
+    if (onOff && localStorage.getItem("accessToken")) {
+      getDeleteSubcribe({ topicId: num, IssueId: detailtitle.id })
+        .then((res) => {
+          console.log(res.data.data.subscribers);
+          setDetailtitle({ ...detailtitle, count: res?.data?.data?.subscribers });
+          setOnOff(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    if (!localStorage.getItem("accessToken")) {
       setOnToast(true);
       setTimeout(() => {
         setOnToast(false);
@@ -63,12 +64,12 @@ const DetailTitle = ({ data }: { data: DetailTitleProps }) => {
     getactiveSubcribe({ topicId: num, IssueId: detailtitle.id })
       .then((res) => {
         if (res.data.isSuccess) {
-          setOnOff(false);
+          setOnOff(false); ///구독할수있는상태
         } else {
           setOnOff(true);
         }
 
-        setOnOff(false);
+        //setOnOff(false);
       })
       .catch((err) => {
         console.log(err);

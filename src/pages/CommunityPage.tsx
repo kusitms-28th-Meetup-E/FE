@@ -41,9 +41,7 @@ export const CommunityPage = () => {
   useEffect(() => {
     getSubscribeTop5()
       .then((res) => {
-        console.log("top5:", res.data);
         setTopData(res.data.data);
-        console.log(topData);
       })
       .catch((err) => {
         // setTopData(ToptopicData);
@@ -52,7 +50,6 @@ export const CommunityPage = () => {
 
     getCommunityTop5()
       .then((res) => {
-        console.log("top55:", res.data);
         setPopularData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -117,7 +114,7 @@ export const CommunityPage = () => {
       default:
         break;
     }
-  }, [selectedTab, topData]);
+  }, [selectedTab]);
 
   return (
     <>

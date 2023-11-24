@@ -1,13 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+
+import { ShowModalState } from "@/recoil/atoms";
 
 import { ModalBackground, NoticeModalContainer } from "./style";
 
 export const NoticeModal = () => {
   const navigate = useNavigate();
+  const ShowModal = useSetRecoilState(ShowModalState);
 
   const SpaceTo = (page: string) => {
     navigate(page);
+    ShowModal(false);
   };
+  document.body.style.overflowY = "auto";
 
   return (
     <ModalBackground>

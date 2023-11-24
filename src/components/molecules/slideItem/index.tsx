@@ -2,7 +2,7 @@ import moment from "moment";
 import { useSetRecoilState } from "recoil";
 
 import { LikeBorderButton, QuotBorderButton } from "@/components/atoms/button";
-import { ShowModalState, modalState } from "@/recoil/atoms";
+import { ShowModalState, ToastState, modalState } from "@/recoil/atoms";
 import { ArticleDataProps } from "@/types";
 
 import { SlideWrapper } from "./style";
@@ -12,11 +12,20 @@ export const SlideItem = ({ data }: { data: ArticleDataProps }) => {
   const setModal = useSetRecoilState(modalState);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const ShowModal = useSetRecoilState(ShowModalState);
+  const setOnToast = useSetRecoilState<boolean>(ToastState);
 
   const Modal = () => {
-    setModal(data);
-    ShowModal(true);
-    document.body.style.overflowY = "hidden";
+    if (!localStorage.getItem("accessToken")) {
+      setOnToast(true);
+      setTimeout(() => {
+        setOnToast(false);
+      }, 1500);
+    } else {
+      setModal(data);
+      ShowModal(true);
+      console.log("modal-data", data);
+      document.body.style.overflowY = "hidden";
+    }
   };
 
   return (
@@ -45,14 +54,23 @@ export const SlideItem = ({ data }: { data: ArticleDataProps }) => {
           <div className="last-text">
             <div className="text-date">{moment(data?.pubDate).format("YYYY.MM.DD")}</div>
             {data.title ? (
-              <div className="button-wrapper">
+              <div
+                className="button-wrapper"
+                onClick={(e: React.MouseEvent<HTMLElement>) => {
+                  e.stopPropagation();
+                }}
+              >
                 {data.title !== undefined && (
                   <LikeBorderButton
                     likeCount={30}
-                    initialLikeStatus="true"
+                    initialLikeStatus="false"
                   />
                 )}
-                <QuotBorderButton onClick={Modal} />
+                <QuotBorderButton
+                  onClick={() => {
+                    Modal();
+                  }}
+                />
               </div>
             ) : null}
           </div>

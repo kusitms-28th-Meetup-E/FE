@@ -11,6 +11,7 @@ export const CommunityContainer = styled.div`
   overflow: hidden;
   flex: 1;
   border-radius: 5px;
+  cursor: pointer;
 
   .community-content {
     padding: 20px;
@@ -32,11 +33,18 @@ export const CommunityContainer = styled.div`
 
       .content-text {
         overflow: hidden;
+        display: -webkit-box;
         color: var(--Gray9_800, #424242);
         font-size: var(--text_b3);
         font-weight: 400;
         line-height: 22px; /* 157.143% */
         letter-spacing: -0.21px;
+        letter-spacing: -0.24px;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-wrap: break-word;
       }
 
       .status-info {

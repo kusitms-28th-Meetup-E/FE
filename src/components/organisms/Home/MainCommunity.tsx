@@ -17,7 +17,7 @@ export const MainCommunity = () => {
         <div className="inner">
           <SeeMore
             text="더보기"
-            path="/login"
+            path="/community"
           />
         </div>
       </MainCommunityBack>

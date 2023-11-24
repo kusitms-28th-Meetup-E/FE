@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 
 import { getComment, postComment } from "@/apis";
 import temp from "@/assets/main_logo.svg";
 import { Comment } from "@/components/molecules/comment";
+import { ToastState } from "@/recoil/atoms";
 
 export const CommentList = () => {
   const { topicId } = useParams();
@@ -14,6 +16,7 @@ export const CommentList = () => {
   const [text, setText] = useState("");
   const [registerBtn, setRegisterBtn] = useState(true);
   const [commentdata, setCommentData] = useState([]);
+  const setmodal = useSetRecoilState(ToastState);
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.currentTarget.value);
     if (e.currentTarget.value === "") {
@@ -29,6 +32,12 @@ export const CommentList = () => {
     }
   };
   const commentRegister = () => {
+    if (!localStorage.getItem("accessToken")) {
+      setmodal(true);
+      setTimeout(() => {
+        setmodal(false);
+      }, 1500);
+    }
     postComment({
       topicId: parseInt(topicId || "0"),
       communityId: parseInt(communityId || "0"),

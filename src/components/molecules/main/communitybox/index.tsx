@@ -11,6 +11,8 @@ import { PopularCommunityState } from "@/recoil/atoms";
 import { CommunityContainer } from "./style";
 
 import "swiper/css";
+// eslint-disable-next-line import/order
+import { useNavigate } from "react-router-dom";
 
 export const CommunityBox = () => {
   // const [margin, setMargin] = useState((window.innerWidth - 1080) * 0.49);
@@ -31,8 +33,23 @@ export const CommunityBox = () => {
 
   const communityData = useRecoilValue(PopularCommunityState);
 
-  console.log(communityData, 22);
+  const navigate = useNavigate();
 
+  const spaceToCommunity = (area: string, id: number) => {
+    let topicId = 0;
+
+    if (area === "일자리-노동") {
+      topicId = 1;
+    } else if (area === "주거-사회안전망") {
+      topicId = 2;
+    } else if (area === "환경") {
+      topicId = 3;
+    } else if (area === "교육") {
+      topicId = 4;
+    }
+
+    navigate(`/detailcommunity/${topicId}/${id}`);
+  };
   return (
     <TempContainer>
       <Swiper
@@ -134,7 +151,10 @@ export const CommunityBox = () => {
         {communityData.map((item, idx) => (
           <SwiperSlide key={idx}>
             <CommunityContainer>
-              <div className="community-content">
+              <div
+                className="community-content"
+                onClick={() => spaceToCommunity(item?.area, item?.id)}
+              >
                 <div className="community-tag-wrapper">
                   <TopicTag category={item.area} />
                   <KeywordTag category={item.area}>{item.subject}</KeywordTag>
@@ -157,7 +177,10 @@ export const CommunityBox = () => {
               </div>
               <div className="quotation">
                 <div className="quot-title">인용한 콘텐츠</div>
-                <div className="quot-text">{item.contentsTitle}</div>
+                <div
+                  className="quot-text"
+                  dangerouslySetInnerHTML={{ __html: item ? item.contentsTitle : "<div></div>" }}
+                ></div>
               </div>
             </CommunityContainer>
           </SwiperSlide>

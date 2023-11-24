@@ -17,7 +17,7 @@ export const ContentBox = ({ data, category }: { data?: ContentsMainProps; categ
   const [hover, setHover] = useState<boolean>(false);
 
   const onClick = () => {
-    window.open(`${data?.link}`, "_blank");
+    window.open(`${data?.url}`, "_blank");
   };
 
   return (
@@ -28,7 +28,10 @@ export const ContentBox = ({ data, category }: { data?: ContentsMainProps; categ
       onMouseOut={() => setHover(false)}
     >
       <HoverContent $hover={hover}>
-        <div className="article-text">{data?.title}</div>
+        <div
+          className="article-text"
+          dangerouslySetInnerHTML={{ __html: data ? data.title : "<div></div>" }}
+        ></div>
         <div className="article-img">
           <img
             src={nextIcon}
@@ -51,7 +54,10 @@ export const ContentBox = ({ data, category }: { data?: ContentsMainProps; categ
         </div>
         <div className="text-box">
           <p>{data?.type}</p>
-          <div className="content-title">{data?.title}</div>
+          <div
+            className="content-title"
+            dangerouslySetInnerHTML={{ __html: data ? data.title : "<div></div>" }}
+          ></div>
         </div>
       </ContentContainer>
     </EdgeContainer>

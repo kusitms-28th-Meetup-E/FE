@@ -6,7 +6,7 @@ export const Container = styled.div<{ $string: string }>`
   border-radius: 5px;
   opacity: 0.8;
   background-color: #343434;
-
+  cursor: pointer;
   @media (max-width: 1150px) {
     height: 120px;
   }

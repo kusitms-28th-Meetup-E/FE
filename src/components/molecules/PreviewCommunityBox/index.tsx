@@ -33,7 +33,7 @@ export const PreviewCommunityBox = ({ data }: { data: CommunityItemProps }) => {
         </div>
         <div className="bottom-content">
           <div>인용한 콘텐츠</div>
-          <p>{data.contentsTitle}</p>
+          <p dangerouslySetInnerHTML={{ __html: data.contentsTitle }}></p>
         </div>
       </CommunityDetailContainer>
     </>

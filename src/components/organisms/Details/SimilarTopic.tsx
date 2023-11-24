@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
@@ -12,7 +12,7 @@ const SimilarTopic = ({ data }: { data: SimilarTopicProps[] }) => {
   const area = useRecoilValue(areaState);
 
   const name = decodeURI(decodeURIComponent(id || ""));
-
+  const navigate = useNavigate();
   return (
     <Container $area={area}>
       <div className="keyword-text">
@@ -29,7 +29,7 @@ const SimilarTopic = ({ data }: { data: SimilarTopicProps[] }) => {
           })}
         </div>
         <DifferentTopicBtn>
-          <p>다른 사회 이슈도 둘러보세요.</p>
+          <p onClick={() => navigate("/")}>다른 사회 이슈도 둘러보세요.</p>
           <img
             src={next}
             alt=">"

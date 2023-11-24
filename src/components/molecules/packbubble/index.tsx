@@ -76,7 +76,6 @@ const PackBubble = () => {
         events: {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           click: function (e: any) {
-            console.log(e.point.name);
             const name = encodeURI(encodeURIComponent(e.point.name));
             navigate(`/detail/${name}`);
             //1부터 9까지 숫자가 들어오면 거기에 맞춰서 라우팅 하는게 맞을듯

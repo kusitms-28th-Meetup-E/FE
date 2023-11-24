@@ -1,49 +1,76 @@
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 
+import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+// eslint-disable-next-line import/order
 
-import { SeeMore } from "@/components/atoms/more";
+import { getIssueMainfirst, mySubscribe } from "@/apis";
 import { Title } from "@/components/atoms/title";
 // import { TopicCarousel } from "@/components/molecules/carousel/TopicCarousel";
+import { TopicCarousel } from "@/components/molecules/carousel/TopicCarousel";
 import { CategoryFilter } from "@/components/molecules/categoryFilter";
+
 // import { MySubscribeData } from "@/dummy/MySubscribeData";
 
 export const LoginTopic = () => {
-  // const [arr, setArr] = useState([]);
-  // const [a, setA] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [subscirbeData, setSubscirbeData] = useState([]);
 
-  // const [b, setB] = useState("");
-  // const [c, setC] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selectedCate, setSelectedCate] = useState<any[]>([]);
 
-  // useEffect(() => {
-  //   getget()
-  //     .then((res) => {
-  //       console.log(res.data.data.subscribeResList);
-  //       setA(res.data.data.subscribeResList[0]?.issue);
-  //       setB(res.data.data.subscribeResList[1]?.issue);
-  //       setC(res.data.data.subscribeResList[2]?.issue);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    console.log(selectedCategory);
+    mySubscribe().then((res) => {
+      console.log(res.data.data);
+      const uniqueIssues = [...new Set(res.data.data.map((item: { issue: string }) => item.issue))];
+      console.log(uniqueIssues);
+      setSelectedCategory(res.data.data[0].issue);
+      setSelectedCate(uniqueIssues);
+      getIssueMainfirst(selectedCategory).then((res) => {
+        console.log(res.data.data);
+        setSubscirbeData(res.data.data);
+      });
+    });
+    //selectedCategory -> 이거 여기서 데이터값 보내서 바꾸기 아래 캐러셀로 넘어가는거
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (selectedCategory !== "") {
+      getIssueMainfirst(selectedCategory).then((res) => {
+        console.log(res.data.data);
+        setSubscirbeData(res.data.data);
+      });
+    }
+    //selectedCategory -> 이거 여기서 데이터값 보내서 바꾸기 아래 캐러셀로 넘어가는거
+  }, [selectedCategory]);
   return (
-    <Background>
-      <div className="inner">
-        <Title title="나의 관심 이슈" />
-      </div>
-      <div className="inner">
-        <CategoryFilter />{" "}
-      </div>
-      {/* <TopicCarousel data={MySubscribeData} /> */}
-      <div className="inner">
-        <SeeMore
+    <>
+      {subscirbeData.length && (
+        <Background>
+          <div className="inner">
+            <Title title="나의 관심 이슈" />
+          </div>
+          <div className="inner">
+            {subscirbeData.length && (
+              <CategoryFilter
+                selectedCate={selectedCate}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
+            )}
+          </div>
+          <TopicCarousel data={subscirbeData} />
+          <div className="inner">
+            {/* <SeeMore
           text="관심 콘텐츠 더보기"
           path="/login"
-        />
-      </div>
-    </Background>
+        /> */}
+          </div>
+        </Background>
+      )}
+    </>
   );
 };
 

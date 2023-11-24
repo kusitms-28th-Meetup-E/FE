@@ -43,7 +43,6 @@ export const BigUserInfo = styled.div`
     border-radius: 30px;
     width: 40px;
     height: 40px;
-    object-fit: cover;
   }
 
   div {

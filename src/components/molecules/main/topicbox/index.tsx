@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import { TopicTag } from "@/components/atoms/tag";
 import { SubjectProps } from "@/types";
 
@@ -20,7 +22,18 @@ export const TopicBox = ({ title, imgUrl, subscribeCount, category }: SubjectPro
   const handleMouseOut = () => {
     setIsHover(false);
   };
+  const navigate = useNavigate();
+  const spaceToDetail = (title: string) => {
+    const name = encodeURI(encodeURIComponent(title));
+    navigate(`/detail/${name}`);
+    window.scrollTo({ top: 0 });
+  };
 
+  // const spaceToDetailPage = (subTitle: string) => {
+  //   console.log(subTitle); // 주제별 상세페이지로 이동 로직
+  //   const name = encodeURI(encodeURIComponent(subTitle));
+  //   navigate(`/detail/${name}`);
+  // };
   return (
     <TopicContainer
       style={containerStyle}
@@ -31,7 +44,8 @@ export const TopicBox = ({ title, imgUrl, subscribeCount, category }: SubjectPro
         <img
           className="img-hover"
           src={imgUrl}
-          alt=""
+          alt="미안"
+          onClick={() => spaceToDetail(title)}
         />
       ) : (
         <div className="topic-wrapper">

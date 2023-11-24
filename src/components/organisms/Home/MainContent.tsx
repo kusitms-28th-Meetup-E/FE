@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
-import { SeeMore } from "@/components/atoms/more";
+// import { SeeMore } from "@/components/atoms/more";
 import { Title } from "@/components/atoms/title";
 import { ContentBox } from "@/components/molecules/main/contentbox";
 // import { contentData } from "@/dummy/ContentData";
@@ -42,10 +42,10 @@ export const MainContent = () => {
             </div>
           </ContentWrapper>{" "}
           <div className="inner">
-            <SeeMore
+            {/* <SeeMore
               text="더보기"
               path="/login"
-            />
+            /> */}
           </div>
         </MainContentContainer>
       </Inner>

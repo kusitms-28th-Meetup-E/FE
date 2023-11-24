@@ -260,24 +260,6 @@ export const getactiveSubcribe = async ({
   return res;
 };
 
-export const getget = async () => {
-  const res = await GwangjangAxios.get(`/member/subscribe`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.accessToken}`,
-    },
-  });
-  return res;
-};
-
-export const getgetget = async (topic: string) => {
-  const res = await GwangjangAxios.get(`/contnets/subscribe/${topic}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.accessToken}`,
-    },
-  });
-  return res;
-};
-
 export const getMainBottom = async () => {
   const res = await GwangjangAxios.get("/keyword/topic/all");
   return res;
@@ -290,5 +272,68 @@ export const getMainTop = async () => {
 
 export const getPopularContents = async () => {
   const res = await GwangjangAxios.get("/contents/contents/like");
+  return res;
+};
+
+export const getIssueMainfirst = async (issue: string) => {
+  const res = await GwangjangAxios.get(`/contents/issueTitle/${issue}/NAVER`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.accessToken}`,
+    },
+  });
+  return res;
+};
+
+export const mySubscribe = async () => {
+  const res = await GwangjangAxios.get(`member/subscribe/contents`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.accessToken}`,
+    },
+  });
+  return res;
+};
+
+//내가 구독한 주제
+export const getMySubscribeData = async (accessToken: string) => {
+  const res = await GwangjangAxios.get("/member/subscribe", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return res;
+};
+
+//좋아요한 커뮤니티 글
+export const getMyLikeCommunityData = async (accessToken: string) => {
+  const res = await GwangjangAxios.get("/community/mypage", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return res;
+};
+
+//내가 쓴 커뮤니티 글
+export const getMyWriteCommunityData = async (accessToken: string) => {
+  const res = await GwangjangAxios.get("/community/mywrite", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return res;
+};
+
+export const postMyLikeContentsData = async (accessToken: string) => {
+  const res = await GwangjangAxios.post(
+    "/contents/my-page/like",
+    {
+      data: [],
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
   return res;
 };

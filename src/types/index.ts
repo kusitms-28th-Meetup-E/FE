@@ -116,13 +116,13 @@ export interface semiDataProps {
 export interface ArticleDataProps {
   contents_id?: number;
   description?: string;
-  imgUrl: string;
+  imgUrl?: string;
   issueTitle?: string;
   keyword?: string;
   pubDate: string;
   title: string;
   topic?: string;
-  type: string;
+  type?: string;
   url: string;
 } // 좋아요 수 넣기
 export interface ArticleData1Props {
@@ -175,7 +175,7 @@ export interface CommunityItemProps {
   contentsTitle: string;
   contentsUrl: string;
   likeStatus: string;
-  quotText: string;
+  quotText?: string;
 }
 
 export interface CommentItemProps {
@@ -208,15 +208,43 @@ export interface SimilarTopicesProps {
 }
 
 export interface SimilarTopicProps {
-  issueTitle: string;
-  topicTitle: string;
+  category: string;
+  categoryId: number;
+  imgUrl: string;
+  subscribeCount: number;
+  title: string;
+  titleId: number;
 }
 export interface ToptopicProps {
-  id: number;
-  area: string;
-  subject: string;
+  id?: number;
+  area?: string;
+  subject?: string;
   category?: string;
-  title?: string;
+  title?: string; //
+  imgUrl?: string;
+  issue?: string;
+  issueId?: number;
+  topic?: string;
+}
+export interface ContentsItemProps {
+  contents_id: number;
+  imgUrl: string;
+  title: string;
+  description: string;
+  type: string;
+  issueTitle: string;
+  keyword: string;
+  pubDate: string;
+  topic: string;
+  likeCount?: number;
+  quotCount?: number;
+}
+export interface SubscribeDataProps {
+  //
+  imgUrl: string;
+  issue: string;
+  issueId: number;
+  topic: string;
 }
 
 export interface PopularCommunityProps {
@@ -307,11 +335,14 @@ export interface CommunityMainProps {
   area: string;
   subject: string;
   keyword: string;
-  likeCount: number;
   commentCount: number;
   contentsId: number;
   contents: null;
   contentsTitle: string;
+  contentsUrl: string;
+  likeStatus: string;
+  likeCount: number;
+  quotText?: string;
 }
 
 export interface ContentsMainProps {
@@ -321,7 +352,7 @@ export interface ContentsMainProps {
   issueTitle?: string;
   keyword?: string;
   pubDate?: string;
-  title?: string;
+  title: string;
   topic?: string;
   type?: string;
   url?: string;

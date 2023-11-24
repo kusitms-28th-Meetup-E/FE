@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import arrow from "@/assets/discussedTopic/arrow_right.svg";
 import donut from "@/assets/discussedTopic/donut_topic.svg";
 import background4 from "@/assets/discussedTopic/topic1.png";
@@ -15,9 +17,11 @@ const background = [background1, background2, background3, background4];
 
 const Topic = ({ title, subTitles, idx }: discussedTopicProps) => {
   const [hover, setHover] = useState<boolean>(false);
-
+  const navigate = useNavigate();
   const spaceToDetailPage = (subTitle: string) => {
     console.log(subTitle); // 주제별 상세페이지로 이동 로직
+    const name = encodeURI(encodeURIComponent(subTitle));
+    navigate(`/detail/${name}`);
   };
 
   return (

@@ -52,7 +52,6 @@ export const ArticleCarousel = ({ data }: { data: ArticleDataProps[] }) => {
 
   const prev = useCallback(() => slickRef.current?.slickPrev(), []);
   const next = useCallback(() => slickRef.current?.slickNext(), []);
-
   return (
     <CategorySlideWrapper>
       {" "}

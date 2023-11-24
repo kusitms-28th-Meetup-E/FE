@@ -51,14 +51,21 @@ export const MainCommunityBox = ({ data }: { data: CommunityItemProps }) => {
       >
         <div className="quot-text">
           <p>인용한 콘텐츠</p>
-          <div>{data.contentsTitle}</div>
+          <div
+            dangerouslySetInnerHTML={{ __html: data ? data.contentsTitle : "<div></div>" }}
+          ></div>
         </div>
         <img
           src={data.contentsUrl}
           alt=""
         />
       </div>
-      <div className="content-button">
+      <div
+        className="content-button"
+        onClick={(e: React.MouseEvent<HTMLElement>) => {
+          e.stopPropagation();
+        }}
+      >
         <LikeBorderButton
           likeCount={data.likeCount}
           initialLikeStatus={data.likeStatus}

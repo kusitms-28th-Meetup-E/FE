@@ -6,7 +6,7 @@ export const CommunityDetailContainer = styled.div`
   border-radius: 5px;
   background: var(--White, #fff);
   box-shadow: 0px 15px 35px 0px rgba(66, 66, 66, 0.05);
-
+  cursor: pointer;
   .top-content {
     padding: 18px;
     /* height: 70%; */

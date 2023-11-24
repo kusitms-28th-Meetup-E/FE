@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
-import { TopTopicBox } from "@/components/molecules/longTopicBox";
+import { Top5TopicBox } from "@/components/molecules/longTopicBox";
 import { ToptopicProps } from "@/types";
 
 const CommunityTopTopic = ({ data }: { data: ToptopicProps[] }) => {
@@ -23,7 +23,7 @@ const CommunityTopTopic = ({ data }: { data: ToptopicProps[] }) => {
           return (
             <div className="box">
               <p>{idx + 1}위</p>
-              <TopTopicBox data={item} />
+              <Top5TopicBox data={item} />
             </div>
           );
         })}

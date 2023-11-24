@@ -45,6 +45,7 @@ const Header = () => {
   const LogOut = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
+    SpaceTo("/");
     window.location.reload();
   };
   const handleResize = () => {

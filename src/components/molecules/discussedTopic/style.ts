@@ -35,8 +35,9 @@ export const Title = styled.div<{ $hover: boolean; $idx: number }>`
   .text {
     display: ${(props) => (props.$hover ? "none" : "block")};
     padding: 18px 0 0 20px;
-    width: 80px;
-    white-space: wrap;
+    width: 83px;
+    white-space: pre;
+
     color: var(--Gray1_50, #fafafa);
     font-weight: 700;
     font-size: var(--text_h5);
@@ -69,8 +70,9 @@ export const Hover = styled.div<{ $hover: boolean }>`
   .text {
     opacity: 1;
     padding: 18px 0 0 20px;
-    width: 80px;
-    white-space: wrap;
+    width: 83px;
+    white-space: pre;
+
     color: var(--Gray1_50, #fafafa);
     font-weight: 700;
     font-size: var(--text_h5);

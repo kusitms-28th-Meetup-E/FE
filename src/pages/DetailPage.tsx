@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 import styled from "styled-components";
 
-import { getDetailOneLineIntro, getDetailSubscribeCount, getRandomIssue } from "@/apis";
+import { getDetailOneLineIntro, getDetailSubscribeCount, getSubscribeTop5 } from "@/apis";
 import Loading from "@/components/atoms/Loading";
 import ChallengeToast from "@/components/atoms/toast";
 import { BubbleGraph } from "@/components/organisms/Details/BubbleGraph";
@@ -72,10 +72,10 @@ const DetailPage = () => {
         console.log(err);
         setDetailTitle(detailTitleData);
       });
-    getRandomIssue()
+    getSubscribeTop5()
       .then((res) => {
         console.log(res.data.data);
-        setSimilar(res.data.data);
+        setSimilar(res.data.data.slice(0, 3));
       })
       .catch((err) => {
         console.log(err);

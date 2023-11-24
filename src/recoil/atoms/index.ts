@@ -5,8 +5,10 @@ import {
   ArticleDataProps,
   BubbleGraphProps,
   CommunityMainProps,
+  ContentsItemProps,
   ContentsMainProps,
   DetailTitleProps,
+  SubscribeDataProps,
   TopicMainProps,
   lineGraphProps,
   mainTopicBottom,
@@ -24,7 +26,7 @@ export const accessTokenState = atom({
 //선택된 카테고리를 저장할 atom
 export const selectedCategoryState = atom({
   key: "selectedCategoryState",
-  default: mySubjectData.category[0],
+  default: "후쿠시마 오염수",
 });
 
 //카테고리 기반 데이터 필터링하는 selector
@@ -164,5 +166,24 @@ export const ContentsPopularState = atom<ContentsMainProps[]>({
 
 export const PopularCommunityState = atom<CommunityMainProps[]>({
   key: "src/atoms/auth.tsx-PopularCommunityState",
+  default: [],
+});
+export const mySubscribeTopicData = atom<SubscribeDataProps[]>({
+  key: "src/atoms/auth.tsx-mySubscribeTopicData",
+  default: [],
+});
+
+export const myLikeData = atom<CommunityMainProps[]>({
+  key: "src/atoms/auth.tsx-myLikeData",
+  default: [],
+});
+
+export const myLikeContentsData = atom<ContentsItemProps[]>({
+  key: "src/atoms/auth.tsx-myLikeContentsData",
+  default: [],
+});
+
+export const myWriteData = atom<CommunityMainProps[]>({
+  key: "src/atoms/auth.tsx-myWriteData",
   default: [],
 });

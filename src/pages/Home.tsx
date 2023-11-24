@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useSetRecoilState } from "recoil";
 
@@ -8,10 +8,12 @@ import {
   getMainBubbleChart,
   getMainTop,
   getPopularContents,
+  mySubscribe,
 } from "@/apis";
 import BubbleChart from "@/components/organisms/Home/BubbleChart";
 import DiscussedTopics from "@/components/organisms/Home/DiscussedTopics";
 // import { LoginTopic } from "@/components/organisms/Home/LoginTopic";
+import { LoginTopic } from "@/components/organisms/Home/LoginTopic";
 import { MainCommunity } from "@/components/organisms/Home/MainCommunity";
 import { MainContent } from "@/components/organisms/Home/MainContent";
 import { MainTopic } from "@/components/organisms/Home/MainTopic";
@@ -35,6 +37,8 @@ const Home = () => {
   const setPopularContents = useSetRecoilState<ContentsMainProps[]>(ContentsPopularState);
 
   const setCommunityData = useSetRecoilState<CommunityMainProps[]>(PopularCommunityState);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selectedCate, setSelectedCate] = useState<number>(0);
 
   useEffect(() => {
     getMainBubbleChart()
@@ -90,6 +94,11 @@ const Home = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    mySubscribe().then((res) => {
+      console.log(res.data.data);
+      setSelectedCate(res.data.data.length);
+    });
   }, [
     setBubbleChartData,
     setCommunityData,
@@ -103,7 +112,13 @@ const Home = () => {
     <DragContainer>
       <BubbleChart />
       {/* 여러가지 메인에 들어갈 organism들 */}
-      {!localStorage.getItem("accessToken") ? <MainTopic /> : ""}
+      {!localStorage.getItem("accessToken") ? (
+        <MainTopic />
+      ) : selectedCate !== 0 ? (
+        <LoginTopic />
+      ) : (
+        <MainTopic />
+      )}
       <MainContent />
       <MainCommunity />
       <DiscussedTopics />
