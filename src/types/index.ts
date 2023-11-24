@@ -124,7 +124,9 @@ export interface ArticleDataProps {
   topic?: string;
   type?: string;
   url: string;
-} // 좋아요 수 넣기
+  likeCount: number;
+  userLiked: boolean;
+}
 export interface ArticleData1Props {
   id: number;
   url: string;

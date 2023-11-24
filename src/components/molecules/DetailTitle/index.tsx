@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useSetRecoilState, useRecoilValue } from "recoil";
 
-import { getDeleteSubcribe, getSubcribe, getactiveSubcribe } from "@/apis";
+import { getDeleteSubcribe, getSubcribe, getactiveSubcribe, mySubscribe } from "@/apis";
 import { SubscribeButton } from "@/components/atoms/button";
 import OneLine from "@/components/atoms/oneLine";
 import { TopicTag } from "@/components/atoms/tag";
@@ -29,16 +29,25 @@ const DetailTitle = ({ data }: { data: DetailTitleProps }) => {
     } else if (area === "교육") {
       setNum(4);
     }
+
     if (!onOff && localStorage.getItem("accessToken")) {
-      getSubcribe({ topicId: num, IssueId: detailtitle.id })
-        .then((res) => {
-          console.log(res.data.data.subscribers);
-          setDetailtitle({ ...detailtitle, count: res?.data?.data?.subscribers });
-          setOnOff(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      mySubscribe().then((res) => {
+        console.log(res.data.data);
+        if (res.data.data.length !== 3) {
+          getSubcribe({ topicId: num, IssueId: detailtitle.id })
+            .then((res) => {
+              console.log(res.data.data.subscribers);
+              setDetailtitle({ ...detailtitle, count: res?.data?.data?.subscribers });
+              setOnOff(true);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          alert("구독 수 3개를 초과하셨습니다.");
+        }
+      });
+
       // 구독 Api 발송!
     }
     if (onOff && localStorage.getItem("accessToken")) {
@@ -63,7 +72,8 @@ const DetailTitle = ({ data }: { data: DetailTitleProps }) => {
   useEffect(() => {
     getactiveSubcribe({ topicId: num, IssueId: detailtitle.id })
       .then((res) => {
-        if (res.data.isSuccess) {
+        console.log(res);
+        if (res.data.data) {
           setOnOff(false); ///구독할수있는상태
         } else {
           setOnOff(true);

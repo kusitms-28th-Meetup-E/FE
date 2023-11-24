@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 
+import { putLikeApi } from "@/apis";
 import { CommentBorderButton, LikeBorderButton } from "@/components/atoms/button";
 import { KeywordTag, TopicTag } from "@/components/atoms/tag";
 import { CommunityItemProps } from "@/types";
@@ -8,7 +9,6 @@ import { CommunityMainContainer } from "./style";
 
 export const MainCommunityBox = ({ data }: { data: CommunityItemProps }) => {
   let topicId = 0;
-
   const contLen = String(data.contents).length;
 
   if (data.area === "일자리-노동") {
@@ -25,6 +25,16 @@ export const MainCommunityBox = ({ data }: { data: CommunityItemProps }) => {
 
   const SpaceTo = (page: string) => {
     navigate(page);
+  };
+
+  const onClickLike = () => {
+    putLikeApi(topicId, data.id, localStorage.accessToken)
+      .then((res) => {
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -64,6 +74,7 @@ export const MainCommunityBox = ({ data }: { data: CommunityItemProps }) => {
         className="content-button"
         onClick={(e: React.MouseEvent<HTMLElement>) => {
           e.stopPropagation();
+          onClickLike();
         }}
       >
         <LikeBorderButton

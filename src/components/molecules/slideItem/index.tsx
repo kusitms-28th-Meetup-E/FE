@@ -1,7 +1,7 @@
 import moment from "moment";
 import { useSetRecoilState } from "recoil";
 
-import { LikeBorderButton, QuotBorderButton } from "@/components/atoms/button";
+import { LikeContentBorderButton, QuotBorderButton } from "@/components/atoms/button";
 import { ShowModalState, ToastState, modalState } from "@/recoil/atoms";
 import { ArticleDataProps } from "@/types";
 
@@ -27,6 +27,7 @@ export const SlideItem = ({ data }: { data: ArticleDataProps }) => {
       document.body.style.overflowY = "hidden";
     }
   };
+  console.log(data);
 
   return (
     <SlideWrapper
@@ -61,9 +62,9 @@ export const SlideItem = ({ data }: { data: ArticleDataProps }) => {
                 }}
               >
                 {data.title !== undefined && (
-                  <LikeBorderButton
-                    likeCount={30}
-                    initialLikeStatus="false"
+                  <LikeContentBorderButton
+                    likeCount={data?.likeCount}
+                    initialLikeStatus={data?.userLiked}
                   />
                 )}
                 <QuotBorderButton

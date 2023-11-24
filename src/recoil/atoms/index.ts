@@ -60,6 +60,8 @@ export const modalState = atom<ArticleDataProps>({
     topic: "",
     type: "",
     url: "",
+    likeCount: 0,
+    userLiked: false,
   },
 });
 

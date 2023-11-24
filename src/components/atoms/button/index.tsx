@@ -118,20 +118,59 @@ export const LikeBorderButton = ({
   likeCount: number;
   initialLikeStatus: string;
 }) => {
-  const isStatus = initialLikeStatus === "true";
-  const [likeStatus, setLikeStatus] = useState(isStatus);
-
+  // const isStatus = initialLikeStatus === "true";
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [likeStatus, setLikeStatus] = useState(initialLikeStatus);
+  const [count, setCount] = useState(likeCount);
   const handleButtonClick = () => {
-    setLikeStatus((prevLikeStatus) => !prevLikeStatus);
+    if (likeStatus == "false") {
+      setCount(count + 1);
+      setLikeStatus("true");
+    } else if (likeStatus == "true") {
+      setCount(count - 1);
+      setLikeStatus("false");
+    }
   };
 
   return (
     <BorderStyleButtonTemp
-      likeStatus={likeStatus}
+      likeStatus={!likeStatus}
       onClick={handleButtonClick}
     >
       <PiThumbsUpBold />
-      <p>{likeCount}</p>
+      <p>{count}</p>
+    </BorderStyleButtonTemp>
+  );
+};
+
+export const LikeContentBorderButton = ({
+  likeCount,
+  initialLikeStatus,
+}: {
+  likeCount: number;
+  initialLikeStatus: boolean;
+}) => {
+  // const isStatus = initialLikeStatus === "true";
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [likeStatus, setLikeStatus] = useState(initialLikeStatus);
+  const [count, setCount] = useState(likeCount);
+  const handleButtonClick = () => {
+    if (likeStatus == false) {
+      setCount(count + 1);
+      setLikeStatus(true);
+    } else if (likeStatus == true) {
+      setCount(count - 1);
+      setLikeStatus(false);
+    }
+  };
+
+  return (
+    <BorderStyleButtonTemp
+      likeStatus={Boolean(likeStatus)}
+      onClick={handleButtonClick}
+    >
+      <PiThumbsUpBold />
+      <p>{count}</p>
     </BorderStyleButtonTemp>
   );
 };
