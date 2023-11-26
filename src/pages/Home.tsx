@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 import {
   getCommunityTop5,
@@ -10,6 +10,7 @@ import {
   getPopularContents,
   mySubscribe,
 } from "@/apis";
+import Loading from "@/components/atoms/Loading";
 import BubbleChart from "@/components/organisms/Home/BubbleChart";
 import DiscussedTopics from "@/components/organisms/Home/DiscussedTopics";
 // import { LoginTopic } from "@/components/organisms/Home/LoginTopic";
@@ -27,6 +28,7 @@ import {
   ShowModalState,
   TalkingHoverState,
   TalkingTopicState,
+  loadingState,
 } from "@/recoil/atoms";
 import { DragContainer } from "@/style/global";
 import { CommunityMainProps, ContentsMainProps, TopicMainProps, mainTopicBottom } from "@/types";
@@ -42,6 +44,7 @@ const Home = () => {
   const setCommunityData = useSetRecoilState<CommunityMainProps[]>(PopularCommunityState);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedCate, setSelectedCate] = useState<number>(0);
+  const [loading, setLoading] = useRecoilState(loadingState);
 
   useEffect(() => {
     getMainBubbleChart()
@@ -51,6 +54,7 @@ const Home = () => {
           return Object.freeze(item);
         });
         setBubbleChartData(RealObj);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -103,28 +107,33 @@ const Home = () => {
     setBubbleChartData,
     setCommunityData,
     setHoverData,
+    setLoading,
     setMainBottomData,
     setMainTopData,
     setPopularContents,
   ]);
 
   return (
-    <DragContainer>
-      <BubbleChart />
-      {/* 여러가지 메인에 들어갈 organism들 */}
-      {!localStorage.getItem("accessToken") ? (
-        <MainTopic />
-      ) : selectedCate !== 0 ? (
-        <LoginTopic />
+    <>
+      {!loading ? (
+        <DragContainer>
+          <BubbleChart />
+          {!localStorage.getItem("accessToken") ? (
+            <MainTopic />
+          ) : selectedCate !== 0 ? (
+            <LoginTopic />
+          ) : (
+            <MainTopic />
+          )}
+          <MainContent />
+          <MainCommunity />
+          <DiscussedTopics />
+          {Show ? <QuotModal /> : ""}
+        </DragContainer>
       ) : (
-        <MainTopic />
+        <Loading />
       )}
-      <MainContent />
-      <MainCommunity />
-      <DiscussedTopics />
-      {Show ? <QuotModal /> : ""}
-    </DragContainer>
+    </>
   );
 };
-
 export default Home;
