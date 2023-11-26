@@ -13,7 +13,6 @@ export const MainContent = () => {
   const title = "지금 사람들이\n가장 많이 본 콘텐츠";
 
   const contentsData = useRecoilValue(ContentsPopularState);
-  console.log("dfdf", contentsData);
   const firstData = contentsData[0];
 
   return (

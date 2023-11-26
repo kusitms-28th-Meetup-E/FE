@@ -6,7 +6,6 @@ const formatDate = (inputDate: string) => {
   if (!inputDate) {
     return "";
   }
-  console.log("실행");
   const date = new Date(inputDate);
   const formattedDate = date.toLocaleDateString();
   return formattedDate;

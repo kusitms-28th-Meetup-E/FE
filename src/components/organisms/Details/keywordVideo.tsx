@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import { getKeywordYoutube, getTopicYoutube } from "@/apis";
 import { SubTitle } from "@/components/atoms/title";
 import { ArticleCarousel } from "@/components/molecules/carousel/ArticleCarousel";
 //import { tempVideoData } from "@/dummy/tempVideoData";
-import { detailPageKeyword } from "@/recoil/atoms";
+import { detailPageKeyword, loading2State } from "@/recoil/atoms";
 import { ArticleDataProps } from "@/types";
 
 export const KeywordVideo = () => {
   const { id } = useParams();
+  const [loading2, setLoading2] = useRecoilState(loading2State);
 
   const name = decodeURI(decodeURIComponent(id || ""));
   const DetailPageKeyword = useRecoilValue(detailPageKeyword);
@@ -23,6 +24,7 @@ export const KeywordVideo = () => {
     getTopicYoutube(name, "YOUTUBE")
       .then((res) => {
         setYoutubeData(res.data.data);
+        setLoading2(false);
       })
       .catch((err) => {
         console.log(err);
@@ -32,26 +34,35 @@ export const KeywordVideo = () => {
       getKeywordYoutube(DetailPageKeyword, "YOUTUBE")
         .then((res) => {
           setKeywordYoutubeData(res.data.data);
+          setLoading2(false);
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [DetailPageKeyword, name]);
+  }, [DetailPageKeyword, name, setLoading2]);
 
   return (
-    <Background>
-      {(keywordYoutubeData.length || YoutubeData.length) && (
-        <>
-          <div className="inner">
-            <SubTitle title="관련 영상으로 더 알아보세요" />
-          </div>
-          <div>
-            <ArticleCarousel data={DetailPageKeyword === "" ? YoutubeData : keywordYoutubeData} />
-          </div>
-        </>
+    <>
+      {!loading2 ? (
+        <Background>
+          {(keywordYoutubeData.length || YoutubeData.length) && (
+            <>
+              <div className="inner">
+                <SubTitle title="관련 영상으로 더 알아보세요" />
+              </div>
+              <div>
+                <ArticleCarousel
+                  data={DetailPageKeyword === "" ? YoutubeData : keywordYoutubeData}
+                />
+              </div>
+            </>
+          )}
+        </Background>
+      ) : (
+        ""
       )}
-    </Background>
+    </>
   );
 };
 

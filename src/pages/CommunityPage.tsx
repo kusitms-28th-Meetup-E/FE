@@ -59,6 +59,7 @@ export const CommunityPage = () => {
         getCommunityAllData()
           .then((res) => {
             setCommunityData(res.data.data);
+            console.log(res.data.data);
           })
           .catch((err) => {
             setCommunityData(envirData);

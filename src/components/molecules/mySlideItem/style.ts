@@ -4,7 +4,7 @@ export const SlideWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 35px;
-
+  cursor: pointer;
   .slide-container {
     flex-direction: column;
     width: 344px;

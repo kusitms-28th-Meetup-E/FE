@@ -23,6 +23,7 @@ import {
   ShowModalState,
   ToastState,
   bubbleGraphState,
+  detailPageKeyword,
   detailTitleState,
   loadingState,
 } from "@/recoil/atoms";
@@ -37,9 +38,11 @@ const DetailPage = () => {
   const { id } = useParams();
   const [loading, setLoading] = useRecoilState(loadingState);
   const [similar, setSimilar] = useState([]);
+  const setDetailPageKeyword = useSetRecoilState(detailPageKeyword);
 
   useEffect(() => {
     const name = decodeURI(decodeURIComponent(id || ""));
+    setDetailPageKeyword(name);
     getDetailOneLineIntro() // detailTitle
       .then((res) => {
         const obj = [...res.data.data];
@@ -76,7 +79,7 @@ const DetailPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [id, setBubbleGraphData, setDetailTitle, setLoading]);
+  }, [id, setBubbleGraphData, setDetailPageKeyword, setDetailTitle, setLoading]);
 
   return (
     <>

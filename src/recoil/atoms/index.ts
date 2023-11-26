@@ -128,6 +128,11 @@ export const loadingState = atom({
   key: "src/atoms/auth.tsx-loadingState ",
   default: true,
 });
+export const loading2State = atom({
+  // 주제뱔 상세페이지 접속시, 쿼리스트링의 영역값을 저장
+  key: "src/atoms/auth.tsx-loading2State ",
+  default: true,
+});
 
 export const topDateState = atom({
   // 주제뱔 상세페이지 접속시, 쿼리스트링의 영역값을 저장

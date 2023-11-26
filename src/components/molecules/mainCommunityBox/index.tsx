@@ -29,9 +29,8 @@ export const MainCommunityBox = ({ data }: { data: CommunityItemProps }) => {
 
   const onClickLike = () => {
     putLikeApi(topicId, data.id, localStorage.accessToken)
-      .then((res) => {
-        console.log(res.data.data);
-      })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .then(() => {})
       .catch((err) => {
         console.log(err);
       });
