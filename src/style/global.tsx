@@ -34,6 +34,7 @@ time, mark, audio, video, ::placeholder, textarea, button {
 	vertical-align: baseline;
 	font-family:'Pretendard';
 	font-weight: 500;
+
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
