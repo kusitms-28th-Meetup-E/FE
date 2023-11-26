@@ -6,7 +6,8 @@ export const Container = styled.div`
   background-color: var(--Gray2_100, #f5f5f5);
   position: relative;
   .inner {
-    width: 1080px;
+    width: 100%;
+    max-width: 1080px;
     margin: 0 auto;
     display: flex;
     color: var(--Gray6_500, #959595);
