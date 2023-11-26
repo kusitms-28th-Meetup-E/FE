@@ -32,7 +32,8 @@ const Container = styled.div`
 `;
 
 const Cover = styled.div`
-  width: 1080px; // 여기 반응형 작업 잘하기
+  max-width: 1080px;
+  width: 94.12%; // 여기 반응형 작업 잘하기
   height: 220px;
   position: absolute;
   top: 0;
@@ -78,7 +79,7 @@ const Title = styled.div`
     right: 0;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+
     font-size: 1.3rem;
   }
 `;
