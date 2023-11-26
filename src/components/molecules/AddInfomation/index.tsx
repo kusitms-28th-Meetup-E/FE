@@ -74,7 +74,6 @@ const AddInfomation = () => {
       })
       .catch((err) => console.log(err));
 
-    console.log("aa");
     //추가정보 기입 api 발동과 동시에 회원가입 완료 되었다는 모달창 띄우기
   };
 
