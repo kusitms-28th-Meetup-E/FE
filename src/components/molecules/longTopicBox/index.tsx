@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import bg from "@/assets/discussedTopic/topic1.png";
 import { TopicTag } from "@/components/atoms/tag";
-import { ToptopicProps, SimilarTopicProps } from "@/types";
+import { ToptopicProps, SimilarTopicProps, subscribetopicProps } from "@/types";
 
 import { Container, Top, Bottom, Middle } from "./style";
 
@@ -37,7 +37,7 @@ export const SimilarTopicBox = ({ data }: { data: SimilarTopicProps }) => {
   );
 };
 
-export const TopTopicBox = ({ data }: { data: ToptopicProps }) => {
+export const TopTopicBox = ({ data }: { data: subscribetopicProps }) => {
   const containerStyle = {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(${bg})`,
     backgroundSize: "cover",
@@ -60,10 +60,13 @@ export const Top5TopicBox = ({ data }: { data: ToptopicProps }) => {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(${data.imgUrl})`,
     backgroundSize: "cover",
   };
+  const navigate = useNavigate();
+
   return (
     <Container
       style={containerStyle}
       $string="top"
+      onClick={() => navigate(`/detail/${encodeURI(encodeURIComponent(data.title))}`)}
     >
       <Middle>
         <div className="title">{data.title}</div>

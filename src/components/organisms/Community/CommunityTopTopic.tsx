@@ -7,6 +7,7 @@ import { ToptopicProps } from "@/types";
 
 const CommunityTopTopic = ({ data }: { data: ToptopicProps[] }) => {
   const [link, setLink] = useState<string>("");
+
   useEffect(() => {
     if (document.location.href.split("/")[3] === "search") {
       setLink("search");

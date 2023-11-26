@@ -16,5 +16,5 @@ const SearchTopicList = ({ data }: { data: SearchTopicProps[] }) => {
 export default SearchTopicList;
 
 const Container = styled.div`
-  width: 100%;
+  /* width: 100%; */
 `;

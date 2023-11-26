@@ -23,6 +23,7 @@ const SearchPage = () => {
   const [count, setCount] = useState(0);
   const [searchCommunityData, setSearchCommunityData] = useState([]);
   const [countCommunity, setCountCommunity] = useState(0);
+
   const search = useRecoilValue(searchResultState);
 
   //
@@ -34,9 +35,13 @@ const SearchPage = () => {
     console.log(searchquery);
     getSearch(searchquery)
       .then((res) => {
-        setCount(res.data.data.searchCount);
-        setSearchTopicData(res.data.data.issueResList);
-        setNotfound(false);
+        if (res.data.data.issueResList.length === 0) {
+          setNotfound(true);
+        } else {
+          setCount(res.data.data.searchCount);
+          setSearchTopicData(res.data.data.issueResList);
+          setNotfound(false);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -44,10 +49,14 @@ const SearchPage = () => {
       });
     getSearchCommunity(searchquery)
       .then((res) => {
-        setCountCommunity(res.data.data.searchCount);
-        setSearchCommunityData(res.data.data.communityResList);
-        console.log(res.data.data);
-        setNotfound(false);
+        if (res.data.data.communityResList.length === 0) {
+          setNotfound(true);
+        } else {
+          setCountCommunity(res.data.data.searchCount);
+          setSearchCommunityData(res.data.data.communityResList);
+          console.log(res.data.data);
+          setNotfound(false);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -91,12 +100,16 @@ const SearchPage = () => {
         ) : searchCategoryBtn === "커뮤니티" ? (
           <Bottom>
             <CommunityMainList data={searchCommunityData} />
-            <CommunityPopular data={popularData} />
+            <div className="toptopic">
+              <CommunityPopular data={popularData} />
+            </div>
           </Bottom>
         ) : (
           <Bottom>
             <SearchTopicList data={searchTopicData} />
-            <CommunityTopTopic data={topData} />
+            <div className="toptopic">
+              <CommunityTopTopic data={topData} />
+            </div>
           </Bottom>
         )}
       </BottomContainer>
@@ -107,19 +120,32 @@ const SearchPage = () => {
 export default SearchPage;
 
 const Container = styled.div`
+  width: 100%;
   /* width: 1080px;
   margin: 0 auto;
   display: flex;
   padding-bottom: 152px;
   justify-content: space-between; */
 `;
-
 const Bottom = styled.div`
-  width: 1080px;
+  @media (max-width: 1080px) {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+  @media (min-width: 1080px) {
+    width: 1080px;
+  }
   margin: 0 auto;
   display: flex;
   padding-bottom: 152px;
   justify-content: space-between;
+  .toptopic {
+    @media (max-width: 1150px) {
+      display: none;
+    }
+  }
 `;
 
 const BottomContainer = styled.div`

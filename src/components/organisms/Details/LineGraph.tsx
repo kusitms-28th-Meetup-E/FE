@@ -56,6 +56,9 @@ const Container = styled.div`
   /* justify-content: center; */
   align-items: center;
   background-color: var(--Gray3_200);
+  @media (max-width: 1080px) {
+    display: none;
+  }
 `;
 const ToggleBox = styled.div`
   width: 1080px;

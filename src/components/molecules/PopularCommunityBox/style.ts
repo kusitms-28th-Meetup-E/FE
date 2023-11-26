@@ -7,6 +7,7 @@ export const Container = styled.div`
   background: var(--Gray3_200, #eee);
   padding: 10px 15px 15px;
   box-sizing: border-box;
+  cursor: pointer;
   .text {
     width: 231px;
     overflow: hidden;

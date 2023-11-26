@@ -1,7 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 690px;
+  @media (max-width: 690px) {
+    /* margin: 0 auto; */
+    display: block;
+    width: 330px;
+    img {
+      width: inherit;
+    }
+  }
+  max-width: 690px;
+
   //height: 154px;
   border-radius: 5px;
   box-shadow: 0px 15px 35px 0px rgba(66, 66, 66, 0.05);
@@ -31,7 +40,6 @@ export const Container = styled.div`
     font-weight: 600;
     line-height: 22px; /* 157.143% */
     letter-spacing: -0.21px;
-    width: 400px;
     word-wrap: break-word;
   }
 `;

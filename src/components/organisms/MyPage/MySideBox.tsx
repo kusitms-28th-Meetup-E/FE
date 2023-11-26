@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
+import { getDeleteSubcribe } from "@/apis";
 import editNicknameImg from "@/assets/myPage/edit-pencil-nickname.svg";
 import editImg from "@/assets/myPage/edit-pencil.svg";
 import { TopTopicBox } from "@/components/molecules/longTopicBox";
@@ -17,6 +18,7 @@ export const MySideBox = ({
   profileImg: string;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [num, setNum] = useState<number>(0);
 
   const mySubData = useRecoilValue(mySubscribeTopicData);
 
@@ -41,93 +43,116 @@ export const MySideBox = ({
     window.location.href = "/";
   };
 
+  const subscribeDelte = (topic: string, issueId: number) => {
+    if (topic === "주거·사회 안전망") {
+      setNum(2);
+    } else if (topic === "일자리·노동") {
+      setNum(1);
+    } else if (topic === "환경") {
+      setNum(3);
+    } else if (topic === "교육") {
+      setNum(4);
+    }
+    getDeleteSubcribe({ topicId: num, IssueId: issueId })
+      .then((res) => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
-      {mySubData.length !== 0 && (
-        <MySideBoxWrapper>
-          <div className="my-profile">
-            <div className="img-box">
+      <MySideBoxWrapper>
+        <div className="my-profile">
+          <div className="img-box">
+            <img
+              src={profileImg}
+              alt="profile"
+              className="profile-img"
+            ></img>
+            <div className="edit-box">
               <img
-                src={profileImg}
-                alt="profile"
-                className="profile-img"
-              ></img>
-              <div className="edit-box">
-                <img
-                  src={editImg}
-                  alt=""
+                src={editImg}
+                alt=""
+              />
+            </div>
+          </div>
+          <div className="nick-box">
+            {isEditing ? (
+              <div className="change-nick">
+                <input
+                  type="text"
+                  value={newNickname}
+                  placeholder="변경할 닉네임을 입력해주세요."
                 />
-              </div>
-            </div>
-            <div className="nick-box">
-              {isEditing ? (
-                <div className="change-nick">
-                  <input
-                    type="text"
-                    value={newNickname}
-                    placeholder="변경할 닉네임을 입력해주세요."
-                  />
-                  <div className="btn-wrapper">
-                    <button
-                      className="cancel-btn"
-                      onClick={cancelEditing}
-                    >
-                      취소
-                    </button>
-                    <button
-                      className="change-btn"
-                      onClick={nicknameUpdate}
-                    >
-                      변경
-                    </button>
-                  </div>
+                <div className="btn-wrapper">
+                  <button
+                    className="cancel-btn"
+                    onClick={cancelEditing}
+                  >
+                    취소
+                  </button>
+                  <button
+                    className="change-btn"
+                    onClick={nicknameUpdate}
+                  >
+                    변경
+                  </button>
                 </div>
-              ) : (
-                <>
-                  <p>{newNickname}</p>
-                  <img
-                    src={editNicknameImg}
-                    alt=""
-                    onClick={startEditing}
+              </div>
+            ) : (
+              <>
+                <p>{newNickname}</p>
+                <img
+                  src={editNicknameImg}
+                  alt=""
+                  onClick={startEditing}
+                />
+              </>
+            )}
+          </div>
+        </div>
+        <div className="my-line"></div>
+
+        <SideBox />
+
+        <div className="my-line"></div>
+
+        <div className="subscribe-box">
+          <div className="subscribe-title">구독한 사회이슈</div>
+          <p> 사회이슈 키워드는 최대 3개까지 구독할 수 있어요.</p>
+          <div className="subscribe-topic">
+            {mySubData?.map((item, idx) => {
+              return (
+                <div className="topic-wrapper">
+                  <TopTopicBox
+                    key={idx}
+                    data={item}
                   />
-                </>
-              )}
-            </div>
+                  <button
+                    className="subscribe-cancel"
+                    onClick={() => subscribeDelte(item.topic, item.issueId)}
+                  >
+                    구독취소
+                  </button>
+                </div>
+              );
+            })}
           </div>
-          <div className="my-line"></div>
+        </div>
 
-          <SideBox />
+        <div className="my-line"></div>
 
-          <div className="my-line"></div>
-
-          <div className="subscribe-box">
-            <div className="subscribe-title">구독한 사회이슈</div>
-            <p> 사회이슈 키워드는 최대 3개까지 구독할 수 있어요.</p>
-            <div className="subscribe-topic">
-              {mySubData?.map((item, idx) => {
-                return (
-                  <div className="topic-wrapper">
-                    <TopTopicBox
-                      key={idx}
-                      data={item}
-                    />
-                    <button className="subscribe-cancel">구독취소</button>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="my-line"></div>
-
-          <div
-            className="my-logout"
-            onClick={LogOut}
-          >
-            로그아웃
-          </div>
-        </MySideBoxWrapper>
-      )}
+        <div
+          className="my-logout"
+          onClick={LogOut}
+        >
+          로그아웃
+        </div>
+      </MySideBoxWrapper>
     </>
   );
 };
