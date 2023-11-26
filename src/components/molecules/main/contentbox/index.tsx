@@ -17,7 +17,7 @@ export const ContentBox = ({ data, category }: { data?: ContentsMainProps; categ
   const [hover, setHover] = useState<boolean>(false);
 
   const onClick = () => {
-    window.open(`${data?.url}`, "_blank");
+    window.open(`https://www.youtube.com/watch?v=${data?.url}`, "_blank");
   };
 
   return (

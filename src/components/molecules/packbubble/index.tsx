@@ -90,7 +90,7 @@ const PackBubble = () => {
             textOutline: "none",
             fontWeight: "normal",
             fontFamily: "Pretendard",
-            fontSize: "1.25rem",
+            fontSize: "1.15rem",
             transition: "opacity .1ms",
           },
         },
