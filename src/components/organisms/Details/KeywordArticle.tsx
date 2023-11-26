@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import { getKeywordArticle, getTopicArticle } from "@/apis";
 import { SubTitle } from "@/components/atoms/title";
 import { ArticleCarousel } from "@/components/molecules/carousel/ArticleCarousel";
 //import { articleData } from "@/dummy/articleData";
-import { detailPageKeyword, loading2State } from "@/recoil/atoms";
+import { detailPageKeyword } from "@/recoil/atoms";
 import { areaState } from "@/recoil/atoms";
 import { ArticleDataProps } from "@/types";
 //import { ArticleDataProps } from "@/types";
@@ -18,7 +18,6 @@ export const KeywordArticle = () => {
   const area = useRecoilValue(areaState);
 
   const name = decodeURI(decodeURIComponent(id || ""));
-  const [loading2, setLoading2] = useRecoilState(loading2State);
 
   const DetailPageKeyword = useRecoilValue(detailPageKeyword);
   const [articleData, setArticleData] = useState<ArticleDataProps[]>([]);
@@ -27,46 +26,38 @@ export const KeywordArticle = () => {
     getTopicArticle(name, "NAVER")
       .then((res) => {
         setArticleData(res.data.data);
-        setLoading2(false);
       })
       .catch((err) => {
         console.log(err);
       });
-    if (name !== "") {
+    if (DetailPageKeyword !== "") {
       getKeywordArticle(DetailPageKeyword, "NAVER")
         .then((res) => {
           setKeywordArticleData(res.data.data);
-          setLoading2(false);
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [DetailPageKeyword, name, setLoading2]);
+  }, [DetailPageKeyword, articleData, name]);
 
   return (
     <>
-      {!loading2 ? (
-        <Background $area={area}>
-          {(keywordArticleData.length || articleData.length) && (
-            <>
-              <div className="inner">
-                <div className="keyword-text">
-                  <p>{!DetailPageKeyword ? name : DetailPageKeyword}</p>(이)가 더 궁금하다면?
-                </div>
-                <SubTitle title="관련 기사로 더 알아보세요" />
+      <Background $area={area}>
+        {(keywordArticleData.length !== 0 || articleData.length !== 0) && (
+          <>
+            <div className="inner">
+              <div className="keyword-text">
+                <p>{DetailPageKeyword === "" ? name : DetailPageKeyword}</p>(이)가 더 궁금하다면?
               </div>
-              <div>
-                <ArticleCarousel
-                  data={DetailPageKeyword === "" ? articleData : keywordArticleData}
-                />
-              </div>
-            </>
-          )}
-        </Background>
-      ) : (
-        ""
-      )}
+              <SubTitle title="관련 기사로 더 알아보세요" />
+            </div>
+            <div>
+              <ArticleCarousel data={DetailPageKeyword === "" ? articleData : keywordArticleData} />
+            </div>
+          </>
+        )}
+      </Background>
     </>
   );
 };

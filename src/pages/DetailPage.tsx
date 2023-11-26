@@ -37,12 +37,14 @@ const DetailPage = () => {
   const setBubbleGraphData = useSetRecoilState(bubbleGraphState);
   const { id } = useParams();
   const [loading, setLoading] = useRecoilState(loadingState);
-  const [similar, setSimilar] = useState([]);
+  //const loading2 = useRecoilValue(loading2State);
   const setDetailPageKeyword = useSetRecoilState(detailPageKeyword);
+
+  const [similar, setSimilar] = useState([]);
 
   useEffect(() => {
     const name = decodeURI(decodeURIComponent(id || ""));
-    setDetailPageKeyword(name);
+    setDetailPageKeyword("");
     getDetailOneLineIntro() // detailTitle
       .then((res) => {
         const obj = [...res.data.data];
