@@ -1,20 +1,23 @@
 import { useState } from "react";
 
-import temp from "@/assets/main_logo.svg";
 import editNicknameImg from "@/assets/myPage/edit-pencil-nickname.svg";
 import editImg from "@/assets/myPage/edit-pencil.svg";
 import { SideBox } from "@/components/molecules/sideBox";
 
 import { MySideBoxWrapper } from "./style";
 
-export const ResponsiveSideBox = () => {
+export const ResponsiveSideBox = ({
+  newNickname,
+  profileImg,
+}: {
+  newNickname: string;
+  profileImg: string;
+}) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [newNickname, setNewNickname] = useState("기본값");
 
   //닉네임 수정 시
   const startEditing = () => {
     setIsEditing(true);
-    setNewNickname("");
   };
 
   const cancelEditing = () => {
@@ -38,7 +41,7 @@ export const ResponsiveSideBox = () => {
       <div className="my-profile">
         <div className="img-box">
           <img
-            src={temp}
+            src={profileImg}
             alt="profile"
             className="profile-img"
           ></img>
@@ -55,7 +58,6 @@ export const ResponsiveSideBox = () => {
               <input
                 type="text"
                 value={newNickname}
-                onChange={(e) => setNewNickname(e.target.value)}
                 placeholder="변경할 닉네임을 입력해주세요."
               />
               <div className="btn-wrapper">
