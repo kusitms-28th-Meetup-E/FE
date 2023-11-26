@@ -36,7 +36,7 @@ export const BubbleGraph = () => {
           ))}
         </BubbleBottom>
       </Container>
-      <div style={{ padding: "0 20px" }}>
+      <div style={{ padding: "0 20px", display: "none" }}>
         {450 < windowWidth && windowWidth < 1080 ? (
           <div>
             <ExampleBubble>월별 키워드 분포를 확인하려면 크기를 확대하세요!</ExampleBubble>
@@ -59,7 +59,7 @@ export const BubbleGraph = () => {
 };
 
 const ExampleBubble = styled.div`
-  @media (min-width: 1080px) {
+  @media (max-width: 1080px) {
     display: none;
   }
   @media (max-width: 1080px) {
@@ -89,7 +89,7 @@ const ExampleBubble = styled.div`
   }
 `;
 const ExampleBubble2 = styled.div`
-  @media (min-width: 1080px) {
+  @media (max-width: 1080px) {
     display: none;
   }
   @media (max-width: 1080px) {
@@ -130,7 +130,34 @@ const Container = styled.div`
   padding-top: 80px;
   background-color: var(--Gray3_200);
   @media (max-width: 1080px) {
-    display: none;
+    zoom: 0.9;
+  }
+  @media (max-width: 960px) {
+    zoom: 0.8;
+  }
+  @media (max-width: 850px) {
+    margin-top: 46px;
+    zoom: 0.7;
+  }
+  @media (max-width: 740px) {
+    margin-top: 86px;
+    zoom: 0.6;
+  }
+  @media (max-width: 650px) {
+    margin-top: 166px;
+    zoom: 0.5;
+  }
+  @media (max-width: 540px) {
+    margin-top: 286px;
+    zoom: 0.4;
+  }
+  @media (max-width: 450px) {
+    margin-top: 456px;
+    zoom: 0.35;
+  }
+  @media (max-width: 412px) {
+    margin-top: 556px;
+    zoom: 0.3;
   }
 
   //위에 한줄소개 height 늘어나게 했을 때 대비해서 일단 작성해놓은 반응형
@@ -163,6 +190,15 @@ const BubbleTop = styled.div`
     border-radius: 185px;
     background: var(--Gray3_200, #eee);
     line-height: 22px;
+    @media (max-width: 650px) {
+      margin: 128px auto 0;
+    }
+    @media (max-width: 540px) {
+      margin: 158px auto 0;
+    }
+    @media (max-width: 412px) {
+      margin: 208px auto 0;
+    }
   }
   .first {
     color: var(--Gray9_800, #424242);

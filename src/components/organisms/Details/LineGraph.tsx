@@ -57,7 +57,25 @@ const Container = styled.div`
   align-items: center;
   background-color: var(--Gray3_200);
   @media (max-width: 1080px) {
-    display: none;
+    zoom: 0.9;
+  }
+  @media (max-width: 960px) {
+    zoom: 0.8;
+  }
+  @media (max-width: 850px) {
+    zoom: 0.7;
+  }
+  @media (max-width: 740px) {
+    zoom: 0.6;
+  }
+  @media (max-width: 650px) {
+    zoom: 0.5;
+  }
+  @media (max-width: 540px) {
+    zoom: 0.4;
+  }
+  @media (max-width: 412px) {
+    zoom: 0.3;
   }
 `;
 const ToggleBox = styled.div`
