@@ -1,7 +1,18 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
+  @media (max-width: 1080px) {
+    width: 100%;
+  }
+  @media (min-width: 1080px) {
+    width: 1080px;
+  }
+  @media (max-width: 565px) {
+    justify-content: flex-end;
+  }
+  margin: 0 auto;
+  display: flex;
+
   position: relative;
   background-color: var(--Gray1_50, #fafafa);
 `;
@@ -92,9 +103,9 @@ export const CategoryBarContainer = styled.div<{ isShow: boolean }>`
 
   @media (max-width: 565px) {
     padding-top: 20px;
-    padding-left: 50px;
+
     align-items: flex-start;
-    width: 50%;
+
     box-sizing: border-box;
     height: fit-content;
     display: ${(props) => (props.isShow ? "flex" : "none")};
