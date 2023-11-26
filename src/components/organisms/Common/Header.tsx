@@ -112,7 +112,10 @@ const Header = () => {
                       onChange={Search}
                       onKeyDown={handleOnKeyPress}
                     />
-                    <IoSearch className="searchIcon" />
+                    <IoSearch
+                      className="searchIcon"
+                      onClick={() => navigate(`search/?q=${searchText}`)}
+                    />
                   </div>
                 </div>
               ) : (
@@ -307,6 +310,7 @@ export const Wrapper = styled.div<{ $openlist: boolean }>`
     transform: scale(1.4);
     margin: auto 0;
     margin-right: 15px;
+    cursor: pointer;
   }
   @media (max-width: 450px) {
     .responsiveBackground {
@@ -387,6 +391,7 @@ export const RighttHeader = styled.div`
       bottom: 0;
       margin: auto 0;
       opacity: 0.7;
+      cursor: pointer;
     }
   }
 `;
