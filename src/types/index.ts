@@ -222,7 +222,7 @@ export interface ToptopicProps {
   area?: string;
   subject?: string;
   category?: string;
-  title?: string; //
+  title: string; //
   imgUrl?: string;
   issue?: string;
   issueId?: number;

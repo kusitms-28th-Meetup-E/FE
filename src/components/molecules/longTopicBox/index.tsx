@@ -60,10 +60,13 @@ export const Top5TopicBox = ({ data }: { data: ToptopicProps }) => {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(${data.imgUrl})`,
     backgroundSize: "cover",
   };
+  const navigate = useNavigate();
+
   return (
     <Container
       style={containerStyle}
       $string="top"
+      onClick={() => navigate(`/detail/${encodeURI(encodeURIComponent(data.title))}`)}
     >
       <Middle>
         <div className="title">{data.title}</div>
