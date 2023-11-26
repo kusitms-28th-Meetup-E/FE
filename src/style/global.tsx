@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
 	
 }
 
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -68,6 +69,21 @@ a{
 	width: 100%;
 	height: 100%;
 	font-size: 16px; // 여기서 폰트 반응형 처리하면 될듯??
+	@media (max-width: 1080px) {
+		font-size: 15px;
+  }
+	@media (max-width: 880px) {
+		font-size: 14px;
+  }
+	@media (max-width: 680px) {
+		font-size: 13px;
+  }
+	@media (max-width: 480px) {
+		font-size: 12px;
+  }
+	@media (max-width: 400px) {
+		font-size: 11px;
+  }
 }
 
 

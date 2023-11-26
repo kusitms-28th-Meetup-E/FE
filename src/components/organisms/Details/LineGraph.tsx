@@ -91,7 +91,7 @@ const ToggleBox = styled.div`
 
   .title {
     color: var(--Gray7_600, #757575);
-    font-size: var(--text_h6);
+    font-size: 20px;
     line-height: 28px;
     display: flex;
   }

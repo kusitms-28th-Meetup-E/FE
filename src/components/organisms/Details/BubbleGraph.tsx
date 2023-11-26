@@ -183,7 +183,7 @@ const BubbleTop = styled.div`
     display: flex;
     margin: 48px auto 0;
     color: var(--Gray7_600, #757575);
-    font-size: var(--text_b3);
+    font-size: 14px;
     width: fit-content;
     padding: 6px 12px;
     box-sizing: border-box;
