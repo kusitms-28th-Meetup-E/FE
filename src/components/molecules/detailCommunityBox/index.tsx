@@ -13,7 +13,7 @@ export const DetailCommunityBox = ({ data }: { data: CommunityItemProps }) => {
       <div className="top-post-wrapper">
         <BigProfile
           nickname={data.nickname}
-          profileImg=""
+          profileImg={data.profileImg}
           date={data.date}
         />
         <LikeBorderButton
