@@ -98,7 +98,7 @@ export const RealMyPage = () => {
         <OutWrapper>
           <MyPageTitle />
           <RealMyPageContainer>
-            {windowWidth > 1150 ? (
+            {windowWidth > 1080 ? (
               <>
                 <MySideBox
                   newNickname={newNickname}
@@ -106,12 +106,22 @@ export const RealMyPage = () => {
                 />
                 <MyStatus />
               </>
-            ) : (
+            ) : windowWidth > 580 ? (
               <div className="responsive-box">
-                <ResponsiveSideBox />
+                <ResponsiveSideBox
+                  newNickname={newNickname}
+                  profileImg={pf}
+                />
                 {selectedTab === 0 && <MyPost />}
                 {selectedTab === 1 && <MyContent />}
                 {selectedTab === 2 && <MyPost />}
+              </div>
+            ) : (
+              <div className="container">
+                <MySideBox
+                  newNickname={newNickname}
+                  profileImg={pf}
+                />
               </div>
             )}
           </RealMyPageContainer>
@@ -148,5 +158,8 @@ export const RealMyPageContainer = styled.div`
     @media (max-width: 800px) {
       width: 100%;
     }
+  }
+  .container {
+    margin: 0 auto;
   }
 `;
