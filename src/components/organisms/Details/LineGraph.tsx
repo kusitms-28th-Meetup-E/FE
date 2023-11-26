@@ -23,7 +23,7 @@ export const LineGraph = () => {
           className="toggleBtn"
           onClick={() => setShowGraph(!showGraph)}
         >
-          <p>{showGraph ? "그래프 접기" : "그래프로 자세히 보기"}</p>
+          <p>{showGraph ? "그래프 접기" : "그래프 보기"}</p>
           <img
             className={showGraph ? "up" : ""}
             src={arrow}
