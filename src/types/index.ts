@@ -217,6 +217,17 @@ export interface SimilarTopicProps {
   title: string;
   titleId: number;
 }
+export interface subscribetopicProps {
+  id?: number;
+  area?: string;
+  subject?: string;
+  category?: string;
+  title?: string; //
+  imgUrl?: string;
+  issue?: string;
+  issueId?: number;
+  topic?: string;
+}
 export interface ToptopicProps {
   id?: number;
   area?: string;
