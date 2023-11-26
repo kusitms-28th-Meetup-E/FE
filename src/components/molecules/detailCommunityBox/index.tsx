@@ -42,7 +42,7 @@ export const DetailCommunityBox = ({ data }: { data: CommunityItemProps }) => {
       >
         <div className="quot-text">
           <p>인용한 콘텐츠</p>
-          <div>{data.contentsTitle}</div>
+          <div dangerouslySetInnerHTML={{ __html: data?.contentsTitle }}></div>
         </div>
         <img
           src={data.contentsUrl}
